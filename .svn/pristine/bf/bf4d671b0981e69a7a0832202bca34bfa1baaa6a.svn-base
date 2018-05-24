@@ -1,0 +1,30 @@
+<!--pages/account/login/login.wxml-->
+<view class="container">
+  <view class="logo-wrapper">
+    <image src="/images/logo.png" class="logo"></image>
+    <image src="/images/title.png" class="title"></image>
+  </view>
+  <view class="cate-wrapper">
+    <view class="active">校友</view>
+    <view>教职工</view>
+  </view>
+  <view class="form-wrapper">
+    <form bindsubmit="formSubmit">
+      <view class="icon-input-group">
+        <image src="/images/icon-user.png"></image>
+        <input type="idcard" placeholder='请输入身份证号/学号'></input>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-pwd.png"></image>
+        <input type="password" placeholder='请输入密码'></input>
+      </view>
+      <view class="form-button">
+        <button>登录</button>
+      </view>
+      <view class="form-operate">
+        <navigator url="/pages/account/register/register" hover-class='none'>注册</navigator>
+        <navigator>忘记密码</navigator>
+      </view>
+    </form>
+  </view>
+</view>

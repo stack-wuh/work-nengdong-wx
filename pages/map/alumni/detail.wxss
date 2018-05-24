@@ -1,0 +1,84 @@
+/* pages/map/alumni/unpass.wxss */
+.card-list{
+  width:100%;
+  padding:30rpx 40rpx 20rpx 40rpx;
+  margin-bottom:15rpx;
+  font-size: 24rpx;
+  color: #999;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.card-list:first-of-type .list-item > view{
+  display: flex;
+  align-items: center;
+}
+.list-item-first{
+  font-size: 30rpx;
+} 
+.list-item-first > text{
+  color: #333;
+  margin-right:30rpx;
+}
+.list-item-first + view{
+  margin:18rpx 0 23rpx 0;
+}
+.list-item-last > view{
+  display: flex;
+  align-items: center;
+}
+.list-item-last view:first-of-type{
+  display: inline-block;
+  padding-right:20rpx;
+  border-right:1px solid #ADADAD;
+}
+.list-item-last view:nth-child(2){
+  flex:1;
+  padding-left:20rpx;
+}
+.card-list .card-list-item{
+  /* padding:25rpx 0 18rpx 0; */
+  padding-bottom:18rpx;
+  /* border-bottom:1px solid #eee; */
+}
+.card-list .card-list-item > view:first-of-type{
+  margin-top:20rpx;
+  margin-bottom:10rpx;
+  color:#333;
+  font-size: 26rpx;
+}
+.card-list .card-list-item:first-of-type view:first-of-type{
+  margin-top:0;
+}
+.no-bottom{
+  margin-bottom:0;
+  border-bottom:1px solid #eee;
+}
+.no-border{
+  border-bottom:none !important;
+}
+
+.item-title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.item-title > text:last-of-type{
+  display: inline-block;
+  padding-left:20rpx;
+  padding-right:10rpx;
+  color: #F87070;
+  border:1px solid #F87070;
+  border-top-left-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+}
+
+.img-list-box{
+  display: flex;
+  align-items: center;
+  height:120rpx;
+}
+.img-list-box .img-item{
+  width:120rpx;
+  height:120rpx;
+  margin-right:20rpx;
+}

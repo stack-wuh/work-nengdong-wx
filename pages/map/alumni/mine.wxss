@@ -1,0 +1,40 @@
+/* pages/map/alumni/mine.wxss */
+.avatar{
+  width:200rpx;
+  height:160rpx;
+}
+.list-content{
+  height:100%;
+  margin-top:15rpx;
+  padding:0 36rpx;
+  background-color: #fff;
+}
+.list-content .img-box{
+  width:200rpx;
+  height:160rpx;
+  overflow: hidden;
+}
+.list-content .list-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:30rpx 0;
+  border-bottom:1px solid #eee;
+}
+.list-content .right-content{
+  flex:1;
+  padding-left:15rpx;
+  font-size: 24rpx;
+  color: #666;
+  overflow: hidden;
+}
+.list-content .right-content > view{
+  margin:16rpx 0;
+}
+.list-content .right-content > view:first-of-type{
+  font-size: 26rpx;
+}
+.list-content .right-content > view:nth-child(2){
+  font-size: 30rpx;
+  color: #333;
+}

@@ -1,0 +1,33 @@
+<!--pages/map/firend/detail.wxml-->
+<view class="container other-bg">
+  <view class="head-content">
+    <view class="img-box">
+      <image src="/images/avatar.png" class="avatar" />
+    </view>
+    <view class="right-content">
+      <view class="flex-box">
+        <text>姓名：</text>
+        <text>伍六一</text>
+        <text class="empty"></text>
+        <image src="/images/icon-collect-default.png" class="icon-collect" />
+      </view>
+      <view>
+        <text>状态：</text>
+        <text>升学就业</text>
+      </view>
+    </view>
+  </view>
+  <view  wx:for="{{optionList}}">
+    <view class="option-title flex-box">
+      <image src="{{item.iconPath}}"  class="icon-info"/>
+      <text class="option-txt">{{item.title}}</text>
+      <text class="empty"></text>
+    </view>
+    <view class="act-card">
+      <view class="card-list-item" wx:for="{{item.list}}">
+        <text class="item-title">{{item.name}}</text>
+        <text class="item-input">{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+</view>

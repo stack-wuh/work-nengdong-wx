@@ -1,0 +1,75 @@
+/* pages/user/index/index.wxss */
+.user-list-img{
+  width: 44rpx;
+  height:44rpx;
+  margin:5rpx 15rpx;
+}
+.top-content{
+  position: relative;
+  width:100%;
+  height:500rpx;
+  overflow: hidden;
+}
+.bg-user{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 750rpx;
+  height:400rpx;
+}
+.top-content .info-content{
+  position: relative;
+  display: flex;
+  align-items: center;
+  height:250rpx;
+  padding:50rpx 75rpx;
+  font-size: 24rpx;
+  color: #fff;
+  box-sizing: border-box;
+}
+.top-content .info-content .img-box{
+  width: 150rpx;
+  height:150rpx;
+  overflow: hidden;
+}
+.top-content .info-content .img-box .avatar{
+  width: 150rpx;
+  height:150rpx;
+  border-radius: 50%;
+}
+.right-content{
+  height:150rpx;
+  padding-left: 20rpx;
+}
+.right-content > view{
+  margin-bottom:15rpx;
+  word-spacing: 5rpx;
+  letter-spacing: 2rpx;
+}
+.right-content > view:first-of-type{
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.right-content .txt-title{
+  display: inline-block;
+  width: 112rpx;
+  height:44rpx;
+  margin-left:20rpx;
+  line-height:44rpx;
+  text-align: center;
+  font-size: 26rpx;
+  font-weight: normal;
+  background-color: #FABC50;
+  border-radius: 40rpx;
+}
+.list-content{
+  position: relative;
+  top:-200rpx;
+  padding:0 30rpx;
+}
+.list-content .act-card{
+  border-radius: 10rpx;
+}
+.list-content .act-card .card-list-item{
+  height:80rpx;
+}

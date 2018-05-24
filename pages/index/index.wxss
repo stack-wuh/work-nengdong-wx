@@ -1,0 +1,69 @@
+/* pages/index/index.wxss */
+
+.list-img{
+  width:68rpx;
+  height:66rpx;
+}
+
+.carousle{
+  height:347rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.carousle .index-bg{
+  width:100%;
+  height:347rpx;
+}
+.carousle .swiper{
+  position: relative;
+  height:100%;
+}
+.carousle .carousle-title{
+  position: absolute;
+  bottom:16rpx;
+  left:40rpx;
+  color: #fff;
+  font-size: 30rpx;
+}
+.index-list{
+  height:235rpx;
+  padding:30rpx 40rpx;
+  padding-right:30rpx;
+  margin-bottom:15rpx;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.index-list .list-title{
+  height:30rpx;
+  padding-left:20rpx;
+  border-left:6rpx solid #00978d;
+  border-radius: 3rpx;
+  font-size: 32rpx;
+  color: #666;
+  line-height:30rpx;
+}
+.index-list .list-item-box{
+  display: flex;
+  align-items: center;
+  justify-content:flex-start;
+  height:100%;
+  padding:30rpx 0;
+  box-sizing: border-box;
+
+}
+.index-list .list-item{
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  width:150rpx;
+  margin-right:20rpx;
+
+}
+.index-list .list-item view:first-of-type{
+  text-align:center;
+}
+.index-list .list-item view:last-of-type{
+  color: #333;
+  font-size: 28rpx;
+}

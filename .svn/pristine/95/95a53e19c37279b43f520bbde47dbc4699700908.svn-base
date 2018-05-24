@@ -1,0 +1,56 @@
+<!--pages/account/bind/bind.wxml-->
+<view class="container">
+  <view class="form-wrapper">
+    <form bindsubmit="formSubmit">
+      <view class="icon-input-group">
+        <image src="/images/icon-phone.png"></image>
+        <input type="number" placeholder='请输入您的手机号'></input>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-email.png"></image>
+        <input placeholder='请输入您的绑定邮箱'></input>
+        <view class="icon-input-group-suffix">发送验证码</view>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-token.png"></image>
+        <input placeholder='请输入验证码'></input>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-pwd.png"></image>
+        <input type="password" placeholder='请输入密码'></input>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-pwd2.png"></image>
+        <input type="password" placeholder='请再次输入密码'></input>
+      </view>
+      <view class="form-button">
+        <button>提交</button>
+      </view>
+    </form>
+  </view>
+  <view class="dialog-wrapper">
+    <view class="dialog pass-dialog" wx:if="{{false}}">
+      <image src="/images/bind-pass.png"></image>
+      <view class="text">恭喜您</view>
+      <view class="text">完成校友身份认证！</view>
+      <view class="tips">即将进入个人中心完善个人信息。</view>
+      <view class="dialog-btn-wrapper">
+        <view class="btn btn-gray">取消</view>
+        <view class="btn btn-blue">个人中心</view>
+      </view>
+    </view>
+    <view class="dialog nopass-dialog">
+      <image src="/images/bind-nopass.png"></image>
+      <view class="text">很抱歉</view>
+      <view class="text">您的校友身份认证未通过！</view>
+      <view class="tips" style="margin-top:46rpx;">可能原因如下：</view>
+      <view class="tips">1.您填写的个人信息有误，请仔细核对重新提交。</view>
+      <view class="tips">2.如果您填写的个人信息无误，那么数据库录入的信息有误导致信息无法匹配，请向管理员反馈。</view>
+      <view class="tips">3.该平台的用户仅针对xx学校xx学院校友，若您想要体验该校友平台功能，请关注xx公众号。</view>
+      <view class="dialog-btn-wrapper">
+        <view class="btn btn-blue">重新认证</view>
+        <view class="btn btn-blue">反馈</view>
+      </view>
+    </view>
+  </view>
+</view>

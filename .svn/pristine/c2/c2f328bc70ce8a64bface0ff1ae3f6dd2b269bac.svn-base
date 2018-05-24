@@ -1,0 +1,99 @@
+/* pages/map/alumni/alumni.wxss */
+.search-box{
+  height:80rpx;
+}
+.icon-search{
+  width:31rpx;
+  height:30rpx;
+  margin-right:10rpx;
+}
+.icon-menu{
+  width:30rpx;
+  height:26rpx;
+  margin-right:5rpx;
+}
+.icon-action{
+  width:122rpx;
+  height:121rpx;
+}
+.avatar{
+  width:200rpx;
+  height:160rpx;
+  margin-right:15rpx;
+}
+.nav-wrapper{
+  height:87rpx;
+  padding:0 30rpx;
+  font-size: 32rpx;
+  background-color: #fff;
+}
+.nav-wrapper > text{
+  display: inline-block;
+  height:87rpx;
+  padding:0 20rpx;
+  line-height:87rpx;
+}
+.nav-wrapper > text:last-of-type{
+  /* margin-left:-200rpx; */
+}
+.nav-wrapper .empty-text{
+  margin-left:-200rpx;
+}
+.active-pedding{
+  font-weight: 700;
+  color: #0E90F5;
+  border-bottom:4rpx solid #0E90F5;
+}
+.empty-box{
+  display: flex;
+  align-items: center;
+  padding:5rpx 10rpx;
+  border-radius: 22rpx;
+  color: #00998d;
+  font-size: 28rpx;
+  border:1px solid #00998d;
+}
+
+.item-list{
+  padding:20rpx;
+  padding-bottom:0;
+  margin-bottom:0;
+  box-sizing: border-box;
+}
+.item{
+  display: flex;
+  align-items: center;
+  padding:36rpx 20rpx 30rpx 10rpx;
+  background-color: #fff;
+}
+.item .img-box{
+  width:200rpx;
+  height:160rpx;
+}
+.item .right-content{
+  flex:1;
+  height:160rpx;
+  padding-left:15rpx;
+  font-size: 24rpx;
+  color: #999;
+  box-sizing: border-box;
+}
+.item .right-content > view{
+  margin-bottom:8rpx;
+}
+.item .right-content > view:first-of-type{
+  font-size: 28rpx;
+}
+.item .right-content > view:nth-child(2){
+  font-size: 30rpx;
+  color: #333;
+}
+.item .right-content > view:last-of-type{
+  display: flex;
+  align-items: center;
+}
+.img-btn{
+  position: fixed;
+  right:10rpx;
+
+}

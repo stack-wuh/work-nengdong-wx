@@ -1,0 +1,27 @@
+/* pages/account/bind/bind.wxss */
+.pass-dialog{
+  padding-top: 37rpx;
+}
+.dialog image{
+  width: 311rpx;
+  height: 203rpx;
+}
+.nopass-dialog{
+  width: 690rpx;
+  height: 809rpx;
+  padding-top: 48rpx;
+}
+.nopass-dialog .tips{
+  width: 580rpx;
+  margin: 0 auto;
+  text-align: left;
+  color: #666;
+  line-height: 50rpx;
+}
+.dialog-btn-wrapper{
+  height: 80rpx;
+}
+.dialog-btn-wrapper .btn{
+  height: 80rpx;
+  line-height: 80rpx;
+}

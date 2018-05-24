@@ -1,0 +1,90 @@
+/* pages/other/help/common.wxss */
+.icon-prise{
+  width:40rpx;
+  height:40rpx;
+  margin-right:22rpx;
+}
+.icon-share{
+  margin-right:22rpx;
+}
+.swiper{
+  width: 100%;
+  height:347rpx;
+  overflow: hidden;
+}
+.swiper .swiper-img{
+  width:100%;
+  height:347rpx;
+}
+.list-item{
+  padding:30rpx;
+  padding-bottom:20rpx;
+  margin-bottom:15rpx;
+  font-size: 24rpx;
+  color: #999;
+  background-color: #fff;
+}
+.list-item:first-of-type + .list-item{
+  padding-bottom:10rpx;
+}
+.list-item > view{
+  margin-bottom:15rpx;
+}
+.list-item > view:first-of-type{
+  font-size: 30rpx;
+  color: #333;
+}
+.list-item > view > text:nth-child(2n){
+  margin-right:76rpx;
+  color: #333;
+}
+.flex-box .empty{
+  flex:1;
+  text-align: right;
+}
+.list-info{
+  padding:0 30rpx;
+  margin-bottom:15rpx;
+  color: #999;
+  font-size: 26rpx;
+  background-color: #fff;
+}
+.list-info > view{
+  padding:20rpx 0;
+  border-bottom:1px solid #eee;
+}
+.list-info > view:last-of-type{
+  border-bottom:none;
+}
+.list-info > view >text:nth-child(2n-1){
+  width: 90rpx;
+  color: #333;
+}
+.btn-area{
+  position: fixed;
+  bottom:0;
+  left:0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:0;
+  margin-bottom:0;
+  padding:20rpx 0;
+  font-size: 36rpx;
+  color: #333;
+  background-color: #fff;
+}
+.btn-area .btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 334rpx;
+  height:80rpx;
+  border:1px solid #00998d;
+  border-radius: 4rpx;
+}
+.bg-btn{
+  margin-right:22rpx;
+  background-color: #00998d;
+  color: #fff;
+}

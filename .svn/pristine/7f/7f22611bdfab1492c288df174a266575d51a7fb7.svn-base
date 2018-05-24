@@ -1,0 +1,60 @@
+/* pages/map/school/scholl.wxss */
+.icon-search{
+  width:31rpx;
+  height:30rpx;
+  margin-right:10rpx;
+}
+.icon-collect{
+  width: 40rpx;
+  height:37rpx;
+}
+.container{
+  height:100%;
+}
+.search-btn{
+  color: #999;
+}
+.search-box{
+  height:110rpx;
+}
+.nav-box{
+  position: fixed;
+  width:100%;
+}
+.list-content{
+  height:100%;
+  background-color: #fff;
+}
+.list-content .list-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:20rpx 30rpx 20rpx 40rpx;
+  font-size: 30rpx;
+}
+.list-content .list-item .tips{
+  display: inline-block;
+  width:32rpx;
+  height:32rpx;
+  margin-right:20rpx;
+  text-align: center;
+  line-height:30rpx;
+  font-size: 20rpx;
+  color: #fff;
+  background-color: #5094FA;
+  border-radius: 50%;
+}
+.list-content .list-item .list-name{
+  flex:1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right:20rpx;
+}
+.list-content .list-item .list-name text:nth-child(2){
+  flex:1;
+  margin:0 10rpx;
+  padding: 0 5rpx;
+  text-align: center;
+  overflow: hidden;
+}

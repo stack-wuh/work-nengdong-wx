@@ -1,0 +1,215 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.98",
+	"appid": "wx2e21d90cedf48171",
+	"projectname": "xiaoyou",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 28,
+			"list": [
+				{
+					"id": -1,
+					"name": "注册",
+					"pathName": "pages/account/register/register",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "立即绑定",
+					"pathName": "pages/account/bind/bind",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "忘记密码",
+					"pathName": "pages/account/forgetPwd/forgetPwd",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "重置密码",
+					"pathName": "pages/account/resetPwd/resetPwd",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "联系学院",
+					"pathName": "pages/account/contact/contact",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "联系学院",
+					"pathName": "pages/activity/index/index",
+					"query": ""
+				},
+				{
+					"id": 6,
+					"name": "活动主页",
+					"pathName": "pages/activity/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我发起的",
+					"pathName": "pages/activity/mine/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "发起活动",
+					"pathName": "pages/activity/action/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "活动详情",
+					"pathName": "pages/activity/detail/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "校友黄页",
+					"pathName": "pages/map/firend/firend",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "校友黄页-详情",
+					"pathName": "pages/map/firend/detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "校友会黄页-详情",
+					"pathName": "pages/map/alumni/alumni",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "校友会黄页-创建校友页",
+					"pathName": "pages/map/alumni/action",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的校友会",
+					"pathName": "pages/map/alumni/mine",
+					"query": ""
+				},
+				{
+					"id": 16,
+					"name": "黄页详情",
+					"pathName": "pages/map/alumni/detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "院校黄页",
+					"pathName": "pages/map/school/scholl",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的收藏",
+					"pathName": "pages/map/collect/collect",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "互联互助",
+					"pathName": "pages/other/help/help",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "互联互助--发布",
+					"pathName": "pages/other/help/publish",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "互联互助--我的发布",
+					"pathName": "pages/other/help/detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "互联互助-我的发布详情",
+					"pathName": "pages/other/help/common",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/user/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "个人中心-更多设置",
+					"pathName": "pages/user/setting/setting",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "个人中心-毕业档案",
+					"pathName": "pages/user/recoed/recoed",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "个人中心-隐私设置",
+					"pathName": "pages/user/private/private",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "其他-校友捐赠",
+					"pathName": "pages/other/donate/donate",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "登陆",
+					"pathName": "pages/account/login/login",
+					"query": ""
+				}
+			]
+		}
+	}
+}

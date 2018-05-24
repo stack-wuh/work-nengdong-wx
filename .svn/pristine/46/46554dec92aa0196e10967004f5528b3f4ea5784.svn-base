@@ -1,0 +1,21 @@
+<!--pages/map/alumni/mine.wxml-->
+<view class="container other-bg">
+  <view class="nav-box">
+    <view class="nav-list">
+      <text class="nav-list-item nav-list-item-active">待审核</text>
+      <text class="nav-list-item">已审核</text>
+    </view>
+  </view>
+  <view class="list-content">
+    <navigator hover-class="none" url="/pages/map/alumni/detail" class="list-item" wx:for="{{4}}">
+      <view class="img-box">
+        <image src="/images/avatar.jpg" class="avatar" />
+      </view>
+      <view class="right-content">
+          <view>类型：年级</view>
+          <view class="over-text">能动学院1301校友会</view>
+          <view>创建时间：2018-05-01</view>
+      </view>
+    </navigator>
+  </view>
+</view>

@@ -1,0 +1,32 @@
+<!--pages/account/login/login.wxml-->
+<view class="container">
+  <view class="logo-wrapper">
+    <image src="/images/logo.png" class="logo"></image>
+    <image src="/images/title.png" class="title"></image>
+  </view>
+  <view class="cate-wrapper">
+    <view bindtap="handleClickChangeActive" data-type="1" class="{{type == 1 ? 'active' : ''}}">校友</view>
+    <view bindtap="handleClickChangeActive" data-type="2" class="{{type == 2 ? 'active' : ''}}">教职工</view>
+  </view>
+  <view class="form-wrapper">
+    <form bindsubmit="formSubmit">
+      <view class="icon-input-group">
+        <image src="/images/icon-user.png"></image>
+        <input wx:if="{{type == 1}}" name="number" type="idcard" placeholder='请输入身份证号/学号'></input>
+        <input wx:elif="{{type == 2}}" name="number" type="idcard" placeholder='请输入工号'></input>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-pwd.png"></image>
+        <input name="password" type="password" placeholder='请输入密码'></input>
+      </view>
+      <view class="form-button">
+        <button formType="submit">登录</button>
+      </view>
+      <view class="form-operate">
+        <navigator wx:if="{{type == 1}}" hover-class="none" url="/pages/account/register/register" hover-class='none'>注册</navigator>
+        <text></text>
+        <navigator hover-class="none" url="/pages/account/forgetPwd/forgetPwd">忘记密码</navigator>
+      </view>
+    </form>
+  </view>
+</view> 

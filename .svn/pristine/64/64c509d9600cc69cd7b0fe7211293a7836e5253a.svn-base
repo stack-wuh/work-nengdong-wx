@@ -1,0 +1,6 @@
+<!--pages/activity/index/index.wxml-->
+<view class="container">
+  <view class="top-wrapper">
+    <view class="top-wrapper-btn"></view>
+  </view>
+</view>

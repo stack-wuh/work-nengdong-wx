@@ -1,0 +1,41 @@
+/* pages/account/login/login.wxss */
+.logo-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 400rpx;
+  color: #fff;
+  text-align: center;
+  background: #00998d;
+}
+.logo{
+  width: 190rpx;
+  height: 190rpx;
+}
+.title{
+  width: 476rpx;
+  height: 76rpx;
+  margin-top: 32rpx;
+}
+.cate-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 82rpx;
+  font-size: 30rpx;
+  background: #fff;
+}
+.cate-wrapper view{
+  width: 90rpx;
+  height: 78rpx;
+  line-height: 78rpx;
+  text-align: center;
+}
+.cate-wrapper view:first-child{
+  margin-right: 100rpx;
+}
+.cate-wrapper view.active{
+  border-bottom: 4rpx solid #00998d;
+}

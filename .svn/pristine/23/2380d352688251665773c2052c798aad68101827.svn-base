@@ -1,0 +1,95 @@
+<!--pages/account/contact/contact.wxml-->
+<view class="container">
+  <form bindsubmit="formSubmit">
+    <view class="contact-wrapper">
+      <image src="/images/icon-question-g.png"></image>
+      <view class="contact-content">
+        <view class="contact-title">您想反馈的问题类型</view>
+        <radio-group>
+          <label>
+            <radio/><text>忘记密码</text>
+          </label>
+          <label>
+            <radio/><text>校友身份认证失败</text>
+          </label>
+          <label>
+            <radio/><text>其他</text>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+
+    <view class="contact-wrapper">
+      <image src="/images/icon-edit-g.png"></image>
+      <view class="contact-content">
+        <view class="contact-title">请详细补充问题和建议</view>
+        <textarea placeholder='请在此输入您所遇到的问题...'></textarea>
+      </view>
+    </view>
+
+    <view class="contact-wrapper">
+      <image src="/images/icon-upload-g.png"></image>
+      <view class="contact-content">
+        <view class="contact-title">请上传图片证据</view>
+        <view class="tips">
+          <text>*</text>建议上传毕业证、学位证、学生证、学信网截图、身份证等客观信息的照片作为审核依据
+        </view>
+        <view class="image-wrapper">
+          <view class="image-group" wx:for="{{5}}">
+            <image src="/images/image.png" class="image"></image>
+            <image src="/images/icon-delete.png" class="delete"></image>
+          </view>
+          <image src="/images/upload.png" class="image"></image>
+        </view>
+      </view>
+    </view>
+
+    <view class="contact-wrapper">
+      <image src="/images/icon-info-g.png"></image>
+      <view class="contact-content">
+        <view class="contact-title">请留下您的个人信息</view>
+        <view class="input-wrapper">
+          <view class="input-group">
+            <view class="label">姓名</view>
+            <input placeholder='请输入您的姓名'></input>
+          </view>
+          <view class="input-group">
+            <view class="label">手机号</view>
+            <input placeholder='请输入您的手机号'></input>
+          </view>
+          <view class="input-group">
+            <view class="label">邮箱</view>
+            <input placeholder='请输入您的邮箱'></input>
+          </view>
+          <view class="input-group">
+            <view class="label">入学年份</view>
+            <input placeholder='请输入您的入学年份'></input>
+          </view>
+          <view class="input-group">
+            <view class="label">学号</view>
+            <input placeholder='请输入您的学号'></input>
+          </view>
+          <view class="input-group">
+            <view class="label">身份证</view>
+            <input placeholder='请输入您的身份证号'></input>
+          </view>
+          <view class="input-group">
+            <view class="label">专业班级</view>
+            <input placeholder='请输入您的专业班级'></input>
+          </view>
+          <view class="input-group">
+            <view class="label">辅导员姓名</view>
+            <input placeholder='请输入您的辅导员姓名'></input>
+          </view>
+        </view>
+        <view class="tips" style="margin-bottom:0;">
+          <text>*</text>忘记密码和校友身份认证失败：姓名、手机号、邮箱、入学年份、学号、身份证、专业班级、辅导员姓名（学号、身份证填其一）
+        </view>
+      </view>
+    </view>
+
+    <view class="contact-wrapper">
+      <button>提交</button>
+    </view>
+  </form>
+</view>

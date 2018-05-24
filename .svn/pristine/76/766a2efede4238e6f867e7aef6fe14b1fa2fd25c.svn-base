@@ -1,0 +1,34 @@
+/* pages/user/index/index.wxss */
+.top-content{
+  position: relative;
+  width:100%;
+  height:500rpx;
+  overflow: hidden;
+}
+.bg-user{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 750rpx;
+  height:501rpx;
+}
+.top-content .info-content{
+  position: relative;
+  display: flex;
+  height:250rpx;
+  padding:50rpx 75rpx;
+  font-size: 24rpx;
+  color: #fff;
+  box-sizing: border-box;
+  border:1px solid red;
+}
+.top-content .info-content .img-box{
+  width: 150rpx;
+  height:150rpx;
+  overflow: hidden;
+}
+.top-content .info-content .img-box .avatar{
+  width: 150rpx;
+  height:150rpx;
+  border-radius: 50%;
+}

@@ -1,0 +1,63 @@
+{
+  "pages":[
+    "pages/account/login/login",
+    "pages/account/register/register",
+    "pages/account/bind/bind",
+    "pages/account/forgetPwd/forgetPwd",
+    "pages/account/contact/contact",
+    "pages/account/resetPwd/resetPwd",
+    "pages/account/email/email",
+    "pages/activity/index/index",
+    "pages/activity/mine/index",
+    "pages/activity/action/index",
+    "pages/activity/detail/index",
+    "pages/index/index",
+    "pages/map/firend/firend",
+    "pages/map/firend/detail",
+    "pages/map/alumni/alumni",
+    "pages/map/alumni/action",
+    "pages/map/alumni/mine",
+    "pages/map/alumni/detail",
+    "pages/map/school/scholl",
+    "pages/map/collect/collect",
+    "pages/other/help/help",
+    "pages/other/help/publish",
+    "pages/other/help/detail",
+    "pages/other/help/common",
+    "pages/other/donate/donate",
+    "pages/user/index/index",
+    "pages/user/setting/setting",
+    "pages/user/recoed/recoed",
+    "pages/user/private/private"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#00988d",
+    "navigationBarTitleText": "能动学院",
+    "navigationBarTextStyle":"white"
+  },
+  "tabBar":{
+    "selectedColor":"#00988D",
+    "list":[
+      {
+        "pagePath":"pages/index/index",
+        "text":"首页",
+        "iconPath":"/images/icon-home-default.png",
+        "selectedIconPath":"/images/icon-home-active.png"
+      },
+      {
+         "pagePath": "pages/index/index",
+         "text": "消息",
+          "iconPath": "/images/icon-messge-default.png",
+          "selectedIconPath": "/images/icon-message-active.png"
+      }
+      ,
+      {
+        "pagePath": "pages/user/index/index",
+        "text": "个人",
+        "iconPath": "/images/icon-user-default.png",
+        "selectedIconPath": "/images/icon-user-active.png"
+      }      
+    ]
+  }
+}

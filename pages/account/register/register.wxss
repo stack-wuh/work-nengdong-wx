@@ -1,0 +1,15 @@
+/* pages/account/register/register.wxss */
+.dialog image{
+  width: 276rpx;
+  height: 192rpx;
+  margin: 45rpx 0 23rpx 0;
+}
+.dialog .btn{
+  width: 240rpx;
+  height: 60rpx;
+  margin: 20rpx auto;
+  line-height: 60rpx;
+  color: #fff;
+  background: #00998d;
+  border-radius: 30rpx;
+}

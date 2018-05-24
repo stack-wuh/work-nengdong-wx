@@ -1,0 +1,17 @@
+/* pages/map/alumni/action.wxss */ 
+.container{
+  padding:20rpx;
+}
+.icon-right{
+  width:11rpx;
+  height:26rpx;
+}
+.avatar{
+  width:100rpx;
+  height:100rpx;
+  margin-right:10rpx;
+}
+.icon-action{
+  width:399rpx;
+  height:235rpx;
+}

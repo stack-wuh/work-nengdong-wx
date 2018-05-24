@@ -1,0 +1,73 @@
+<!--pages/map/firend/firend.wxml-->
+<view class="container other-bg">
+  <view class="act-wrapper-header">
+    <view class="act-wrapper-nav bor-default" bindtap="handleClickShowSearch">
+      <image class="icon-search-g" src="../../../images/icon-search-g.png" alt="icon-search-g"/>
+      <text class="txt-default">搜索</text>
+    </view>
+    <view class="act-wrapper-nav bor-default">
+      <image class="icon-menu-g" src="../../../images/icon-menu-g.png" alt="icon-menu-g" />
+      <picker value="{{index}}" range="{{list}}">
+        <view class="txt-default">筛选</view>
+      </picker>
+    </view>
+  </view>
+  <view style="height:87rpx;"></view>
+  <view class="father other-bg">
+    <navigator hovor-class="none" url="/pages/map/firend/detail" class="item-content" wx:for="{{3}}">
+      <view class="img-box">
+        <image src="/images/avatar.png" class="avatar" />
+      </view>
+      <view class="right-content">
+        <view class="flex-box">
+          <text>姓名：</text>
+          <text>伍六一</text>
+          <text wx:if="{{index == 0}}" class="pedding-text">就业</text>
+          <text wx:elif="{{index == 1}}" class="pedding-text pedding-up">升学</text>
+          <text wx:else="{{index == 2}}" class="pedding-text pedding-up-school">升学就业</text>
+          <text class="empty-box"></text>
+          <image src="/images/icon-collect-default.png" class="icon-collect" />
+        </view>
+        <view class="flex-box">
+          <text>入学年份：</text>
+          <text>2010级</text>
+          <text>学院：</text>
+          <view class="fixed-over">计算机工程</view>
+          <view class="empty-box"></view>
+        </view>
+        <view>
+          <text>专业班级：</text>
+          <text>能动1204</text>
+        </view>
+        <view>
+          <text>工作/升学所在地：</text>
+          <text>湖北省武汉市洪山区</text>
+        </view>
+      </view>
+    </navigator>
+  </view>
+
+  <view class='menu-slide'>
+    <view class="menu-content">
+      <view class="menu-header">
+        <text>取消</text>
+        <text>筛选</text>
+        <text>重置</text>
+      </view>
+      <view class="menu-list" wx:for="{{menuList}}">
+        <view class="menu-name">{{item.name}}</view>
+        <view class="menu-option-list">
+          <view class="menu-option" wx:for="{{item.list}}">{{item}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="search-box" hidden>
+    <view class="input-box">
+      <image src="/images/icon-search.png" class="icon-search" />
+      <text class="search-btn">请输入关键字</text>
+      <input hidden focus  class="my-input"  />
+   </view>
+  </view>
+</view>

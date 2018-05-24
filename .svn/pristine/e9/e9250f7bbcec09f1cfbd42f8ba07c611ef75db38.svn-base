@@ -1,0 +1,69 @@
+<!--pages/map/collect/collect.wxml-->
+<view class="container other-bg">
+  <view class="nav-box">
+    <view class="nav-list">
+      <text class="nav-list-item nav-list-item-active">校友黄页</text>
+      <text class="nav-list-item">校友会黄页</text>
+      <text class="nav-list-item">院校黄页</text>
+    </view>
+  </view>
+  <view class="list-item" wx:if="{{false}}">
+    <view class="img-box">
+      <image src="/images/avatar.png" class="avatar" />
+    </view>
+    <view class="right-content">
+      <view class="flex-box">
+        <text>类型：年级</text>
+        <image src="/images/icon-collect-default.png" class="icon-collect" />
+      </view>
+      <view class="over-text">能动学院XXXXXXXXXXXX能动学院XXXXXXXXXXXX</view>
+      <view>创建时间：2018-05-01</view>
+      <view class="flex-box">
+        <text>320人觉得赞</text>
+        <image src="/images/icon-prise-default.png" class="icon-prise" />
+        <text class="empty"></text>
+      </view>
+    </view>
+  </view>
+  <view class="list-item1 list-item" wx:if="{{false}}" wx:for="{{3}}">
+    <view class="img-box">
+      <image src="/images/avatar.png" class="avatar" />
+    </view>
+    <view class="right-content">
+      <view class="flex-box">
+        <text>姓名：</text>
+        <text>伍六一</text>
+        <text wx:if="{{index == 0}}" class="pedding-text">就业</text>
+        <text wx:elif="{{index == 1}}" class="pedding-text pedding-up">升学</text>
+        <text wx:else="{{index == 2}}" class="pedding-text pedding-up-school">就业升学</text>
+        <text class="empty"></text>
+        <image src="/images/icon-collect-default.png" class="icon-collect" />
+      </view>
+      <view>
+        <text>入学年份：</text>
+        <text>2010级</text>
+        <text>学院：</text>
+        <text>计算机工程</text>
+      </view>
+      <view >
+        <text>专业班级：</text>
+        <text>能动1301</text>
+      </view>
+      <view class="flex-box">
+        <text>工作/升学所在地：</text>
+        <text class="over-text">湖北省武汉市洪山区</text>
+      </view>      
+    </view>
+  </view>
+  <view class="list-content">
+    <view class="list-item" wx:for="{{5}}">
+      <text class="tips">工</text>
+      <view class="list-name">
+        <text>学工部</text> 
+        <text>································</text>
+        <text>027-7010-001</text>
+      </view>
+      <image src="/images/icon-collect-default.png" class="icon-collect" />
+    </view>
+  </view>
+</view>

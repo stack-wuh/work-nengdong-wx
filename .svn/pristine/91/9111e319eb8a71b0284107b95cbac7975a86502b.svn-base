@@ -1,0 +1,18 @@
+/* pages/activity/action/index.wxss */
+.container{
+  padding:40rpx 30rpx;
+}
+.icon-arrow-right{
+  width: 11rpx;
+  height:26rpx;
+}
+.avatar{
+  width:120rpx;
+  height:120rpx;
+  margin-right:10rpx;
+}
+.submit{
+  width:392rpx;
+  height:220rpx;
+  margin-top:30rpx;
+}

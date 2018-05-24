@@ -1,0 +1,61 @@
+<!--pages/account/register/register.wxml-->
+<view class="container">
+  <view class="form-wrapper">
+    <form bindsubmit="formSubmit">
+      <view class="icon-input-group">
+        <image src="/images/icon-user.png"></image>
+        <input name="name" placeholder='请输入您的姓名'></input>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-number.png"></image>
+        <input name="number" type="number" placeholder='请输入您的学号'></input>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-card.png"></image>
+        <input name="no" type="idcard" placeholder='请输入您的身份证号'></input>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-pwd.png"></image>
+        <input name="password" type="password" placeholder='请输入密码'></input>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-pwd2.png"></image>
+        <input name="checkpwd" type="password" placeholder='请确认密码'></input>
+      </view>            
+      <view class="icon-input-group">
+        <image src="/images/icon-year.png"></image>
+        <picker mode="selector" bindchange="changeYear" value="{{index}}" range="{{yearList}}" range-key="{{yearList[index].age_name}}">
+          <view class="{{year?'':'placeholder'}}">{{formInfo.school_age||'请选择您的入学年份'}}</view>
+          <image src="/images/icon-arrow-down-gray.png"></image>
+        </picker>
+      </view>
+      <view class="form-tips">
+        <text>*</text>学号和身份证号至少填其一，其他为必填项
+      </view>
+      <view class="form-button">
+        <button formType="submit">提交</button>
+      </view>
+      <view class="form-operate">
+        <view></view>
+        <navigator>忘记邮箱</navigator>
+      </view>
+    </form>
+  </view>
+  <view class="dialog-wrapper" wx:if="{{false}}">
+    <view class="dialog">
+      <block wx:if="{{false}}">
+        <image src="/images/register-pass.png"></image>
+        <view class="text">审核通过！</view>
+        <view class="text">请绑定个人账号</view>
+        <view class="btn" bindtap="bind">立即绑定</view>
+      </block>
+      <block wx:if="{{false}}">
+        <image src="/images/register-nopass.png"></image>
+        <view class="text">很遗憾</view>
+        <view class="text">本次审核未通过！</view>
+        <view class="btn">重新认证</view>
+      </block>
+    </view>
+  </view>
+</view>
+
