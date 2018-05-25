@@ -52,6 +52,10 @@ Page({
         }
       } 
     }
+    if(data.password.length < 6){
+      app.toastMsg('error','密码至少6位')
+      return
+    }
     if(data.password !== data.checkpwd){
       app.toastMsg('error','密码不一致!!')
       return
@@ -68,8 +72,9 @@ Page({
     let newData = Object.assign(data,this.data.formInfo)
     app.apiPost('addStudent_Info',newData).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
+      wx.setStorageSync('id',res.id)
       app.toastMsg(error,res.msg)
-      if(res.error == 1){
+      if(res.error == 0){
         setTimeout(()=>{
           wx.navigateTo({
             url:'/pages/account/login/login'

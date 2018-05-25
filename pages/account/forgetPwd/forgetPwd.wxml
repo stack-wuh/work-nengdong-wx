@@ -20,7 +20,7 @@
       </view>
       <view class="form-operate">
         <view></view>
-        <navigator>忘记邮箱</navigator>
+        <navigator url="/pages/account/contact/contact" hover-class="none">忘记邮箱</navigator>
       </view>
     </form>
   </view>

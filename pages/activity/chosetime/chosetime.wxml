@@ -1,0 +1,42 @@
+<!--pages/activity/chosetime/chosetime.wxml-->
+<view class="container other-bg">
+  <view class="list-content">
+    <view class="list-item">
+      <text class="item-title">开始日期</text>
+      <picker data-type="{{1}}" mode="date" class="picker" bindchange="timeChange">
+        <view>
+          <text class="picker-title">{{start.date ? start.date : '请选择开始日期'}}</text>
+          <image src="/images/icon-arrow-right.png" class="icon-arrow-right" />
+        </view>
+      </picker>
+    </view>
+    <view class="list-item">
+      <text class="item-title">开始时间</text>
+       <picker data-type="{{2}}" mode="time"  class="picker" bindchange="timeChange">
+        <view >
+          <text class="picker-title">{{start.time ? start.time : '请选择开始时间'}}</text>
+          <image src="/images/icon-arrow-right.png" class="icon-arrow-right" />
+        </view>
+      </picker>
+    </view>
+    <view class="list-item">
+      <text class="item-title">结束日期</text>
+       <picker data-type="{{3}}" mode="date" class="picker" bindchange="timeChange">
+        <view >
+          <text class="picker-title"> {{end.date ? end.date : '请选择结束日期'}}</text>
+          <image src="/images/icon-arrow-right.png" class="icon-arrow-right" />
+        </view>
+      </picker>
+    </view>
+    <view class="list-item">
+      <text class="item-title">结束时间</text>
+       <picker data-type="{{4}}" mode="time" class="picker" bindchange="timeChange">
+        <view >
+          <text class="picker-title">{{end.time ? end.time : '请选择结束时间'}}</text>
+          <image src="/images/icon-arrow-right.png" class="icon-arrow-right" />
+        </view>
+      </picker>
+    </view> 
+    <view bindtap="jumpToOther" class="btn-area">保存</view>   
+  </view>
+</view>

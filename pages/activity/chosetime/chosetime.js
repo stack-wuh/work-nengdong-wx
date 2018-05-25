@@ -1,23 +1,48 @@
-// pages/account/contact/contact.js
+// pages/activity/chosetime/chosetime.js
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    start:{
+      time:'',
+      date:''
+    },
+    end:{
+      time:'',
+      date:''
+    }
   },
 
+  timeChange(e){
+    let type = e.currentTarget.dataset.type
+    switch(type){
+      case 1 : this.setData({start:{date:e.detail.value,time:this.data.start.time}})
+                break;
+      case 2 : this.setData({start:{time:e.detail.value,date:this.data.start.date}})
+                break;
+      case 3 : this.setData({end:{date:e.detail.value,time:this.data.end.time}})
+                break;
+      case 4 : this.setData({end:{time:e.detail.value,date:this.data.end.date}})
+               break;
+    }
+  },
+  jumpToOther(){
+    wx.setStorageSync('start',this.data.start)
+    wx.setStorageSync('end',this.data.end)
+    wx.navigateBack({ 
+      delta:1
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
   
-  }, 
-
-  formSunmit(e){
-    console.log(e)
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

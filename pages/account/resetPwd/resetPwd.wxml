@@ -4,14 +4,14 @@
     <form bindsubmit="formSubmit">
       <view class="icon-input-group">
         <image src="/images/icon-pwd.png"></image>
-        <input type="password" placeholder='请设置新密码'></input>
+        <input name="password" type="password" placeholder='请设置新密码'></input>
       </view>
       <view class="icon-input-group">
         <image src="/images/icon-pwd2.png"></image>
-        <input type="password" placeholder='请再次输入新密码'></input>
+        <input name="checkpwd" type="password" placeholder='请再次输入新密码'></input>
       </view>
       <view class="form-button">
-        <button>保存</button>
+        <button formType="submit">保存</button>
       </view>
     </form>
   </view>

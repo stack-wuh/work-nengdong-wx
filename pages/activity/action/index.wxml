@@ -1,54 +1,71 @@
 <!--pages/activity/action/index.wxml-->
 <view class="container other-bg">
-  <form>
+  <form bindsubmit="formSubmit">
     <view class="act-card">
       <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title">活动类型</text>
-            <picker>
+            <picker  data-type="{{1}}" name="type" range="{{typeList}}" bindchange="pickerChange">
               <view class="picker">
-                <text class="picker-title">校友活动</text>
+                <text class="picker-title">{{type ? type : '请选择活动类型'}}</text>
                 <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
               </view>
             </picker>
           </view>
           <view class="card-list-item">
             <text class="item-title">活动标题</text>
-            <input placeholder="请输入活动标题" class="item-input" />
+            <input name="title" placeholder="请输入活动标题" class="item-input" />
           </view>
           <view class="card-list-item">
             <text class="item-title">组织者</text>
-            <picker>
-              <view class="picker">
-                <text class="picker-title">校友活动</text>
-                <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
-              </view>
-            </picker>
+            <block wx:if="{{!organ}}">
+              <picker bindchange="pickerChange" data-type="{{2}}" name="organizer" range="{{organizerList}}">
+                <view class="picker">
+                  <text class="picker-title">{{organ ? organ : '请选择组织形式'}}</text>
+                  <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
+                </view>
+              </picker>
+            </block>
+            <block wx:if="{{organ == '官方'}}">
+              <picker bindchange="pickerChange" data-type="{{3}}" name="organizer" range="{{klassList}}">
+                <view class="picker">
+                  <text class="picker-title">{{klass ? klass : '请选择部门'}}</text>
+                  <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
+                </view>
+              </picker>
+            </block>
+            <block wx:elif="{{organ == '非官方'}}">
+              <input class="item-input" placeholder="请输入组织者" />
+              <picker bindchange="pickerChange" data-type="{{2}}" name="organizer" range="{{organizerList}}">
+                <view>
+                 <text></text>
+                  <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
+                </view>
+              </picker>
+            </block>
           </view>
-          <view class="card-list-item">
+          <navigator hover-class="none" url="/pages/activity/chosetime/chosetime" class="card-list-item">
             <text class="item-title">时间（段）</text>
-            <picker>
-              <view class="picker">
-                <text class="picker-title">校友活动</text>
-                <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
-              </view>
-            </picker>
-          </view>     
+            <view class="flex-box">
+              <text wx:if="{{start.date}}" class="empty">{{start.date}} {{start.time}} 至 {{end.date}} {{end.time}}</text>
+              <text wx:else class="picker-title">请选择活动时间</text>
+              <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
+            </view>
+          </navigator>     
           <view class="card-list-item">
             <text class="item-title" style="width:250rpx;">是否借用学校场地</text>
             <view class="picker">
               <text></text>
-              <switch color="#0E90F5" />
+              <switch color="#0E90F5" name="site" />
             </view>
           </view> 
           <view class="card-list-item">
             <text class="item-title">地点</text>
-            <input placeholder="请输入活动地点" class="item-input" />
+            <input name="place" placeholder="请输入活动地点" class="item-input" />
           </view>   
           <view class="card-list-item align-top">
             <text class="item-title" style="width:120rpx;">活动介绍</text>
-            <!-- <input placeholder="请输入活动介绍" class="item-input" /> -->
-            <textarea placeholder="请输入活动介绍" class="item-input item-textarea"></textarea>
+            <textarea name="activity_introduction" placeholder="请输入活动介绍" class="item-input item-textarea"></textarea>
           </view>                        
       </view>
     </view>
@@ -56,15 +73,15 @@
         <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title">参与人数</text>
-            <input placeholder="请输入参与人数" class="item-input" />
+            <input name="participants" placeholder="请输入参与人数" class="item-input" />
           </view>
           <view class="card-list-item align-top">
             <text class="item-title" style="width:120rpx">参与要求</text>
-            <textarea class="item-input item-textarea" placeholder="请输入参与要求"></textarea>
+            <textarea name="require" class="item-input item-textarea" placeholder="请输入参与要求"></textarea>
           </view>
           <view class="card-list-item align-top">
             <text class="item-title" style="width:120rpx;">费用</text>
-            <textarea placeholder="是否产生费用,若有费用请说明详情" class="item-input item-textarea"></textarea>
+            <textarea name="money" placeholder="是否产生费用,若有费用请说明详情" class="item-input item-textarea"></textarea>
           </view>                        
       </view>
     </view>
@@ -72,7 +89,7 @@
       <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title">负责人</text>
-            <input placeholder="默认此账号,可以修改" class="item-input" />
+            <input name="leading_name" placeholder="默认此账号,可以修改" class="item-input" />
           </view>
       </view>
     </view>
@@ -80,21 +97,21 @@
       <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title">手机号</text>
-            <input placeholder="默认此账号绑定手机,可以修改" class="item-input" />
+            <input name="phone" placeholder="默认此账号绑定手机,可以修改" class="item-input" />
           </view>
           <view class="card-list-item">
             <text class="item-title">邮箱</text>
-            <input placeholder="默认此账号绑定邮箱,可以修改" class="item-input" />
+            <input name="email" placeholder="默认此账号绑定邮箱,可以修改" class="item-input" />
           </view>
           <view class="card-list-item">
             <text class="item-title">QQ</text>
-            <!-- <input placeholder="默认此账号,可以修改" class="item-input" /> -->
-            <text class="picker-title">111111111</text>
+            <!-- <text class="picker-title">111111111</text> -->
+            <input name="QQ" placeholder="默认此账号,可以修改" class="item-input" />
           </view> 
           <view class="card-list-item">
             <text class="item-title">微信</text>
-            <!-- <input placeholder="默认此账号,可以修改" class="item-input" /> -->
-            <text class="picker-title">131 2323 3322</text>
+            <input name="weixin" placeholder="默认此账号,可以修改" class="item-input" />
+            <!-- <text class="picker-title">131 2323 3322</text> -->
           </view> 
       </view>  
     </view>
@@ -103,8 +120,8 @@
       <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title" style="width:120rpx;">交流咨询群</text>
-            <text class="picker-title">131 2323 3232</text>
-            <!-- <input placeholder="默认此账号绑定手机,可以修改" class="item-input" /> -->
+            <!-- <text class="picker-title">131 2323 3232</text> -->
+            <input name="group" placeholder="默认此账号绑定手机,可以修改" class="item-input" />
           </view>
       </view> 
     </view>
@@ -113,13 +130,12 @@
           <view class="card-list-item align-top">
             <text class="item-title">封面图片</text>
             <view class="item-img-list">
-              <image src="../../../images/image.png" class="avatar" />
+              <image src="../../../images/upload.png" class="avatar" />
             </view>
           </view>
           <view class="card-list-item align-top">
             <text class="item-title">其他图片</text>
             <view class="item-img-list">
-              <image src="../../../images/image.png" class="avatar" />
               <image src="../../../images/upload.png" class="avatar" />
             </view>
           </view> 
@@ -130,11 +146,11 @@
       <view class="act-card-list ">
           <view class="card-list-item align-top">
             <text class="item-title">备注</text>
-            <textarea placeholder="请输入备注" class="item-input item-textarea"></textarea>
+            <textarea name="remark" placeholder="请输入备注" class="item-input item-textarea"></textarea>
           </view>
       </view>   
     </view>
-    <view class="btn-area">提交</view>
+    <button formType="submit" class="btn-area">提交</button>
   </form>
 
   <view class="dialog-wrapper" wx:if="{{false}}">

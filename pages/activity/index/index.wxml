@@ -17,23 +17,23 @@
   </view>
   <view style="height:87rpx;"></view>
   <view class="act-father">
-      <view class="act-list" wx:for="{{6}}">
+      <view class="act-list" wx:for="{{newList}}" wx:key="{{index}}">
         <view class="act-list-img-box">
           <image class="act-list-img" src="../../../images/avatar.jpg" />
         </view>
         <view class="act-list-content">
           <view>
-            <text wx:if="{{index == 0}}" class="act-top-title friend">校友活动</text>
-            <text wx:if="{{index == 1}}" class="act-top-title school">学校活动</text>
-            <text wx:if="{{index == 2}}" class="act-top-title college">学院活动</text>
-            <text wx:if="{{index == 3}}" class="act-top-title classify">专业活动</text>
+            <text wx:if="{{item.type == '校友活动'}}" class="act-top-title friend">校友活动</text>
+            <text wx:if="{{item.type == '学校活动'}}" class="act-top-title school">学校活动</text>
+            <text wx:if="{{item.type == '学院活动'}}" class="act-top-title college">学院活动</text>
+            <text wx:if="{{item.type == '专业活动'}}" class="act-top-title classify">专业活动</text>
             <text wx:if="{{index % 2 == 0}}" class="act-ing">进行中</text>
             <text wx:else="{{index % 2 == 0}}" class="act-end">进行中</text>
           </view>
-          <view>英语系2013届同学聚会</view>
+          <view>{{item.title}}</view>
           <view class="list-item">
             <image src="../../../images/icon-time.png" class="icon-time" alt="icon-time" />
-            <text>2018-04-20 09：00</text>
+            <text>{{formatTime(item.startTime)}}</text>
           </view>
           <view class="list-item">
             <image src="../../../images/icon-location.png" class="icon-location" alt="icon-location" />
@@ -61,10 +61,5 @@
   <!--发起活动-->
   <view class="action-box">
     <image src="../../../images/icon-action.png" class="icon-action"/>
-    <!-- <view class="action-title">
-      <text>快速发起活动</text>
-      <image src="../../../images/icon-radius.png" class="icon-radius" />
-      <image src="../../../images/icon-close.png" class="icon-close" />
-    </view> -->
   </view>
 </view>

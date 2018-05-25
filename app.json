@@ -11,6 +11,7 @@
     "pages/activity/mine/index",
     "pages/activity/action/index",
     "pages/activity/detail/index",
+    "pages/activity/chosetime/chosetime",
     "pages/index/index",
     "pages/map/firend/firend",
     "pages/map/firend/detail",

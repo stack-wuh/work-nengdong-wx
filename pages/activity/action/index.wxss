@@ -17,3 +17,9 @@
   height:220rpx;
   margin-top:30rpx;
 }
+.flex-box{
+  flex:1;
+}
+.empty{
+  font-size: 25rpx;
+}

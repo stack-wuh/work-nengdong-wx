@@ -1,4 +1,6 @@
 // pages/activity/index/index.js
+var app = getApp()
+import format from '../../../utils/util.js'
 Page({
 
   /**
@@ -10,8 +12,17 @@ Page({
     ],
     isShowSearch:false,
     isShowInput:false,
+    newList:[],
   },  
   
+
+  fetchData(){
+    app.apiPost('getActivity').then(res=>{
+      this.setData({
+        newList:res
+      })
+    })
+  },
   
   hiddenSearchBox(){
     this.setData({
@@ -41,7 +52,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.fetchData()
   },
 
   /**
