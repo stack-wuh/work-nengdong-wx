@@ -23,3 +23,17 @@
 .empty{
   font-size: 25rpx;
 }
+.item-img-list{
+  display: flex;
+}
+.item-img-list .item-img-box{
+  position: relative;
+  width: 120rpx;
+  height:120rpx;
+  margin-right:10rpx;
+}
+.item-img-list .item-img-box .icon-delete{
+  position: absolute;
+  right:-10rpx;
+  top:10rpx;
+}

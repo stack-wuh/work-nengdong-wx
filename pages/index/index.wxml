@@ -10,7 +10,7 @@
         </block>
       </swiper>
    </view>
-   <view class="index-list" wx:for="{{menuList}}">
+   <view class="index-list" wx:for="{{menuList}}" wx:key="{{index}}">
     <view class="list-title">{{item.title}}</view>
     <view class="list-item-box">
         <navigator url="{{item.pathUrl}}" hover-class="none" class="list-item" wx:for="{{item.list}}">

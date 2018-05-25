@@ -1,23 +1,36 @@
 // pages/activity/index/index.js
 var app = getApp()
-import format from '../../../utils/util.js'
+const format = n =>{
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+// import format from '../../../utils/util.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list : [
-      1,2,3,4,5
-    ],
     isShowSearch:false,
     isShowInput:false,
     newList:[],
+    title:'',
+    typeList:['校友活动','学校活动','学院活动','专业活动','班级活动','讲座活动'],
   },  
   
-
+  bindchange(e){
+    console.log(e.detail.value)
+  },
   fetchData(){
-    app.apiPost('getActivity').then(res=>{
+    let data = {
+      title:this.data.title,
+    }
+    app.apiPost('getActivity',data).then(res=>{
+      res.map(item=>{
+        let start = new Date(item.starttime) , end = new Date(item.endtime)
+        item.starttime = [start.getFullYear(),start.getMonth(),start.getDate()].map(format).join('-') + ' ' + [start.getHours(),start.getMinutes()].map(format).join(':')
+        item.endtime = [end.getFullYear(),end.getMonth(),end.getDate()].map(format).join('-') + ' ' + [end.getHours(),end.getMinutes()].map(format).join(':')
+      })
       this.setData({
         newList:res
       })
@@ -32,6 +45,10 @@ Page({
   },
   /*input搜索框,enter事件*/
   searchData(e){
+    this.setData({
+      title:e.detail.value
+    })
+    this.fetchData()
     this.setData({
       isShowSearch:false,
       isShowInput:false

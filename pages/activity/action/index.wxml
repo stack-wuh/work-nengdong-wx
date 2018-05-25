@@ -5,7 +5,7 @@
       <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title">活动类型</text>
-            <picker  data-type="{{1}}" name="type" range="{{typeList}}" bindchange="pickerChange">
+            <picker  data-type="{{1}}" name="type" value="{{type}}" range="{{typeList}}" bindchange="pickerChange">
               <view class="picker">
                 <text class="picker-title">{{type ? type : '请选择活动类型'}}</text>
                 <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
@@ -19,7 +19,7 @@
           <view class="card-list-item">
             <text class="item-title">组织者</text>
             <block wx:if="{{!organ}}">
-              <picker bindchange="pickerChange" data-type="{{2}}" name="organizer" range="{{organizerList}}">
+              <picker bindchange="pickerChange" data-type="{{2}}" range="{{organizerList}}">
                 <view class="picker">
                   <text class="picker-title">{{organ ? organ : '请选择组织形式'}}</text>
                   <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
@@ -27,7 +27,7 @@
               </picker>
             </block>
             <block wx:if="{{organ == '官方'}}">
-              <picker bindchange="pickerChange" data-type="{{3}}" name="organizer" range="{{klassList}}">
+              <picker bindchange="pickerChange" data-type="{{3}}" name="organizer" value="{{klass}}" range="{{klassList}}">
                 <view class="picker">
                   <text class="picker-title">{{klass ? klass : '请选择部门'}}</text>
                   <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
@@ -35,7 +35,7 @@
               </picker>
             </block>
             <block wx:elif="{{organ == '非官方'}}">
-              <input class="item-input" placeholder="请输入组织者" />
+              <input name="organizer" class="item-input" placeholder="请输入组织者" />
               <picker bindchange="pickerChange" data-type="{{2}}" name="organizer" range="{{organizerList}}">
                 <view>
                  <text></text>
@@ -106,7 +106,7 @@
           <view class="card-list-item">
             <text class="item-title">QQ</text>
             <!-- <text class="picker-title">111111111</text> -->
-            <input name="QQ" placeholder="默认此账号,可以修改" class="item-input" />
+            <input name="qq" placeholder="默认此账号,可以修改" class="item-input" />
           </view> 
           <view class="card-list-item">
             <text class="item-title">微信</text>
@@ -120,7 +120,6 @@
       <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title" style="width:120rpx;">交流咨询群</text>
-            <!-- <text class="picker-title">131 2323 3232</text> -->
             <input name="group" placeholder="默认此账号绑定手机,可以修改" class="item-input" />
           </view>
       </view> 
@@ -130,13 +129,21 @@
           <view class="card-list-item align-top">
             <text class="item-title">封面图片</text>
             <view class="item-img-list">
-              <image src="../../../images/upload.png" class="avatar" />
+              <view class="item-img-box" wx:if="{{cover.length > 0}}">
+                 <image data-type="{{1}}" bindtap="deleteImg" src="../../../images/icon-delete.png" class="icon-delete" />
+                <image src="{{cover}}" class="avatar" />
+              </view>
+              <image data-type="{{1}}" bindtap="uploadImg" wx:if="{{cover.length == 0}}" src="../../../images/upload.png" class="avatar" />
             </view>
           </view>
           <view class="card-list-item align-top">
             <text class="item-title">其他图片</text>
             <view class="item-img-list">
-              <image src="../../../images/upload.png" class="avatar" />
+              <view class="item-img-box" wx:for="{{address}}" wx:key="{{index}}"> 
+                  <image src="{{item}}" class="avatar" /> 
+                  <image data-type="{{2}}" data-index="{{index}}" bindtap="deleteImg" src="../../../images/icon-delete.png" class="icon-delete" />
+              </view>
+              <image data-type="{{2}}" bindtap="uploadImg" wx:if="{{address.length<4}}" src="../../../images/upload.png" class="avatar" />
             </view>
           </view> 
       </view> 
@@ -153,22 +160,22 @@
     <button formType="submit" class="btn-area">提交</button>
   </form>
 
-  <view class="dialog-wrapper" wx:if="{{false}}">
+  <view class="dialog-wrapper" wx:if="{{isShow == 1}}">
     <view class="dialog pass-dialog">
       <image src="../../../images/submit-pass.png" class="submit" />
       <view class="text">提交成功!</view>
       <view class="tips">可在"我的发起"板块查看审核进度</view>
       <view class="dialog-btn-wrapper">
-        <view class="btn btn-blue">取消</view>
-        <view class="btn btn-blue">查看</view>
+        <view bindtap="cancel" class="btn btn-blue">取消</view>
+        <navigator hover-class="none" url="/pages/activity/index/index" class="btn btn-blue">查看</navigator>
       </view>
     </view>
-    <view class="dialog nopass-dialog" wx:if="{{false}}">
+    <view class="dialog nopass-dialog" wx:if="{{isShow == 2}}">
       <image src="../../../images/submit-unpass.png" class="submit" />
       <view class="text">提交失败!</view>
       <view class="tips">请核对信息, 重新提交</view>
       <view class="dialog-btn-wrapper">
-        <view class="btn btn-gray">取消</view>
+        <view bindtap="cancel" class="btn btn-gray">取消</view>
         <view class="btn btn-blue">重新提交</view>
       </view>
     </view>
