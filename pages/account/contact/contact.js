@@ -1,11 +1,12 @@
 // pages/account/contact/contact.js
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    imgList:[]
   },
 
   /**
@@ -15,6 +16,28 @@ Page({
   
   }, 
 
+  //上传图片
+  uploadImg(){
+    let self = this
+    wx.chooseImage({
+      count:9,
+      success:function(res){
+        var tempFilePaths = res.tempFilePaths
+        wx.uploadFile({
+          url:app.server + 'addImages',
+          filePath:tempFilePaths[0],
+          name:'file',
+          success:function(res){
+            var list = []
+            list.push(res.data)
+            self.setData({
+              imgList:list
+            })
+          }
+        })
+      }
+    })
+  },
   formSunmit(e){
     console.log(e)
   },

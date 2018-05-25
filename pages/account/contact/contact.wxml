@@ -35,11 +35,11 @@
           <text>*</text>建议上传毕业证、学位证、学生证、学信网截图、身份证等客观信息的照片作为审核依据
         </view>
         <view class="image-wrapper">
-          <view class="image-group" wx:for="{{5}}">
-            <image src="/images/image.png" class="image"></image>
+          <view class="image-group" wx:for="{{imgList}}" wx:key="index">
+            <image src="{{item}}" class="image"></image>
             <image src="/images/icon-delete.png" class="delete"></image>
           </view>
-          <image src="/images/upload.png" class="image"></image>
+          <image bindtap="uploadImg" src="/images/upload.png" class="image"></image>
         </view>
       </view>
     </view>

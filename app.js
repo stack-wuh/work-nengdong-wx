@@ -122,5 +122,6 @@ App({
     return str.replace(/(^\s*)|(\s*$)/g, "");
   },
 
+
   server:'http://192.168.10.116:8686/SchoolFellow/'
 })
