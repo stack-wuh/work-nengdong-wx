@@ -32,6 +32,7 @@ Page({
     app.apiPost('LoginStudent_Info',e.detail.value).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
+      wx.setStorageSync('number',res.id)
       if(res.error == 0){
         wx.switchTab({
           url:'/pages/index/index'

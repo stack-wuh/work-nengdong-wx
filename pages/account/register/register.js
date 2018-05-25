@@ -77,7 +77,7 @@ Page({
       if(res.error == 0){
         setTimeout(()=>{
           wx.navigateTo({
-            url:'/pages/account/login/login'
+            url:'/pages/account/bind/bind'
           })
         },1000)
       }

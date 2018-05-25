@@ -7,13 +7,13 @@
         <view class="contact-title">您想反馈的问题类型</view>
         <radio-group name="question_type">
           <label>
-            <radio/><text>忘记密码</text>
+            <radio value="忘记密码"/><text>忘记密码</text>
           </label>
           <label>
-            <radio/><text>校友身份认证失败</text>
+            <radio value="校友身份认证失败"/><text>校友身份认证失败</text>
           </label>
           <label>
-            <radio/><text>其他</text>
+            <radio value="其他"/><text>其他</text>
           </label>
         </radio-group> 
       </view>
@@ -37,7 +37,7 @@
         <view class="image-wrapper">
           <view class="image-group" wx:for="{{imgList}}" wx:key="index">
             <image src="{{item}}" class="image"></image>
-            <image src="/images/icon-delete.png" class="delete"></image>
+            <image bindtap="deleteImg" data-index="{{index}}" src="/images/icon-delete.png" class="delete"></image>
           </view>
           <image bindtap="uploadImg" src="/images/upload.png" class="image"></image>
         </view>
@@ -79,7 +79,7 @@
           </view>
           <view class="input-group">
             <view class="label">辅导员姓名</view>
-            <input class="counsellor" placeholder='请输入您的辅导员姓名'></input>
+            <input name="counsellor" placeholder='请输入您的辅导员姓名'></input>
           </view>
         </view>
         <view class="tips" style="margin-bottom:0;">
