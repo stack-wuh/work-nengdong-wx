@@ -45,7 +45,7 @@ App({
       title: title,
     })
     if (wx.getStorageSync('number')){
-      data.number = wx.getStorageSync('number')
+      data.student_info_id = wx.getStorageSync('number')
     }
     return new Promise((resolve, reject) => {
       wx.request({
@@ -116,6 +116,13 @@ App({
         })
       }
     })
+  },
+
+  //验证正则
+  reg:{
+    phone:'/^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/',
+    email:'/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/',
+    ID:'/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/'
   },
 
   trim: function (str) {
