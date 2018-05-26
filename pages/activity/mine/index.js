@@ -6,7 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    type:1,
+    check:'待审核',
+    list:[]
   },
 
   /**
@@ -16,10 +18,18 @@ Page({
     this.fetchData()
   },
 
-
+  changeActive(e){
+    this.setData({
+      type:e.currentTarget.dataset.type,
+      check:e.currentTarget.dataset.title
+    })
+    this.fetchData()
+  },
   fetchData(){
-    app.apiPost('getMyActivity').then(res=>{
-
+    app.apiPost('getMyActivity',{check:this.data.check}).then(res=>{
+      this.setData({
+        list:res
+      })
     })
   },
   /**
