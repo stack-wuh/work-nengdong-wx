@@ -1,18 +1,32 @@
 // pages/map/alumni/unpass.js
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    list:{},
+    imgList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let list = wx.getStorageSync('alumniList')
+    
+    this.data.list = list.find(item=>{ 
+      return item.id == options.id
+    })
+    this.setData({
+      list:this.data.list
+    })
+    let imgList = this.data.list.alumni_pages_album.address.split(',')
+    this.setData({
+      imgList:imgList
+    })
+    console.log(this.data)
   },
 
   /**

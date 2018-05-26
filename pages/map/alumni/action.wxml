@@ -1,57 +1,57 @@
 <!--pages/map/alumni/action.wxml-->
 <view class="container other-bg">
-  <form>
+  <form bindsubmit="submit">
     <view class="act-card">
       <view class="card-list-item">
         <text class="item-title">类型</text>
-        <picker>
+        <picker value="{{type}}" name="type" range="{{typeList}}" bindchange="pickerChange">
           <view class="picker">
-            <text class="picker-title">年级</text>
+            <text class="picker-title" class="picker-title">{{type ? type : '请选择类型'}}</text>
             <image src="/images/icon-arrow-right.png" class="icon-right" />
           </view>
         </picker>
       </view>
       <view class="card-list-item">
         <text class="item-title">名称</text>  
-        <input placeholder="请输入校友会名称" class="item-input" />
+        <input name="title" placeholder="请输入校友会名称" class="item-input" />
       </view>    
       <view class="card-list-item align-top">
         <text class="item-title" >校友会介绍</text>  
-        <textarea placeholder="请输入校友会名称" class="item-input item-textarea" />
+        <textarea name="introduced" placeholder="请输入校友会名称" class="item-input item-textarea" />
       </view>  
       <view class="card-list-item">
         <text class="item-title">入会要求</text>  
-        <input placeholder="请输入入会要求" class="item-input" /> 
+        <input name="require_text" placeholder="请输入入会要求" class="item-input" /> 
       </view>  
       <view class="card-list-item">
         <text class="item-title">入会方式</text>  
-        <input placeholder="请输入入会方式" class="item-input" /> 
+        <input name="way" placeholder="请输入入会方式" class="item-input" /> 
       </view>    
       <view class="card-list-item">
         <text class="item-title">发起人</text>  
-        <input placeholder="请输入发起人" class="item-input" /> 
+        <input name="name" placeholder="请输入发起人" class="item-input" /> 
       </view>   
       <view class="card-list-item">
         <text class="item-title">学院专业班级</text>  
-        <input placeholder="请输入学院专业班级" class="item-input" /> 
+        <input name="class_text" placeholder="请输入学院专业班级" class="item-input" /> 
       </view>          
     </view>
     <view class="act-card">
       <view class="card-list-item">
         <text class="item-title">手机号</text>
-        <input class="item-input" placeholder="请输入手机号" />
+        <input name="phone" class="item-input" placeholder="请输入手机号" />
       </view>
       <view class="card-list-item">
         <text class="item-title">邮箱</text>
-        <input class="item-input" placeholder="请输入邮箱" />
+        <input name="email" class="item-input" placeholder="请输入邮箱" />
       </view>
       <view class="card-list-item">
         <text class="item-title">QQ</text>
-        <input class="item-input" placeholder="请输入QQ" />
+        <input name="qq" class="item-input" placeholder="请输入QQ" />
       </view>  
       <view class="card-list-item">
         <text class="item-title">微信</text>
-        <input class="item-input" placeholder="请输入微信" />
+        <input name="weixin" class="item-input" placeholder="请输入微信" />
       </view>    
     </view>
     <view class="form-msg">手机号、邮箱、QQ、微信至少填写一项</view>
@@ -60,22 +60,35 @@
           <view class="card-list-item align-top">
             <text class="item-title">封面图片</text>
             <view class="item-img-list">
-              <image src="../../../images/image.png" class="avatar" />
+              <view class="img-box avatar">
+                <image wx:if="{{cover}}" src="{{cover}}" class="avatar" />
+                <image data-type="1" wx:else bindtap="uploadImg" src="/images/upload.png" class="avatar" />
+                <image src="/images/icon-delete.png" class="icon-delete" />
+              </view>
+              <!-- <image src="../../../images/image.png" class="avatar" /> -->
             </view>
           </view>
           <view class="card-list-item align-top">
             <text class="item-title">其他图片</text>
             <view class="item-img-list">
-              <image src="../../../images/image.png" class="avatar" />
-              <image src="../../../images/upload.png" class="avatar" />
+              <view class="img-box" wx:if="{{address.length<4}}">
+                <image  src="/images/icon-delete.png" class="icon-delete" />
+                <image data-type="2" bindtap="uploadImg" src="/images/upload.png" class="avatar" />
+              </view>
+              <view class="img-box" wx:if="{{address.length>0}}" wx:for="{{address}}">
+                <image  src="/images/icon-delete.png" class="icon-delete" />
+                <image data-type="2" bindtap="uploadImg" src="{{item}}" class="avatar" />
+              </view>
+              <!-- <image src="../../../images/image.png" class="avatar" />
+              <image src="../../../images/upload.png" class="avatar" /> -->
             </view>
           </view> 
       </view> 
     </view>
     <view class="form-msg">附件只能PC端上传,或者加群下载;图片上限为4张</view>
-    <view class="btn-area">提交</view>
+    <button formType="submit" class="btn-area">提交</button>
   </form>
-  <view class="dialog-wrapper">
+  <view class="dialog-wrapper" hidden>
     <view class="dialog" wx:if="{{false}}">
       <image src="/images/bg-action-ok.png" class="icon-action" />
       <view class="text">提交成功</view>
@@ -86,8 +99,8 @@
          <text class="btn btn-blue">查看</text>
       </view>
    </view>
-   <view class="dialog">
-     <image src="/images/bg-action-no.png" class="icon-action" />
+   <view class="dialog" wx:if="{{false}}">
+     <image src="/images/bg-action-no.png" class="icon-action"  />
      <view class="text">提交失败</view>
      <view class="tips">请核对您的信息, 重新提交</view>
      <view class="dialog-btn-wrapper">

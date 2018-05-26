@@ -1,20 +1,42 @@
 // pages/map/alumni/mine.js
+var app = getApp()
+const format = require('../../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    list:[],
+    check_text:'待审核'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.fetchData()
   },
-
+  changeActive(e){
+    this.setData({
+      check_text:e.currentTarget.dataset.check
+    })  
+    this.fetchData()
+  },
+  fetchData(){
+    let data = {
+      check_text:this.data.check_text
+    }
+    app.apiPost('getAlumni_PagesByCheck',data).then(res=>{
+      res.map(item=>{
+        item.time = format.formatTime(new Date(item.time))
+      })
+      this.setData({
+        list:res
+      })
+      wx.setStorageSync('alumniList',res)
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -3,34 +3,37 @@
   <view class="search-box other-bg">
     <view class="input-box">
       <image src="/images/icon-search.png" class="icon-search" />
-      <text>请输入关键词</text>
-      <input hidden class="my-input" />
+      <text wx:if="{{!isShowInput}}" bindtap="changeActive">请输入关键词</text>
+      <input auto-focus="{{true}}" bindblur="bindblur" bindconfirm="fetchData" wx:if="{{isShowInput}}" bindinput="saveInput" class="my-input" />
     </view>
   </view>
   <view style="height:110rpx"></view>
   <view class="nav-wrapper flex-box">
     <text class="active-pedding">全部</text>
     <navigator class="empty-text" url="/pages/map/alumni/mine" hover-class="none">我的校友会</navigator>
-    <picker>
+    <picker bindchange="pickerChange" range="{{typeList}}" range-key="{{'name'}}">
       <view class="empty-box">
         <image src="/images/icon-menu-g.png" class="icon-menu" />
         <text>筛选</text>
       </view>
      </picker>
   </view>
-  <view class="item-list" wx:for="{{3}}">
+  <view class="item-list" wx:for="{{list}}" wx:key="{{index}}">
     <view class="item">
       <view class="img-box">
-        <image src="/images/avatar.jpg" class="avatar" />
+        <image wx:if="{{!item.image}}" src="/images/avatar.jpg" class="avatar" />
+        <image wx:if="{{item.image}}" src="{{item.image}}" class="avatar" />
       </view>
       <view class="right-content">
           <view class="flex-box">
-            <text>类型：年级</text>
-            <image src="/images/icon-collect-default.png" class="icon-collect" />
+            <text>类型：{{item.type}}</text>
+            <image data-id="{{item.id}}" bindtap="collected" src="/images/icon-collect-default.png" class="icon-collect" />
           </view>
-          <view>能动学院校友会</view>
-          <view>创建时间：2018-01-01 15:01</view>
-          <view>320人觉得</view>
+          <view>{{item.title}}</view>
+          <view>创建时间：{{item.time}}</view>
+          <view>{{item.praise}}人觉得赞 
+            <image bindtap="parised" data-id="{{item.id}}" src="/images/icon-prise-default.png" class="icon-prise" />
+          </view>
       </view>
     </view>
   </view>

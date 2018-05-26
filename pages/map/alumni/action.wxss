@@ -9,9 +9,22 @@
 .avatar{
   width:100rpx;
   height:100rpx;
-  margin-right:10rpx;
+  /* margin-right:10rpx; */
 }
 .icon-action{
   width:399rpx;
   height:235rpx;
+}
+.item-img-list{
+  display: flex;
+  align-items: center;
+}
+.item-img-list .img-box{
+  position: relative;
+  margin-right:10rpx;
+} 
+.item-img-list .img-box .icon-delete{
+  position: absolute;
+  right:-10rpx;
+  top:-10rpx;
 }
