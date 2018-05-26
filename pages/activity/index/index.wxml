@@ -17,7 +17,7 @@
   </view>
   <view style="height:87rpx;"></view>
   <view class="act-father">
-      <view class="act-list" wx:for="{{newList}}" wx:key="{{index}}">
+      <navigator hover-class="none" url="/pages/activity/detail/index?id={{item.id}}" class="act-list" wx:for="{{newList}}" wx:key="{{index}}">
         <view class="act-list-img-box">
           <image class="act-list-img" src="{{item.cover ? item.cover : '../../../images/avatar.jpg'}}" />
         </view>
@@ -45,7 +45,7 @@
             <text> <text class="act-empty">57</text>/{{item.participants}}人</text>
           </view>
         </view>
-      </view>
+      </navigator>
       <text class="btm-text">没有更多啦...</text>
   </view>
 
@@ -59,7 +59,7 @@
   </view>
 
   <!--发起活动-->
-  <view class="action-box">
+  <navigator hover-class="none" url="/pages/activity/action/index" class="action-box">
     <image src="../../../images/icon-action.png" class="icon-action"/>
-  </view>
+  </navigator>
 </view>

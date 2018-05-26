@@ -1,7 +1,7 @@
 <!--pages/activity/detail/index.wxml-->
 <view class="container other-bg-gray">
   <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" doration="{{1000}}" indicator-active-color="#0E90F5" indicator-color="RGBA(14, 144, 245, .5)">
-    <block wx:for="{{imgUrls}}">
+    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
       <swiper-item>
         <image src="{{item}}" style="width:100%;height:347rpx;"/>
       </swiper-item>
@@ -10,24 +10,24 @@
   <view class="card-list">
     <view class="list-item">
       <view class="list-item-first">
-       <text>能动2013届同学聚会</text>
-       <text class="act-top-title school">学院活动</text>
+       <text>{{list.title}}</text>
+       <text class="act-top-title school">{{list.type}}</text>
       </view>
       <view>
         <image src="../../../images/icon-time.png" class="icon-time" />
-        <text>2018-04-20 09:00至2018-04-20 10:00</text>
+        <text>{{list.starttime}} 至 {{list.endtime}}</text>
      </view>
      <view class="list-item-last">
        <view>
          <image src="../../../images/icon-location.png" class="icon-location" />
-         <text>文科楼403</text>
+         <text>{{list.place}}</text>
        </view>
        <view>
          <image  src="../../../images/icon-user.png" class="icon-user"/>
-         <text>伍六一</text>
+         <text>{{list.organizer}}</text>
        </view>
        <view>
-         <text class="txt-empty">57</text>/100人
+         <text class="txt-empty">57</text>/{{list.participants}}人
        </view>
      </view>
     </view>
@@ -35,50 +35,49 @@
   <view class="card-list">
     <view class="card-list-item">
       <view>参与费用:</view>
-      <view>500元/人(费用有活动组织先行垫付)</view>
+      <view>{{list.money}}</view>
     </view>
     <view class="card-list-item">
       <view>参与要求:</view>
-      <view>此活动面向所有13届英语系同学，请参加的同学准时出席，着统一服装（现场领取）。</view>
+      <view>{{list.require}}</view>
     </view>
     <view class="card-list-item">
       <view>活动介绍: </view>
-      <view>本次活动时间为1天，第一站为大学校园，回忆青春；第二站为酒店，把酒言欢，展望未来。全程摄像跟拍，后期有纪念册和光碟赠送以示留念。</view>
+      <view>{{list.activity_introduction}}</view>
     </view>    
   </view>
   <view class="card-list">
     <view class="card-list-item">
       <view>负责人: </view>
-      <view>伍六一</view>
+      <view>{{list.leading_name}}</view>
     </view> 
     <view class="card-list-item">
       <view>手机号: </view>
-      <view>伍六一: 131 2332 2332</view>
-      <view>伍六一: 131 2332 2332</view>
+      <view>{{list.leading_name}}: {{list.phone}}</view>
     </view>
     <view class="card-list-item">
       <view>邮箱: </view>
-      <view>23657@qq.com</view>
+      <view>{{list.email}}</view>
     </view>
     <view class="card-list-item">
       <view>QQ: </view>
-      <view>23672365</view>
+      <view>{{list.qq}}</view>
     </view> 
     <view class="card-list-item">
       <view>微信: </view>
-      <view>13123234242</view>
+      <view>{{list.weixin}}</view>
     </view>                    
   </view>
   <view class="card-list">
     <view class="card-list-item no-border">
       <view>QQ群</view>
-      <view>121212(方便参与讨论,下载资料)</view>
+      <view>{{list.group}}</view>
     </view>
   </view>
   <view class="card-list">
     <view class="card-list-item no-border">
       <view>备注:</view>
-      <view>此活动旨在加深交流，联系同学感情，禁止攀比和任何其他不负责任的行为。
+      <view>{{list.remark}}
       </view>
     </view>
   </view>
@@ -122,16 +121,17 @@
   </view>
   <view class="btm-btn-list actioned">
     <text>分享</text>
-    <text>我要报名</text>
+    <text data-type="submit" wx:if="{{!isActioned}}" bindtap="handleSubmit">我要报名</text>
+    <text data-type="cancel" wx:else bindtap="handleSubmit">取消报名</text>
   </view>  
 
   <!--报名成功-->
-  <view class="dialog-wrapper">
+  <view class="dialog-wrapper" wx:if="{{isActioned}}">
     <view class="dialog">
       <image src="../../../images/prev-pass.png" class="prev-pass" />
       <view class="text">恭喜您!</view>
       <view class="text">本次报名成功</view>
-      <image src="../../../images/icon-close-white.png" class="icon-close-white" />
+      <image bindtap="hideBox" src="../../../images/icon-close-white.png" class="icon-close-white" />
       <view class="bg-white-line"></view>
     </view>    
   </view>

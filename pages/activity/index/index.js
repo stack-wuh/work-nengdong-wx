@@ -4,6 +4,7 @@ const format = n =>{
   n = n.toString()
   return n[1] ? n : '0' + n
 }
+let arugs = ''
 // import format from '../../../utils/util.js'
 Page({
 
@@ -15,17 +16,29 @@ Page({
     isShowInput:false,
     newList:[],
     title:'',
-    typeList:['校友活动','学校活动','学院活动','专业活动','班级活动','讲座活动'],
+    type:'',
+    typeList:['全部','校友活动','学校活动','学院活动','专业活动','班级活动','讲座活动'],
   },  
   
   bindchange(e){
-    console.log(e.detail.value)
+    this.setData({
+      type:this.data.typeList[e.detail.value],
+    })
+    this.fetchData()
   },
   fetchData(){
+    let type = this.data.type === '全部' ? '' : this.data.type
     let data = {
       title:this.data.title,
+      type:type
     }
-    app.apiPost('getActivity',data).then(res=>{
+    let url = ''
+    if(this.arugs == 1){
+      url = 'getActivity'
+    }else{
+      url='getMyPartake'
+    }
+    app.apiPost(url,data).then(res=>{
       res.map(item=>{
         let start = new Date(item.starttime) , end = new Date(item.endtime)
         item.starttime = [start.getFullYear(),start.getMonth(),start.getDate()].map(format).join('-') + ' ' + [start.getHours(),start.getMinutes()].map(format).join(':')
@@ -34,6 +47,7 @@ Page({
       this.setData({
         newList:res
       })
+      wx.setStorageSync('activeDetail',res)
     })
   },
   
@@ -69,6 +83,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.arugs = options.type
+    if(this.arugs == 1){
+      wx.setNavigationBarTitle({
+        title:'活动'
+      })
+    }else{
+      wx.setNavigationBarTitle({
+        title:'我参与的'
+      })
+    }
     this.fetchData()
   },
 

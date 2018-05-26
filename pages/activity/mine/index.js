@@ -1,4 +1,5 @@
 // pages/activity/mine/index.js
+var app = getApp()
 Page({
 
   /**
@@ -12,9 +13,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.fetchData()
   },
 
+
+  fetchData(){
+    app.apiPost('getMyActivity').then(res=>{
+
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

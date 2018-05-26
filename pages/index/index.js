@@ -32,17 +32,17 @@ Page({
           {
             imgUrl:'/images/icon-list-4.png',
             name:'活动展示',
-            pathUrl:''
+            pathUrl:'/pages/activity/index/index?type=1'
           },
           {
             imgUrl:'/images/icon-list-5.png',
             name:'我发起的',
-            pathUrl:''
+            pathUrl:'/pages/activity/mine/index'
           },
           {
             imgUrl:'/images/icon-list-6.png',
             name:'我参与的',
-            pathUrl:''
+            pathUrl:'/pages/activity/index/index?type=2'
           }
         ]
       },

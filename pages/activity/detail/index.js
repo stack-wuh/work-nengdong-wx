@@ -1,4 +1,6 @@
 // pages/activity/detail/index.js
+var app = getApp()
+let id
 Page({
 
   /**
@@ -10,6 +12,8 @@ Page({
       '../../../images/upload.png',
       '../../../images/submit-pass.png'
     ],
+    list:{},
+    imgList:'',
     listData:[
       {index:'01',name:'text1',classify:'英语1301',tel:'13123234343'},
       {index:'02',name:'text2',classify:'英语1301',tel:'13123234343'},
@@ -17,16 +21,57 @@ Page({
       {index:'04',name:'text4',classify:'英语1301',tel:'13123234343'},
       {index:'05',name:'text5',classify:'英语1301',tel:'13123234343'},
       {index:'06',name:'text6',classify:'英语1301',tel:'13123234343'}
-    ]
+    ],
+    isActioned:false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let list = wx.getStorageSync('activeDetail')
+    this.id = options.id
+    let data = list.find(item=>{
+      return item.id == this.id
+    })
+    let imgList = data.cover + ','+ data.activity_image.address
+    this.setData({
+      list:data,
+      imgUrls:imgList.split(',')
+    })
+    console.log(this.data)
   },
 
+  //隐藏模态框
+  hideBox(){
+    this.setData({
+      isActioned:false
+    })
+  },
+
+  //点击报名--取消报名
+  handleSubmit(e){
+    let type = e.currentTarget.dataset.type
+    let url = type === 'submit' ? 'addJoinActivity' : 'delJoinActivity'
+    let data = {
+      activity_id:this.id
+    }
+    app.apiPost(url,data).then(res=>{
+      let error = res.error == 0 ? 'success' : 'error'
+      app.toastMsg(error,res.msg)
+      if(type === 'submit'){
+        if(res.error == 0){
+          this.setData({
+            isActioned:true
+          })
+        }else{
+          setData({
+            isActioned:false
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
