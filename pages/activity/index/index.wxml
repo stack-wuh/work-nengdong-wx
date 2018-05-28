@@ -27,8 +27,7 @@
             <text wx:if="{{item.type == '学校活动'}}" class="act-top-title school">学校活动</text>
             <text wx:if="{{item.type == '学院活动'}}" class="act-top-title college">学院活动</text>
             <text wx:if="{{item.type == '专业活动'}}" class="act-top-title classify">专业活动</text>
-            <text wx:if="{{index % 2 == 0}}" class="act-ing">进行中</text>
-            <text wx:else="{{index % 2 == 0}}" class="act-end">进行中</text>
+            <text class="{{item.check_text === '进行中' ? 'act-ing' : item.check_text === '待审核' ? 'act-end' : 'act-danger'}}">{{item.check_text}}</text>
           </view>
           <view>{{item.title}}</view>
           <view class="list-item">
@@ -41,8 +40,8 @@
           </view>
           <view class="list-item">
             <image src="../../../images/icon-user.png" class="icon-user" alt="icon-user" />
-            <text>{{item.leading_name}}</text>
-            <text> <text class="act-empty">57</text>/{{item.participants}}人</text>
+            <text>{{item.organizer}}</text>
+            <text> <text class="act-empty">{{item.number ? item.number : '0'}}</text>/{{item.participants}}人</text>
           </view>
         </view>
       </navigator>
@@ -59,7 +58,7 @@
   </view>
 
   <!--发起活动-->
-  <navigator hover-class="none" url="/pages/activity/action/index" class="action-box">
+  <navigator wx:if="{{isShowEdit}}" hover-class="none" url="/pages/activity/action/index" class="action-box">
     <image src="../../../images/icon-action.png" class="icon-action"/>
   </navigator>
 </view>

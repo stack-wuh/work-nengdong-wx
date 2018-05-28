@@ -1,11 +1,7 @@
 // pages/activity/index/index.js
 var app = getApp()
-const format = n =>{
-  n = n.toString()
-  return n[1] ? n : '0' + n
-}
 let arugs = ''
-// import format from '../../../utils/util.js'
+const formatNumber = require('../../../utils/util')
 Page({
 
   /**
@@ -14,6 +10,7 @@ Page({
   data: {
     isShowSearch:false,
     isShowInput:false,
+    isShowEdit:false,
     newList:[],
     title:'',
     type:'',
@@ -41,8 +38,8 @@ Page({
     app.apiPost(url,data).then(res=>{
       res.map(item=>{
         let start = new Date(item.starttime) , end = new Date(item.endtime)
-        item.starttime = [start.getFullYear(),start.getMonth(),start.getDate()].map(format).join('-') + ' ' + [start.getHours(),start.getMinutes()].map(format).join(':')
-        item.endtime = [end.getFullYear(),end.getMonth(),end.getDate()].map(format).join('-') + ' ' + [end.getHours(),end.getMinutes()].map(format).join(':')
+        item.starttime = formatNumber.formatTime(new Date(item.starttime))
+        item.endtime = formatNumber.formatTime(new Date(item.endtime))
       })
       this.setData({
         newList:res
@@ -85,10 +82,16 @@ Page({
   onLoad: function (options) {
     this.arugs = options.type
     if(this.arugs == 1){
+      this.setData({
+        isShowEdit:true
+      })
       wx.setNavigationBarTitle({
         title:'活动'
       })
     }else{
+      this.setData({
+        isShowEdit:false
+      })
       wx.setNavigationBarTitle({
         title:'我参与的'
       })

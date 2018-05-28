@@ -8,7 +8,9 @@ Page({
   data: {
     type:1,
     check:'待审核',
-    list:[]
+    list:[],
+    showInput:false,
+    title:''
   },
 
   /**
@@ -17,7 +19,22 @@ Page({
   onLoad: function (options) {
     this.fetchData()
   },
-
+  bindblur(){
+    this.setData({
+      showInput:false
+    })
+  },
+  saveInput(e){
+    console.log(e)
+    this.setData({
+      title:e.detail.value
+    })
+  },
+  showInput(){
+    this.setData({
+      showInput:true
+    })
+  },
   changeActive(e){
     this.setData({
       type:e.currentTarget.dataset.type,
@@ -26,7 +43,7 @@ Page({
     this.fetchData()
   },
   fetchData(){
-    app.apiPost('getMyActivity',{check:this.data.check}).then(res=>{
+    app.apiPost('getMyActivity',{check:this.data.check,title:this.data.title}).then(res=>{
       this.setData({
         list:res
       })

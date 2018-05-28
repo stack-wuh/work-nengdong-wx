@@ -102,6 +102,38 @@ Page({
       address:this.data.address.toString()
     }
     data = Object.assign(data,newList)
+    if(data.cover.length == 0){
+      app.toastMsg('error','请上传封面照')
+      return
+    }
+    if(!data.title){
+      app.toastMsg('error','请填写标题')
+      return
+    }
+    if(!data.type){
+      app.toastMsg('error','请选择活动类型')
+      return
+    }
+    if(!data.starttime || !data.endtime){
+      app.toastMsg('error','请选择时间')
+      return
+    }
+    if(!data.place){
+      app.toastMsg('error','请填写地址')
+      return
+    }
+    if(!data.organizer){
+      app.toastMsg('error','请选择组织者')
+      return
+    }
+    if(!data.participants){
+      app.toastMsg('error','请填写参与人数')
+      return
+    }
+    if(!data.phone && !data.email && !data.weixin && !data.qq){
+      app.toastMsg('error','请填写联系方式')
+      return
+    }
     app.apiPost('addActivity',data).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)

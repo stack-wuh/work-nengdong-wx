@@ -23,6 +23,7 @@ Page({
       {index:'06',name:'text6',classify:'英语1301',tel:'13123234343'}
     ],
     isActioned:false,
+    showMsg:false,
   },
 
   /**
@@ -45,7 +46,7 @@ Page({
   //隐藏模态框
   hideBox(){
     this.setData({
-      isActioned:false
+      showMsg:false
     })
   },
 
@@ -62,7 +63,8 @@ Page({
       if(type === 'submit'){
         if(res.error == 0){
           this.setData({
-            isActioned:true
+            isActioned:true,
+            showMsg:true
           })
         }else{
           setData({

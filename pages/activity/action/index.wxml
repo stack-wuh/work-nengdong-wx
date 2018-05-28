@@ -36,7 +36,7 @@
             </block>
             <block wx:elif="{{organ == '非官方'}}">
               <input name="organizer" class="item-input" placeholder="请输入组织者" />
-              <picker bindchange="pickerChange" data-type="{{2}}" name="organizer" range="{{organizerList}}">
+              <picker bindchange="pickerChange" data-type="{{2}}"  range="{{organizerList}}">
                 <view>
                  <text></text>
                   <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
@@ -167,7 +167,7 @@
       <view class="tips">可在"我的发起"板块查看审核进度</view>
       <view class="dialog-btn-wrapper">
         <view bindtap="cancel" class="btn btn-blue">取消</view>
-        <navigator hover-class="none" url="/pages/activity/index/index" class="btn btn-blue">查看</navigator>
+        <navigator hover-class="none" url="/pages/activity/index/index?type=1" class="btn btn-blue">查看</navigator>
       </view>
     </view>
     <view class="dialog nopass-dialog" wx:if="{{isShow == 2}}">

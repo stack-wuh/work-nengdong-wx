@@ -2,8 +2,9 @@
 <view class="container other-bg">
   <view class="search-box other-bg">
     <view class="input-box">
-      <image src="../../../images/icon-search.png" class="icon-search" />
-      <text class="search-btn">请输入关键字</text>
+      <image wx:if="{{!showInput}}" src="../../../images/icon-search.png" class="icon-search" />
+      <text bindtap="showInput" wx:if="{{!showInput}}" class="search-btn">请输入关键字</text>
+      <input bindblur="bindblur" bindconfirm="fetchData" value="{{title}}" bindinput="saveInput" wx:if="{{showInput}}" auto-focus="{{true}}" />
     </view>
   </view>
   <view style="height:108rpx;"></view>

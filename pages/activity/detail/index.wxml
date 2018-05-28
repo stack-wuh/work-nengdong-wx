@@ -49,11 +49,11 @@
   <view class="card-list">
     <view class="card-list-item">
       <view>负责人: </view>
-      <view>{{list.leading_name}}</view>
+      <view>{{list.organizer}}</view>
     </view> 
     <view class="card-list-item">
       <view>手机号: </view>
-      <view>{{list.leading_name}}: {{list.phone}}</view>
+      <view>{{list.phone}}</view>
     </view>
     <view class="card-list-item">
       <view>邮箱: </view>
@@ -122,11 +122,11 @@
   <view class="btm-btn-list actioned">
     <text>分享</text>
     <text data-type="submit" wx:if="{{!isActioned}}" bindtap="handleSubmit">我要报名</text>
-    <text data-type="cancel" wx:else bindtap="handleSubmit">取消报名</text>
+    <text data-type="cancel" wx:if="{{isActioned}}" bindtap="handleSubmit">取消报名</text>
   </view>  
 
   <!--报名成功-->
-  <view class="dialog-wrapper" wx:if="{{isActioned}}">
+  <view class="dialog-wrapper" wx:if="{{showMsg}}">
     <view class="dialog">
       <image src="../../../images/prev-pass.png" class="prev-pass" />
       <view class="text">恭喜您!</view>
