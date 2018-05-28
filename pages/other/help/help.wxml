@@ -24,19 +24,18 @@
       <image src="/images/icon-wraning.png" class="icon-wraning"/>
       <view>该板块发布信息采用实名制,禁止发布虚假、不文明信息，违规信息管理员有权删除，情节严重者永久封号！</view>
     </view>
-    <view class="list-item" wx:for="{{3}}">
+    <view class="list-item" wx:for="{{list}}">
        <view class="img-box">
          <image src="/images/avatar.png" class="avatar" />
        </view> 
        <view class="right-content">
           <view class="flex-box" >
-            <text class="title-bold">标题标题</text>
-            <text wx:if="{{index % 2 == 0}}" class="title-pedding info-pedding">提供帮助</text>
-            <text wx:else class="title-pedding success-pedding">寻求帮助</text>
+            <text class="title-bold">{{item.title}}</text>
+            <text class="{{item.type === '提供帮助' ? 'title-pedding info-pedding' : 'title-pedding success-pedding'}}">{{item.type}}</text>
           </view>
           <view>
             <text>发布人：</text>
-            <text>伍六一</text>
+            <text>{{item.college}}</text>
             <text>学院：</text>
             <text>能动学院</text>
           </view>
@@ -46,13 +45,14 @@
           </view>
           <view class="flex-box">
             <text>发布时间：</text>
-            <text>2017-09-01</text>
+            <text>{{item.time}}</text>
             <text class="empty"></text>
             <image src="/images/icon-prise-default.png" class="icon-prise" />
-            <text>111人赞</text>
+            <text>{{item.praise}}人赞</text>
           </view>
        </view> 
     </view>
+    <view class="btm-text">没有更多啦</view>
   </view>
   <navigator hover-class="none" url="/pages/other/help/publish" class="edit-box">
     <image src="/images/icon-action.png" class="icon-action" />

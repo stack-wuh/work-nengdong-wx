@@ -20,3 +20,9 @@
   right:-10rpx;
   top:-10rpx;
 }
+.img-list{
+  display: flex;
+}
+.img-list .img-item-box{
+  margin-right:10rpx;
+}
