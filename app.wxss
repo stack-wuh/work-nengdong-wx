@@ -453,9 +453,20 @@ page{
 }
 /*多行文本溢出*/
 .fixed-over{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
   width:100%;
   color: #333;
   overflow: hidden;
-  text-overflow:ellipsis;
-  white-space: nowrap;
+}
+
+.act-ing{
+  color: #0E90F5;
+}
+.act-end{
+  color: #999999;
+}
+.act-danger{
+  color: #FF8888
 }
