@@ -5,14 +5,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    recoedType:1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let data = wx.getStorageSync('myinfo')
+    if(data == [] || data == undefined || data == null){
+      this.setData({
+        recoedType:1
+      })
+    }else{
+      this.setData({
+        recoedType:2
+      })
+    }
   },
 
   /**

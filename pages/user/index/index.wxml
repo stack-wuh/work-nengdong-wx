@@ -25,7 +25,7 @@
         <text class="empty"></text>
         <image src="/images/icon-arrow-right.png" class="icon-arrow-right" />
       </view>
-      <navigator hover-class="none" url="/pages/user/recoed/recoed" class="card-list-item flex-box">
+      <navigator hover-class="none" url="/pages/user/recoed/recoed?type={{recoedType}}" class="card-list-item flex-box">
         <image src="/images/user-list-2.png" class="user-list-img" />
         <text class="picker-title">毕业档案</text>
         <text class="empty"></text>
@@ -33,12 +33,12 @@
       </navigator>
     </view>
     <view class="act-card">
-      <view class="card-list-item flex-box">
+      <navigator hover-class="none" url='/pages/account/contact/contact' class="card-list-item flex-box">
         <image src="/images/user-list-3.png" class="user-list-img" />
         <text class="picker-title">联系学院</text>
         <text class="empty"></text>
         <image src="/images/icon-arrow-right.png" class="icon-arrow-right" />
-      </view>
+      </navigator>
       <view class="card-list-item flex-box">
         <image src="/images/user-list-4.png" class="user-list-img" />
         <text class="picker-title">关于我们</text>

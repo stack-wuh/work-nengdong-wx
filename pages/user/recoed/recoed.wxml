@@ -1,5 +1,6 @@
 <!--pages/user/recoed/recoed.wxml-->
 <view class="container other-bg">
+<form bindsubmit="handleSubmit">
    <view  wx:for="{{optionList}}" wx:key="{{index}}">
     <view class="option-title flex-box">
       <image src="{{item.iconPath}}"  class="icon-info"/>
@@ -9,7 +10,19 @@
     <view class="act-card">
       <view class="card-list-item" wx:for="{{item.list}}" wx:key="{{index}}">
         <text class="item-title">{{item.name}}</text>
-        <text class="item-input">{{item.value}}</text>
+        <input data-name="{{item.name}}" bindinput="saveInput" wx:if="{{item.isInput}}" name="{{item.prop}}" class="item-input" placeholder="{{'请输入'+item.name}}" value="{{item.value}}" />
+        <picker value="{{item.value}}" name="{{item.prop}}" data-name="{{item.name}}" wx:elif="{{item.name !== '工作/升学所在地'}}" range="{{item.list}}" range-key="{{item.range}}" bindchange="pickerChange">
+          <view class="picker item-input">
+            <text class="picker-title">{{item.value ? item.value : '请选择'+item.name}}</text>
+            <image src="/images/icon-arrow-right.png" class="icon-arrow-right" />
+          </view>
+        </picker>
+        <picker value="{{item.value}}"  name="{{item.prop}}" data-name="{{item.name}}" bindchange="pickerChange" wx:else mode="region" >
+          <view class="picker">
+            <text class="picker-title">{{item.value == 0 ? '请选择所在地' : item.value}}</text>
+            <image src="/images/icon-arrow-right.png" class="icon-arrow-right" />
+          </view>
+        </picker>
       </view>
     </view>
     <view wx:if="{{index == 0}}" class="form-msg">就业者填写就业档案, 生学者提供升学档案</view>
@@ -18,7 +31,8 @@
       <image src="/images/icon-add.png" class="icon-add" />
     </view>
   </view>
- <view class="btn-area">{{recoedType == 1 ? '提交' : recoedType == 2? '预览' : '保存' }}</view>
+ <button form-type="submit" class="btn-area">{{type == 1 ? '提交' : '保存'}}</button>
+</form>
   <navigator hover-class="none" url="/pages/user/private/private" class="img-box">
     <image src="/images/bg-recoed.png" class="recoed" />
   </navigator>

@@ -64,3 +64,7 @@
   width: 120rpx;
   height:120rpx;
 }
+
+.picker{
+  width: 450rpx !important;
+}

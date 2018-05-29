@@ -1,7 +1,7 @@
 <!--pages/user/setting/setting.wxml-->
 <view class="container other-bg">
   <view class="act-card" wx:for="{{menuList}}" wx:key="{{index}}">
-    <navigator hover-class="none" url="{{item.urlPath}}" class="card-list-item flex-box" wx:for="{{item}}" wx:key="{{index}}">
+    <navigator bindtap="{{item.click}}" hover-class="none" url="{{item.urlPath}}" class="card-list-item flex-box" wx:for="{{item}}" wx:key="{{index}}">
       <text class="item-title">{{item.name}}</text>
       <image src="/images/icon-arrow-right.png" wx:if="{{item.showIcon}}" class="icon-arrow-right" />
     </navigator>

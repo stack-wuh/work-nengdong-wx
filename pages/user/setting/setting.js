@@ -1,4 +1,5 @@
 // pages/user/setting/setting.js
+var app = getApp()
 Page({
 
   /**
@@ -28,7 +29,8 @@ Page({
       [
         {
           name:'注销登录',
-          showIcon:false
+          showIcon:false,
+          click:'signout'
         },
         {
           name:'清除记录',
@@ -43,6 +45,15 @@ Page({
    */
   onLoad: function (options) {
   
+  },
+  signout(e){
+    wx.removeStorageSync('number')
+    app.toastMsg('wraning','注销登录')
+    setTimeout(() => {
+      wx.redirectTo({
+        url:'/pages/account/login/login'
+      })  
+    }, 1000);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
