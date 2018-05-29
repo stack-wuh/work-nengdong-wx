@@ -1,5 +1,7 @@
 // pages/other/help/common.js
 var app = getApp()
+var id
+const format = require('../../../utils/util')
 Page({
 
   /**
@@ -13,13 +15,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.fetchData()
+    this.id = options.argus
+    this.fetchData(options.argus)
   },
 
-  fetchData(){
+  // 跳转到编辑
+  jumpToEdit(){
+    wx.navigateTo({
+      url:"/pages/other/help/publish?type=edit"
+    })
+  },
+
+  handleClickPraise(e){
+    app.apiPost('UpdateMutual_Help_Praise',{id:this.id}).then(res=>{
+      let error = res.error == 0 ? 'success' : 'error'
+      app.toastMsg(error,res.msg)
+      if(res.error == 0){
+        this.fetchData()
+      }
+    })
+  },
+
+  fetchData(id){
     app.apiPost('getMutual_Help').then(res=>{
+     let arr = res.find(item=>{
+        return item.id == id
+      })
+      arr.time = format.formatTime(new Date(arr.time))
       this.setData({
-        list:res
+        list:arr
       })
     })
   },

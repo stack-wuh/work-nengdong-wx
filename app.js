@@ -117,6 +117,7 @@ App({
       }
     })
   },
+  
   regPhone:function(){
     return this.reg.phone
   },

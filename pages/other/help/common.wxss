@@ -88,3 +88,10 @@
   background-color: #00998d;
   color: #fff;
 }
+.btn-edit{
+  float:right;
+  padding:0 10rpx;
+  color: #00998d;
+  font-size: 24rpx;
+  border:1px solid #00998d;
+}

@@ -1,59 +1,61 @@
 <!--pages/other/help/common.wxml-->
 <view class="container other-bg">
-  <swiper class="swiper" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{1000}}" indicator-active-color="rgba(225,225,225,1)" indicator-color="rgba(225,225,225,.5)">
-    <block wx:for="{{3}}">
+  <swiper class="swiper" indicator-dots="{{false}}" autoplay="{{true}}" interval="{{5000}}" duration="{{1000}}" indicator-active-color="rgba(225,225,225,1)" indicator-color="rgba(225,225,225,.5)">
+    <block>
       <swiper-item>
-        <image src="/images/avatar.jpg" class="swiper-img" />
+        <image src="{{list.mutual_help_image.address}}" class="swiper-img" />
       </swiper-item>
     </block>
   </swiper>
   <view class="list-item">
-    <view class="over-text">标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</view>
+    <view class="over-text">{{list.title}}
+      <text bindtap="jumpToEdit" class="btn-edit">编辑</text>
+    </view>
     <view>
       <text>发布人：</text>
-      <text>张晓晓</text>
+      <text>{{list.college}}</text>
       <text>学院：</text>
-      <text>能动学院</text>
+      <text>{{list.student_info.school}}</text>
     </view>
     <view>
       <text>专业班级：</text>
-      <text>能动201301</text>
+      <text>{{list.student_info.classes}}</text>
     </view>
     <view class="flex-box">
       <text>发布时间：</text>
-      <text>2017-05-05</text>
-      <text class="empty">1122人赞</text>
+      <text>{{list.time}}</text>
+      <text class="empty">{{list.praise}}人赞</text>
     </view>
   </view>
   <view class="list-item">
     <view>内容：</view>
-    <view>详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容详细内容</view>
+    <view>{{list.content}}</view>
   </view>
   <view class="list-info">
     <view>
       <text>手机：</text>
-      <text>13123233232</text>
+      <text>{{list.phone}}</text>
     </view>
     <view>
       <text>邮箱：</text>
-      <text>13123233232</text>
+      <text>{{list.email}}</text>
     </view>
     <view>
       <text>QQ：</text>
-      <text>13123233232</text>
+      <text>{{list.qq}}</text>
     </view>
     <view>
       <text>微信：</text>
-      <text>13123233232</text>
+      <text>{{list.weixin}}</text>
     </view>            
   </view>
   <view style="height:120rpx;"></view>
   <view class="btn-area">
-      <view class="btn bg-btn">
+      <view bindtap="onShareAppMessage"  class="btn bg-btn">
         <image src="/images/icon-share.png" class="icon-share" />
         <text>分享</text>
       </view>
-      <view class="btn">
+      <view class="btn" bindtap="handleClickPraise">
         <image src="/images/icon-prise-active.png" class="icon-prise" />
         <text>点赞</text>
       </view>

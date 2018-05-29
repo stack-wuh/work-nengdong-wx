@@ -18,12 +18,15 @@ Page({
     this.fetchData()
   },
   delSubmit(e){
-    let id = e.currentTargte.dataset.id
+    let id = e.currentTarget.dataset.id 
     app.apiPost('delMutual_HelpByMe',{id:id}).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
       if(res.error == 0){
+        app.toastMsg('success','删除成功')
         this.fetchData()
+      }else{
+        app.toastMsg('error','删除失败')
       }
     })
   },
