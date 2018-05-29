@@ -33,7 +33,7 @@
       </view>           
     </view>
     <view class="act-card">
-      <view class="card-list-item" wx:for="{{user}}">
+      <view class="card-list-item" wx:for="{{user}}" wx:key="{{index}}">
         <text class="item-title">{{item.name}}</text>
         <input data-prop="{{item.prop}}" bindinput="bindinput" name="{{item.prop}}" value="{{item.value}}" class="picker-title" placeholder="{{item.msg}}"/>
         <block wx:if="{{item.showimg}}">

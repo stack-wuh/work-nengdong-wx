@@ -1,5 +1,6 @@
 // pages/other/help/publish.js
 var app = getApp()
+let argus
 Page({
 
   /**
@@ -57,6 +58,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.argus = options.type
+    if(this.argus === 'edit'){
+      wx.setNavigationBarTitle({
+        title:'编辑'
+      })
+    }else{
+      wx.setNavigationBarTitle({
+        title:'我的发布'
+      })
+    }
     app.apiPost('getMutual_Help_Type').then(res=>{
       this.setData({
         typeList:res
@@ -150,7 +161,7 @@ Page({
     let result =this.data.user.some(item=>{
       return item.hide === true
     })
-    data = Object.assign({address:this.data.address,list:arr},data)
+    data = Object.assign({address:this.data.address},data,arr)
     if(!data.type){
       app.toastMsg('error','请选择类型')
       return
@@ -175,9 +186,11 @@ Page({
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
       if(res.error == 0){
-        wx.redirectTo({
-          url:'pages/other/help/help?type=1'
-        })
+        setTimeout(()=>{
+          wx.redirectTo({
+            url:'/pages/other/help/help?type=1'
+          })
+        },1000)
       }
     })
   },

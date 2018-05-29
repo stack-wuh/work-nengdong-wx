@@ -7,7 +7,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[]
+    list:[],
+    typeList:[
+      '全部',
+      '需求帮助',
+      '提供帮助'
+    ],
+    type:'',
+    title:'',
+    showInput:false,
+    isPraise:1
   },
 
   /**
@@ -16,14 +25,46 @@ Page({
   onLoad: function (options) {
     this.fetchData()
   },
+  showInput(){
+    this.setData({
+      showInput:true
+    })
+  },
+  saveInput(e){
+    this.setData({
+      title:e.detail.value
+    })
+  },
+
+  pickerChange(e){
+    this.setData({
+      type:this.data.typeList[e.detail.value]
+    })
+    this.fetchData()
+  },
+
+  handleClickPraise(e){
+    app.apiPost('UpdateMutual_Help_Praise',{id:e.currentTarget.dataset.id}).then(res=>{
+      let error = res.error == 0 ? 'success' : 'error' 
+      app.toastMsg(error,res.msg)
+      this.fetchData()
+    })
+  },
+
   fetchData(){
-    app.apiPost('getMutual_Help').then(res=>{
+    let data = {
+      type:this.data.type === '全部' ? '' : this.data.type,
+      title:this.data.title
+    }
+    app.apiPost('getMutual_Help',data).then(res=>{
       res.map(item=>{
-        item.time = format.formatTime(new Date(item.time))
+        let date = new Date(item.time)
+        item.time = date.getFullYear() + '-' + (date.getMonth() +1) +'-'+ date.getDate()
       })
       this.setData({
         list:res
       })
+
     })
   },
   /**
