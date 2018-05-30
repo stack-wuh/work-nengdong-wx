@@ -12,6 +12,7 @@
       <view class="list-item-first">
        <text>{{list.title}}</text>
        <text class="act-top-title school">{{list.type}}</text>
+       <text class="{{list.check_text === '进行中' ? 'act-ing' : list.check_text === '待审核' ? 'act-end' : 'act-danger'}}">{{list.check_text}}</text>
       </view>
       <view>
         <image src="../../../images/icon-time.png" class="icon-time" />
@@ -27,7 +28,7 @@
          <text>{{list.organizer}}</text>
        </view>
        <view>
-         <text class="txt-empty">57</text>/{{list.participants}}人
+         <text class="txt-empty">{{list.number}}</text>/{{list.participants}}人
        </view>
      </view>
     </view>

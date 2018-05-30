@@ -37,3 +37,45 @@
   right:-10rpx;
   top:10rpx;
 }
+.my-picker-view{
+  position: fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  width: 100%;
+  height:500rpx;
+  background-color: #fff;
+  z-index:1000;
+}
+.picker-btn{
+  display: flex;
+  align-items:flex-end;
+  justify-content: space-between;
+  position: relative;
+  top:0;
+  height:100rpx;
+  padding:0 20rpx;
+  font-size: 30rpx;
+  background-color: #fff;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+.my-picker{
+  height:400rpx;
+}
+.my-picker .picker{
+  height:200rpx;
+}
+.my-picker .picker .picker-column{
+  height:200px !important;
+  color: #333;
+  font-size: 28rpx;
+  text-align: center;
+  line-height:3;
+}
+.picker-btn .btn-ok{
+  color: #2FB42E;
+}
+.picker-btn .btn-cancel{
+  color: #888;
+}

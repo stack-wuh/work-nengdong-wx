@@ -26,7 +26,9 @@
             <text wx:if="{{item.type == '校友活动'}}" class="act-top-title friend">校友活动</text>
             <text wx:if="{{item.type == '学校活动'}}" class="act-top-title school">学校活动</text>
             <text wx:if="{{item.type == '学院活动'}}" class="act-top-title college">学院活动</text>
+            <text wx:if="{{item.type == '讲座活动'}}" class="act-top-title college">讲座活动</text>
             <text wx:if="{{item.type == '专业活动'}}" class="act-top-title classify">专业活动</text>
+            <text wx:if="{{item.type == '班级活动'}}" class="act-top-title classify">班级活动</text>
             <text class="{{item.check_text === '进行中' ? 'act-ing' : item.check_text === '待审核' ? 'act-end' : 'act-danger'}}">{{item.check_text}}</text>
           </view>
           <view>{{item.title}}</view>

@@ -40,7 +40,7 @@ Page({
       list:data,
       imgUrls:imgList.split(',')
     })
-    console.log(this.data)
+    this.getList(options.id)
   },
 
   //隐藏模态框
@@ -50,6 +50,13 @@ Page({
     })
   },
 
+  getList(id){
+    app.apiPost('getActivity_Enroll',{activity_id:id}).then(res=>{
+      this.setData({
+        // listData:res
+      })
+    })
+  },
   //点击报名--取消报名
   handleSubmit(e){
     let type = e.currentTarget.dataset.type

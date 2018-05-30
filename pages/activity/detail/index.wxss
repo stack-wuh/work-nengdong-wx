@@ -173,3 +173,10 @@
 .txt-empty{
   color:#009488;
 }
+
+.act-ing{
+  color: #0E90F5;
+}
+.act-end{
+  color: #999999;
+}

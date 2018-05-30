@@ -17,22 +17,24 @@
       </view>
   <view class="act-father">
       <view class="act-list" wx:for="{{list}}">
-        <view class="act-list-img-box">
+        <navigator hover-class="none" url="/pages/activity/detail/index?id={{item.id}}" class="act-list-img-box">
           <image class="act-list-img" src="../../../images/avatar.jpg" />
-        </view>
+        </navigator>
         <view class="act-list-content">
           <view>
             <text wx:if="{{item.type == '校友活动'}}" class="act-top-title friend">校友活动</text>
             <text wx:if="{{item.type == '学校活动'}}" class="act-top-title school">学校活动</text>
             <text wx:if="{{item.type == '学院活动'}}" class="act-top-title college">学院活动</text>
+            <text wx:if="{{item.type == '讲座活动'}}" class="act-top-title college">讲座活动</text>
             <text wx:if="{{item.type == '专业活动'}}" class="act-top-title classify">专业活动</text>
+            <text wx:if="{{item.type == '班级活动'}}" class="act-top-title classify">班级活动</text>
             <!-- <text wx:if="{{index % 2 == 0}}" class="act-ing">进行中</text> -->
             <!-- <text wx:else="{{index % 2 == 0}}" class="act-end">进行中</text> -->
           </view>
           <view>{{item.title}}</view>
           <view class="list-item">
             <image src="../../../images/icon-time.png" class="icon-time" alt="icon-time" />
-            <text>{{item.starttime}} 至 {{item.endtime}}</text>
+            <text>{{item.starttime}}</text>
           </view>
           <view class="list-item">
             <image src="../../../images/icon-location.png" class="icon-location" alt="icon-location" />

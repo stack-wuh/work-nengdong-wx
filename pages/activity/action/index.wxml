@@ -44,14 +44,28 @@
               </picker>
             </block>
           </view>
-          <navigator hover-class="none" url="/pages/activity/chosetime/chosetime" class="card-list-item">
+          <!-- <navigator hover-class="none" url="/pages/activity/chosetime/chosetime" class="card-list-item">
             <text class="item-title">时间（段）</text>
             <view class="flex-box">
               <text wx:if="{{start.date}}" class="empty">{{start.date}} {{start.time}} 至 {{end.date}} {{end.time}}</text>
               <text wx:else class="picker-title">请选择活动时间</text>
               <image src="../../../images/icon-arrow-right.png" class="icon-arrow-right" />
             </view>
-          </navigator>     
+          </navigator>      -->
+          <view class="card-list-item">
+            <text class="item-title">开始时间</text>
+            <view data-type="start" bindtap="chooseTime" class="picker">
+              <text class="picker-title">{{!start?'请选择开始时间':start}}</text>
+              <image src='/images/icon-arrow-right.png' class="icon-arrow-right" />
+            </view>
+          </view>
+          <view class="card-list-item">
+            <text class="item-title">结束时间</text>
+            <view data-type="end" bindtap="chooseTime" class="picker">
+              <text class="picker-title">{{!end?'请选择结束时间':end}}</text>
+              <image src='/images/icon-arrow-right.png' class="icon-arrow-right" />
+            </view>
+          </view>
           <view class="card-list-item">
             <text class="item-title" style="width:250rpx;">是否借用学校场地</text>
             <view class="picker">
@@ -105,7 +119,6 @@
           </view>
           <view class="card-list-item">
             <text class="item-title">QQ</text>
-            <!-- <text class="picker-title">111111111</text> -->
             <input name="qq" placeholder="默认此账号,可以修改" class="item-input" />
           </view> 
           <view class="card-list-item">
@@ -180,4 +193,31 @@
       </view>
     </view>
   </view>
+  <view class="my-picker-view" wx:if="{{showPickerView == 'start' || showPickerView == 'end'}}">
+    <view class="picker-btn">
+      <text data-btn="cancel" bindtap="pickerBtn" class="btn-cancel">取消</text>
+      <text data-btn="ok" bindtap="pickerBtn" class="btn-ok">确定</text>
+    </view>
+    <view class="my-picker">
+      <picker-view class="picker" indicator-style="height:100rpx;" bindchange="pickerViewChange">
+        <picker-view-column class="picker-column">
+          <view class="picker-item" wx:for="{{years}}" >{{item}}年</view>
+        </picker-view-column>
+        <picker-view-column class="picker-column">
+          <view wx:for="{{months}}" class="picker-item" >{{item}}月</view>
+        </picker-view-column>
+        <picker-view-column class="picker-column">
+          <view wx:for="{{days}}" class="picker-item" >{{item}}日</view>
+        </picker-view-column>
+        <picker-view-column class="picker-column">
+          <view wx:for="{{hours}}" class="picker-item" >{{item}}</view>
+        </picker-view-column>
+        <picker-view-column class="picker-column">
+          <view wx:for="{{munite}}" class="picker-item">{{item}}</view>
+        </picker-view-column>        
+      </picker-view>
+    </view>
+
+  </view>
+
 </view>

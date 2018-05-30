@@ -1,5 +1,6 @@
 // pages/activity/mine/index.js
 var app = getApp()
+const format = require('../../../utils/util')
 Page({
 
   /**
@@ -25,7 +26,6 @@ Page({
     })
   },
   saveInput(e){
-    console.log(e)
     this.setData({
       title:e.detail.value
     })
@@ -44,8 +44,13 @@ Page({
   },
   fetchData(){
     app.apiPost('getMyActivity',{check:this.data.check,title:this.data.title}).then(res=>{
+      if(res.data)
+      res.data.map(item=>{
+        item.starttime = format.formatTime(new Date(item.starttime))
+        item.endtime = format.formatTime(new Date(item.endtime))
+      }) 
       this.setData({
-        list:res
+        list:res.data
       })
     })
   },

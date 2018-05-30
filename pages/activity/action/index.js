@@ -12,22 +12,87 @@ Page({
     organ:'',
     klassList:['校团委','学生会','学工处','后勤处'],
     klass:'',
-    start:{},
-    end:{},
+    start:'',
+    end:'',
     cover:[],
     address:[],
-    isShow:0
+    isShow:0,
+    years:[],
+    months:[],
+    days:[],
+    hours:[],
+    munite:[],
+    showPickerView:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.newTimeStr()
+  },
+  pickerViewChange(e){
+    let indexArr = e.detail.value
+    if(this.data.showPickerView == 'start'){
+      this.data.start = this.data.years[indexArr[0]] +'-'+this.data.months[indexArr[1]]+'-'+this.data.days[indexArr[2]]+' '+this.data.hours[indexArr[3]]+':'+this.data.munite[indexArr[4]]+':'+'00'
+    }
+    if(this.data.showPickerView == 'end'){
+      this.data.end = this.data.years[indexArr[0]] +'-'+this.data.months[indexArr[1]]+'-'+this.data.days[indexArr[2]]+' '+this.data.hours[indexArr[3]]+':'+this.data.munite[indexArr[4]]+':'+'00'
+    }
+  },
+  pickerBtn(e){
+    let type = e.currentTarget.dataset.btn
+    if(type == 'ok'){
+      this.setData({
+        start:this.data.start,
+        end:this.data.end,
+        showPickerView:false
+      })
+    }else{
+      this.setData({
+        showPickerView:false
+      })
+    }
+  },
+  newTimeStr(){
+    let date = new Date()
+    for(var i = 1990; i<date.getFullYear()+5;i++){
+      this.data.years.push(i)
+    }
+    for(var i=1;i<=12;i++){
+      if(i<10){
+        i = '0' + i
+      }
+      this.data.months.push(i)
+    }
+    for(var i=1;i<=31;i++){
+      this.data.days.push(i)
+    }
+    for(var i=0;i<24;i++){
+      if(i < 10){
+        i = '0' + i
+      }
+      this.data.hours.push(i)
+    }
+    for(var i=0;i<=60;i++){
+      if(i<10){
+        i = '0'+i
+      }
+      this.data.munite.push(i)
+    }
     this.setData({
-      start:wx.getStorageSync('start'),
-      end:wx.getStorageSync('end')
+      years:this.data.years,
+      months:this.data.months,
+      days:this.data.days,
+      hours:this.data.hours,
+      munite:this.data.munite
     })
-    
+  },
+  chooseTime(e){
+    let type = e.currentTarget.dataset.type
+    this.setData({
+      showPickerView:type
+    })
   },
   pickerChange(e){
     let type = e.currentTarget.dataset.type
@@ -93,11 +158,12 @@ Page({
       }
     })
   },
+
   formSubmit(e){
     var data = e.detail.value
     var newList = {
-      starttime:this.data.start.date + ' ' + this.data.start.time,
-      endtime:this.data.end.date + ' ' +this.data.end.time,
+      starttime:this.data.start,
+      endtime:this.data.end,
       cover:this.data.cover,
       address:this.data.address.toString()
     }
@@ -141,6 +207,8 @@ Page({
         this.setData({
           isShow:1
         })
+        wx.removeStorageSync('start')
+        wx.removeStorageSync('end')
       }else{
         this.setData({
           isShow:2
