@@ -167,7 +167,10 @@ Page({
     recoedType: 2,
     schoolList: [],
     school: '',
-    type:1
+    type:1,
+    animation:'',
+    isBack:false,
+    isbtn:false
   },
 
   /**
@@ -196,6 +199,33 @@ Page({
 
   },
 
+  showImgBtn(e){
+    let isBack = e.currentTarget.dataset.back    
+    this.setData({
+      // animation:app.animation(this.data.animation,-40,-180)
+      isBack:!this.data.isBack
+    })
+    if(!isBack){
+      this.setData({
+        animation:app.animation(this.data.animation,-40,-180),
+        isbtn:true
+      })
+    }else{
+      setTimeout(()=>{
+        this.setData({
+          animation:app.animation(this.data.animation,0,0),
+          isbtn:false
+        })
+      })
+    }
+  },
+  jumpToOther(){
+    if(this.data.isbtn){
+      wx.navigateTo({
+        url:'/pages/user/private/private'
+      })
+    }
+  },
   saveInput(e) {
     let name = e.currentTarget.dataset.name
     this.data.optionList.map(item => {
@@ -330,6 +360,7 @@ Page({
             url:'/pages/user/index/index'
           })
         },1000)
+       wx.setStorageSync('recodeInfo',this.data.optionList)
       }
     })
   },

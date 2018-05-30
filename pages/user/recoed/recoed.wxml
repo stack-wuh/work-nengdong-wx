@@ -33,7 +33,7 @@
   </view>
  <button form-type="submit" class="btn-area">{{type == 1 ? '提交' : '保存'}}</button>
 </form>
-  <navigator hover-class="none" url="/pages/user/private/private" class="img-box">
-    <image src="/images/bg-recoed.png" class="recoed" />
-  </navigator>
+  <view data-back="{{isBack}}" bindtap="showImgBtn" animation="{{animation}}" hover-class="none" url="/pages/user/private/private" class="img-box">
+    <image bindtap="jumpToOther" src="/images/bg-recoed.png" class="recoed" />
+  </view>
 </view>

@@ -1,4 +1,5 @@
 // pages/user/private/private.js
+var app = getApp()
 const optionList =[
   {
     title: '基础信息',
@@ -18,18 +19,23 @@ const optionList =[
     }, {
       name: '手机号',
       value: '',
-      ischecked:true
+      ischecked:false,
+      prop:'phone_hide'
     }, {
       name: '邮箱',
-      value: ''
+      value: '',
+      ischecked:false,
+      prop:'email_hide'
     }, {
       name: 'QQ',
       value: '',
-      ischecked:false
+      ischecked:false,
+      prop:'qq_hide'
     }, {
       name: '微信',
       value: '',
-      ischecked:false
+      ischecked:false,
+      prop:'weixin_hide'
     }, {
       name: '工作/升学所在地',
       value: '',
@@ -37,7 +43,8 @@ const optionList =[
     }, {
       name: '详细地址（选填）',
       value:'',
-      ischecked:false
+      ischecked:false,
+      prop:'address_hide'
     }]
   },
   {
@@ -46,7 +53,8 @@ const optionList =[
     list: [{
       name: '用人单位名称',
       value: '',
-      ischecked:false
+      ischecked:false,
+      prop:'unit_name_hide'
     }, {
       name: '单位性质',
       value: '',
@@ -62,11 +70,13 @@ const optionList =[
     }, {
       name: '岗位名称（选填）',
       value: '',
-      ischecked:false
+      ischecked:false,
+      prop:'post_name_hide'
     }, {
       name: '起薪（选填）',
       value: '',
-      ischecked:false
+      ischecked:false,
+      prop:'money_hide'
     }]
   },
   {
@@ -85,12 +95,14 @@ const optionList =[
       {
         name: '院系',
         value: '',
-        ischecked:false
+        ischecked:false,
+        prop:'faculty_hide'
       },
       {
         name: '专业',
         value: '',
-        ischecked:false
+        ischecked:false,
+        prop:'line_text_hide'
       },
     ]
   }
@@ -108,9 +120,72 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let data = wx.getStorageSync('recodeInfo')
+    let privateinfo = wx.getStorageSync('privateInfo')
+    this.data.optionList.map(item=>{
+      data.map(ditem=>{
+          item.list.map(subitem=>{
+            ditem.list.map(dsub=>{
+              if(subitem.name === dsub.name){
+                subitem.value = dsub.value
+              }
+            })
+          })
+      })
+    })
+    this.setData({
+      optionList:this.data.optionList
+    })
+    if(privateinfo){
+      this.data.optionList.map(item=>{
+        privateinfo.map(pdata=>{
+          item.list.map(sublist=>{
+            pdata.list.map(subp=>{
+              if(sublist.name === subp.name){
+                sublist.ischecked = subp.ischecked
+              }
+            })
+          })
+        })
+      })
+      this.setData({
+        optionList:this.data.optionList
+      })
+    }
   },
 
+  handleClickChange(e){
+    let name = e.currentTarget.dataset.name
+    this.data.optionList.map(item=>{
+      item.list.map(list=>{
+        if(list.name === name){
+          list.ischecked = !list.ischecked
+        }
+      })
+    })
+    this.setData({
+      optionList:this.data.optionList
+    })
+  },
+
+  handleClickSubmit(){
+    let data = this.data.optionList
+    let arr = {}
+    data.map(item=>{
+      item.list.map(list=>{
+        if(list.prop){
+          arr[list.prop] = list.ischecked
+        }
+      })
+    })
+    app.apiPost('addStudent_Info_HideService',arr).then(res=>{
+      let error = res.error == 0 ? 'success' : 'error'
+      app.toastMsg(error,res.msg)
+      if(res.error == 0){
+        wx.setStorageSync('privateInfo',data)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

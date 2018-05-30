@@ -11,8 +11,8 @@
       <view class="card-list-item" wx:for="{{item.list}}" wx:key="{{index}}">
         <view>
             <image wx:if="{{item.default}}" src="/images/icon-checked-default.png" class="icon-checked-default" />
-            <image wx:if="{{!item.ischecked && !item.default}}" src="/images/icon-check-default.png" class="icon-check" />
-            <image wx:if="{{item.ischecked}}" src="/images/icon-check-action.png" class="icon-check" />
+            <image data-name="{{item.name}}" bindtap="handleClickChange" wx:if="{{!item.ischecked && !item.default}}" src="/images/icon-check-default.png" class="icon-check" />
+            <image data-name="{{item.name}}" bindtap="handleClickChange" wx:if="{{item.ischecked}}" src="/images/icon-check-action.png" class="icon-check" />
         </view>
         <text class="item-title">{{item.name}}</text>
         <text class="item-input">{{item.value}}</text>
@@ -20,5 +20,5 @@
     </view>
     <view wx:if="{{index == 0}}" class="form-msg">手机号,邮箱,QQ,微信至少展示一项,用于校友黄页展示,方便校友间的沟通交流</view>
   </view>
-  <view class="btn-area">保存</view>
+  <view bindtap="handleClickSubmit" class="btn-area">保存</view>
 </view>
