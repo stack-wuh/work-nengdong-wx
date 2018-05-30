@@ -36,15 +36,15 @@ Page({
       url='getMyPartake'
     }
     app.apiPost(url,data).then(res=>{
-      res.map(item=>{
+      res.data.map(item=>{
         let start = new Date(item.starttime) , end = new Date(item.endtime)
         item.starttime = formatNumber.formatTime(new Date(item.starttime))
         item.endtime = formatNumber.formatTime(new Date(item.endtime))
       })
       this.setData({
-        newList:res
+        newList:res.data
       })
-      wx.setStorageSync('activeDetail',res)
+      wx.setStorageSync('activeDetail',res.data)
     })
   },
   
