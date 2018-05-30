@@ -48,8 +48,8 @@
             <text>发布时间：</text>
             <text>{{item.time}}</text>
             <text class="empty"></text>
-            <image wx:if="{{item.mutual_help_praise.praise_or == 1}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-default.png" class="icon-prise" />
-            <image wx:if="{{item.mutual_help_praise.praise_or == 0}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-active.png" class="icon-prise" />
+            <image wx:if="{{!item.mutual_help_praise.praise_or}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-default.png" class="icon-prise" />
+            <image wx:if="{{item.mutual_help_praise.praise_or}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-active.png" class="icon-prise" />
             <text>{{item.praise}}人赞</text>
           </view>
        </view> 
