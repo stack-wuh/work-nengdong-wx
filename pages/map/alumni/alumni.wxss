@@ -94,6 +94,6 @@
 }
 .img-btn{
   position: fixed;
-  right:10rpx;
-
+  right:-60rpx;
+  bottom:0;
 }

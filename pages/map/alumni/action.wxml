@@ -88,24 +88,24 @@
     <view class="form-msg">附件只能PC端上传,或者加群下载;图片上限为4张</view>
     <button formType="submit" class="btn-area">提交</button>
   </form>
-  <view class="dialog-wrapper" hidden>
-    <view class="dialog" wx:if="{{false}}">
+  <view class="dialog-wrapper" wx:if="{{isShowDialog}}">
+    <view class="dialog" wx:if="{{isShowDialogBtn == 1}}">
       <image src="/images/bg-action-ok.png" class="icon-action" />
       <view class="text">提交成功</view>
       <view class="tips">请在 "我的校友会板块" </view>
       <view class="tips">查看审核进度</view>
       <view class="dialog-btn-wrapper">
-         <text class="btn btn-gray">取消</text>
-         <text class="btn btn-blue">查看</text>
+         <text bindtap="hideDialog" class="btn btn-gray">取消</text>
+         <navigator hover-class="none" url="/pages/map/alumni/alumni" class="btn btn-blue">查看</navigator>
       </view>
    </view>
-   <view class="dialog" wx:if="{{false}}">
+   <view class="dialog" wx:if="{{isShowDialogBtn == 2}}">
      <image src="/images/bg-action-no.png" class="icon-action"  />
      <view class="text">提交失败</view>
      <view class="tips">请核对您的信息, 重新提交</view>
      <view class="dialog-btn-wrapper">
-       <text class="btn btn-gray">取消</text>
-       <text class="btn btn-blue">重新提交</text>
+       <text bindtap="hideDialog" class="btn btn-gray">取消</text>
+       <text bindtap="hideDialog" class="btn btn-blue">重新提交</text>
      </view>
    </view>
   </view>

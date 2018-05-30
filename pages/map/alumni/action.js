@@ -9,7 +9,9 @@ Page({
     address:[],
     cover:'',
     typeList:['年级','地域','行业','其他'],
-    type:''
+    type:'',
+    isShowDialog:false,
+    isShowDialogBtn:0
   },
 
   /**
@@ -17,6 +19,13 @@ Page({
    */
   onLoad: function (options) {
   
+  },
+
+  hideDialog(){
+    this.setData({
+      isShowDialog:false,
+      isShowDialogBtn:0
+    })
   },
   pickerChange(e){
     this.setData({
@@ -74,10 +83,30 @@ Page({
   submit(e){
     var data = e.detail.value
     data = Object.assign({image:this.data.cover,address:this.data.address},data)
+    for(var k in data){
+      if(!data['phone'] && !data['email'] && !data['qq'] && !data['weixin']){
+        if(data[k] == '' || data[k] == null){
+          app.toastMsg('error','请填写必填项')
+          return
+        }
+      }
+    }
     app.apiPost('addAlumni_Pages',data).then(res=>{
-
+      let error = res.error == 0 ? 'success' : 'error'
+      app.toastMsg(error,res.msg)
+      if(res.error == 0){
+        this.setData({
+          isShowDialog:true,
+          isShowDialogBtn:1
+        })
+        wx.setStorageSync('alumniInfo',data)
+      }else{
+        this.setData({
+          isShowDialog:true,
+          isShowDialogBtn:2
+        })
+      }
     })
-    console.log(e)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -12,7 +12,7 @@
     <view class="list-item">
       <view class="card-list-item item-title">
         <text>类型：{{list.type}}</text>
-        <text>未通过</text>
+        <text>{{list.check_text}}</text>
       </view>
       <view class="list-item-first">
        <text>{{list.title}}</text>
@@ -21,7 +21,7 @@
         <image src="../../../images/icon-time.png" class="icon-time" />
         <text>创建时间: {{list.time}}</text>
      </view>
-     <view class="list-item-last">{{item.praise}}人觉得很赞</view>
+     <view class="list-item-last">{{list.praise}}人觉得很赞</view>
     </view>
   </view>
   <view class="card-list">

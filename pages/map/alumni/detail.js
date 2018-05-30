@@ -26,7 +26,6 @@ Page({
     this.setData({
       imgList:imgList
     })
-    console.log(this.data)
   },
 
   /**

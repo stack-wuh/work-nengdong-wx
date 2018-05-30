@@ -20,24 +20,27 @@
   </view>
   <view class="item-list" wx:for="{{list}}" wx:key="{{index}}">
     <view class="item">
-      <view class="img-box">
+      <navigator hover-class="none" url="/pages/map/alumni/detail?id={{item.id}}" class="img-box">
         <image wx:if="{{!item.image}}" src="/images/avatar.jpg" class="avatar" />
         <image wx:if="{{item.image}}" src="{{item.image}}" class="avatar" />
-      </view>
+      </navigator>
       <view class="right-content">
           <view class="flex-box">
             <text>类型：{{item.type}}</text>
-            <image data-id="{{item.id}}" bindtap="collected" src="/images/icon-collect-default.png" class="icon-collect" />
+            <image wx:if="{{!item.alumni_pages_collect.or_name}}" data-id="{{item.id}}" bindtap="collected" src="/images/icon-collect-default.png" class="icon-collect" />
+            <image wx:if="{{item.alumni_pages_collect.or_name}}" data-id="{{item.id}}" bindtap="collected" src="/images/icon-collect-active.png" class="icon-collect" />
           </view>
           <view>{{item.title}}</view>
           <view>创建时间：{{item.time}}</view>
           <view>{{item.praise}}人觉得赞 
-            <image bindtap="parised" data-id="{{item.id}}" src="/images/icon-prise-default.png" class="icon-prise" />
+            <image wx:if="{{!item.alumni_praise.praise_or}}" bindtap="parised" data-id="{{item.id}}" src="/images/icon-prise-default.png" class="icon-prise" />
+            <image wx:if="{{item.alumni_praise.praise_or}}" bindtap="parised" data-id="{{item.id}}" src="/images/icon-prise-active.png" class="icon-prise" />
           </view>
       </view>
     </view>
   </view>
-  <navigator hover-class="none" url="/pages/map/alumni/action" class="img-btn">  
-    <image src="/images/icon-action.png" class="icon-action" />
-  </navigator>
+  <view data-back="{{isBack}}" animation="{{animation}}" bindtap="showImgBtn"  class="img-btn">  
+    <image bindtap="jumpToOther" src="/images/icon-action.png" class="icon-action" />
+  </view>
+  <view class="btm-text">没有更多啦</view>
 </view>
