@@ -33,9 +33,10 @@ Page({
     app.apiPost('UpdateMutual_Help_Praise',{id:this.id}).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
-      if(res.error == 0){
-        this.fetchData()
-      }
+      this.data.list.mutual_help_praise.praise_or = !this.data.list.mutual_help_praise.praise_or
+      this.setData({
+        list:this.data.list
+      })
     })
   },
 
@@ -98,7 +99,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function (res) {
+    if(res.form === 'button'){
+      // console.log('is ok')
+    }
+    return{
+      title:'我的互助详情',
+      path:'/pages/other/help/common?id=' + this.id
+    }
   }
 })

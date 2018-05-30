@@ -87,10 +87,11 @@
 .menu-slide{
   position: fixed;
   top:0;
-  left:0;
+  left:100%;
   right:0;
   bottom:0;
-  transform: translateX(100%);
+  width: 100%;
+  z-index:1000 !important;
   background-color: rgba(0,0,0,.5);
 }
 .menu-slide .menu-content{
@@ -141,4 +142,13 @@
   color: #999;
   border:1px solid #999;
   border-radius: 4rpx;
+}
+.picker{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width:100%;
+  padding:0 20rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
 }

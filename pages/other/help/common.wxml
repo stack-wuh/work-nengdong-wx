@@ -51,12 +51,14 @@
   </view>
   <view style="height:120rpx;"></view>
   <view class="btn-area">
-      <view bindtap="onShareAppMessage"  class="btn bg-btn">
-        <image src="/images/icon-share.png" class="icon-share" />
-        <text>分享</text>
-      </view>
+      <!-- <view bindtap="onShareAppMessage"  class="btn bg-btn"> -->
+        <button class="btn bg-btn" open-type="share">
+          <image src="/images/icon-share.png" class="icon-share" />
+        分享</button>
+      <!-- </view> -->
       <view class="btn" bindtap="handleClickPraise">
-        <image src="/images/icon-prise-active.png" class="icon-prise" />
+        <image wx:if="{{list.mutual_help_praise.praise_or}}" src="/images/icon-prise-active.png" class="icon-prise" />
+        <image wx:if="{{!list.mutual_help_praise.praise_or}}" src="/images/icon-prise-default.png" class="icon-prise" />
         <text>点赞</text>
       </view>
   </view>
