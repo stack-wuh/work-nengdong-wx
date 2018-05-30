@@ -26,3 +26,6 @@
 .img-list .img-item-box{
   margin-right:10rpx;
 }
+.empty{
+  flex:1 !important;
+}

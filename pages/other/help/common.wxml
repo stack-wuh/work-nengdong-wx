@@ -9,7 +9,7 @@
   </swiper>
   <view class="list-item">
     <view class="over-text">{{list.title}}
-      <text bindtap="jumpToEdit" class="btn-edit">编辑</text>
+      <text data-id="{{list.id}}" bindtap="jumpToEdit" class="btn-edit">编辑</text>
     </view>
     <view>
       <text>发布人：</text>

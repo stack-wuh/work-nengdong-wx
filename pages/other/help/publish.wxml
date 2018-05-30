@@ -13,11 +13,11 @@
       </view>
       <view class="card-list-item">
         <text class="item-title">标题</text>
-        <input name="title" placeholder="请输入标题" class="item-input" />
+        <input name="title" value="{{title}}" placeholder="请输入标题" class="item-input" />
       </view>
       <view class="card-list-item align-top">
         <text class="item-title">内容</text>
-        <textarea name="content" placeholder="请输入内容" class="item-input item-textarea" />
+        <textarea value="{{content}}" name="content" placeholder="请输入内容" class="item-input item-textarea" />
       </view> 
       <view class="card-list-item align-top">
         <text class="item-title">图片</text>
@@ -36,6 +36,7 @@
       <view class="card-list-item" wx:for="{{user}}" wx:key="{{index}}">
         <text class="item-title">{{item.name}}</text>
         <input data-prop="{{item.prop}}" bindinput="bindinput" name="{{item.prop}}" value="{{item.value}}" class="picker-title" placeholder="{{item.msg}}"/>
+        <view class="empty"></view>
         <block wx:if="{{item.showimg}}">
           <image data-prop="{{item.prop}}" bindtap="checkShow" wx:if="{{!item.hide}}" src="/images/icon-check-default.png" class="icon-check" />
           <image data-prop="{{item.prop}}" bindtap="checkHide" wx:if="{{item.hide}}" src="/images/icon-check-action.png" class="icon-check" />

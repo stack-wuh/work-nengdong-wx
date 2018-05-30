@@ -1,6 +1,6 @@
 // pages/other/help/publish.js
 var app = getApp()
-let argus
+let argus , id
 Page({
 
   /**
@@ -9,6 +9,8 @@ Page({
   data: {
     typeList:[],
     type:'',
+    title:'',
+    content:'',
     user:[
       {
         name:'联系人',
@@ -59,9 +61,29 @@ Page({
    */
   onLoad: function (options) {
     this.argus = options.type
+    this.id = options.id
     if(this.argus === 'edit'){
+    let list = wx.getStorageSync('helpEditInfo')
       wx.setNavigationBarTitle({
         title:'编辑'
+      })
+      let _address = []
+      _address.push(list.mutual_help_image.address)
+      this.setData({
+        type:list.type,
+        title:list.title,
+        content:list.content,
+        address:_address
+      })
+      this.data.user.map(item=>{
+        for(var k in list){
+          if(item.prop === k){
+            item.value = list[k]
+          }
+        }
+      })
+      this.setData({
+        user:this.data.user
       })
     }else{
       wx.setNavigationBarTitle({
@@ -154,14 +176,20 @@ Page({
 
   submit(e){
     let data = e.detail.value
-    let arr = {}
+    let arr = {} , url = ''
     this.data.user.map(item=>{
       arr[item.prop+'_hide'] = item.hide
     })
     let result =this.data.user.some(item=>{
       return item.hide === true
     })
-    data = Object.assign({address:this.data.address},data,arr)
+    if(this.argus === 'edit'){
+      url = 'UpdateMutual_Help'
+      data = Object.assign({address:this.data.address},data,arr,{id:this.id})
+    }else{
+      url = 'addMutual_Help'
+      data = Object.assign({address:this.data.address},data,arr)
+    }
     if(!data.type){
       app.toastMsg('error','请选择类型')
       return
@@ -182,7 +210,7 @@ Page({
       app.toastMsg('error','请勾选一项可见')
       return
     }
-    app.apiPost('addMutual_Help',data).then(res=>{
+    app.apiPost(url,data).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
       if(res.error == 0){

@@ -24,11 +24,11 @@
       <image src="/images/icon-wraning.png" class="icon-wraning"/>
       <view>该板块发布信息采用实名制,禁止发布虚假、不文明信息，违规信息管理员有权删除，情节严重者永久封号！</view>
     </view>
-    <navigator hover-class="none" url="/pages/other/help/common?argus={{item.id}}" class="list-item" wx:for="{{list}}" wx:key="{{index}}">
-       <view class="img-box">
+    <view  class="list-item" wx:for="{{list}}" wx:key="{{index}}">
+       <navigator hover-class="none" url="/pages/other/help/common?argus={{item.id}}" class="img-box">
          <image wx:if="{{!item.address}}" src="/images/avatar.png" class="avatar" />
          <image wx:else src="{{item.address}}" class="avatar" />
-       </view> 
+       </navigator> 
        <view class="right-content">
           <view class="flex-box" >
             <text class="title-bold">{{item.title}}</text>
@@ -53,10 +53,10 @@
             <text>{{item.praise}}人赞</text>
           </view>
        </view> 
-    </navigator>
+    </view>
   </view>
   <view class="btm-text">没有更多啦</view>
-  <navigator hover-class="none" url="/pages/other/help/publish" class="edit-box">
-    <image src="/images/icon-action.png" class="icon-action" />
-  </navigator>
+  <view data-back="{{isBack}}" bindtap="showImgBtn" animation="{{animation}}" hover-class="none" url="/pages/other/help/publish" class="edit-box">
+    <image  bindtap="jumpToOther" src="/images/icon-action.png" class="icon-action" />
+  </view>
 </view>

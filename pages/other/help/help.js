@@ -16,7 +16,10 @@ Page({
     type:'',
     title:'',
     showInput:false,
-    isPraise:1
+    isPraise:1,
+    animation:'',
+    isBack:false,
+    isbtn:false
   },
 
   /**
@@ -24,6 +27,33 @@ Page({
    */
   onLoad: function (options) {
     this.fetchData()
+  },
+
+  showImgBtn(e){
+    let isBack = e.currentTarget.dataset.back
+    this.setData({
+      isBack:!this.data.isBack
+    })
+    if(!isBack){
+      this.setData({
+        animation:app.animation(this.data.animation),
+        isbtn:true
+      })
+    }else{
+      setTimeout(()=>{
+        this.setData({
+          animation:app.animation(this.data.animation,30,0),
+          isbtn:false
+        })
+      },1000)
+    }
+  },
+  jumpToOther(){
+    if(this.data.isbtn){
+      wx.navigateTo({
+        url:'/pages/other/help/publish'
+      })
+    }
   },
   showInput(){
     this.setData({
@@ -44,10 +74,18 @@ Page({
   },
 
   handleClickPraise(e){
+    let id = e.currentTarget.dataset.id
+    this.data.list.map(item=>{
+      if(item.id === id){
+        item.mutual_help_praise.praise_or = !item.mutual_help_praise.praise_or
+      }
+    })
+    this.setData({
+      list:this.data.list
+    })
     app.apiPost('UpdateMutual_Help_Praise',{id:e.currentTarget.dataset.id}).then(res=>{
-      let error = res.error == 0 ? 'success' : 'error' 
+      let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
-      this.fetchData()
     })
   },
 
@@ -64,7 +102,7 @@ Page({
       this.setData({
         list:res
       })
-
+      wx.setStorageSync('MutualList',res)
     })
   },
   /**

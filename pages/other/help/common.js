@@ -1,6 +1,6 @@
 // pages/other/help/common.js
 var app = getApp()
-var id
+var id , type
 const format = require('../../../utils/util')
 Page({
 
@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[]
+    list:{}
   },
 
   /**
@@ -16,14 +16,17 @@ Page({
    */
   onLoad: function (options) {
     this.id = options.argus
-    this.fetchData(options.argus)
+    this.type = options.type
+    this.fetchData(options.argus,options.type)
   },
 
   // 跳转到编辑
-  jumpToEdit(){
+  jumpToEdit(e){
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url:"/pages/other/help/publish?type=edit"
+      url:"/pages/other/help/publish?type=edit&id="+id
     })
+    wx.setStorageSync('helpEditInfo',this.data.list)
   },
 
   handleClickPraise(e){
@@ -36,15 +39,18 @@ Page({
     })
   },
 
-  fetchData(id){
-    app.apiPost('getMutual_Help').then(res=>{
-     let arr = res.find(item=>{
-        return item.id == id
-      })
-      arr.time = format.formatTime(new Date(arr.time))
-      this.setData({
-        list:arr
-      })
+  fetchData(id,type){
+    let data = [] , obj = {}
+    if(type){
+      data = wx.getStorageSync('MutualByMe')
+    }else if(type == undefined || type == null){
+      data = wx.getStorageSync('MutualList')
+    }
+    obj = data.find(item=>{
+      return item.id == id
+    })
+    this.setData({
+      list:obj
     })
   },
   /**

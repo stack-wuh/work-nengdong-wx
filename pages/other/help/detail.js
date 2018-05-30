@@ -44,6 +44,7 @@ Page({
       this.setData({
         list:res
       })
+      wx.setStorageSync('MutualByMe',res)
     })
   },
   /**
