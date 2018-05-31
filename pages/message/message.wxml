@@ -1,0 +1,9 @@
+<view class="container other-bg">
+    <view class="search-box">
+      <view class="input-box">
+        <text>搜索</text>
+        <image src="/images/icon-search.png" class="icon-search" />
+        <input hidden auto-focus="{{true}}" />
+      </view>
+    </view>
+</view>

@@ -1,0 +1,11 @@
+.search-box{
+  height:120rpx;
+  color: #666;
+  background-color: #E8F0F0;
+}
+.icon-search{
+  width:31rpx;
+  height:30rpx;
+  margin-right:20rpx;
+  order:-1;
+}
