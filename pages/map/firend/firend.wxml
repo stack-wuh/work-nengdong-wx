@@ -52,7 +52,7 @@
       <view class="menu-header">
         <text data-isRow="2" bindtap="showCheckBox">取消</text>
         <text>筛选</text>
-        <text>重置</text>
+        <text bindtap="resetInfo">重置</text>
       </view>
       <view class="menu-list" wx:for="{{menuList}}" wx:key="{{index}}">
         <view class="menu-name">{{item.name}}</view>

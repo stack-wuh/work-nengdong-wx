@@ -11,42 +11,49 @@ Page({
         name:'入学年份',
         list:['2010','2011','2012','2013','2014'],
         value:'',
-        prop:'age_name'
+        prop:'age_name',
+        search:'school_age'
       },
       {
         name:'专业',
         list:['油气储运工程','能源与动力工程','轮机工程'],
         value:'',
-        prop:'line_name'
+        prop:'line_name',
+        search:'line'
       },
       {
         name:'班级',
         list:['20100102','20100103','20100102','20100102','20100102','20100103','20100102','20100102'],
         value:'',
-        prop:'class_name'
+        prop:'class_name',
+        search:'classes'
       },
       {
         name:'所在地',
         list:['湖北省','武汉市','洪山区'],
-        value:''
+        value:'',
+        search:'site'
       },
       {
         name:'状态',
         list:['升学','就业','升学就业'],
         value:'',
-        prop:''
+        prop:'',
+        search:'state'
       },
       {
         name:'单位性质',
         list:['外资','合资','国企','民营公司','上市公司','创业公司','外企代表处','政府机关','事业单位'],
         value:'',
-        prop:'property_name'
+        prop:'property_name',
+        search:'unit_property'
       },
       {
         name:'所在行业',
         list:['计算机/网路/通讯/电子','会计/金融/银行/保险','贸易/消费/制造/营运','广告/媒体','广告/媒体'],
         value:'',
-        prop:'place_class_name'
+        prop:'place_class_name',
+        search:'unit_way'
       }
     ],
     animation:'',
@@ -76,6 +83,15 @@ Page({
     this.getPropety()
     this.getWorks()
   },
+  resetInfo(){
+    for(var k  in this.data.info){
+      this.data.info[k] = ''
+    }
+    this.setData({
+      info:this.data.info
+    })
+    this.fetchData()
+  },
   pickerChange(e){
     let vIndex = e.detail.value , name = e.currentTarget.dataset.name , index = e.currentTarget.dataset.index
     this.data.menuList.map((item,idx)=>{
@@ -88,9 +104,15 @@ Page({
           item.value = this.data.menuList[index].list[vIndex]
         }
       }
+      for(var k in this.data.info){
+        if(item.search == k){
+          this.data.info[k] = item.value
+        }
+      }
     })
     this.setData({
-      menuList:this.data.menuList
+      menuList:this.data.menuList,
+      info:this.data.info
     })
     this.fetchData()
   },
@@ -201,7 +223,8 @@ Page({
       res.error == 0 &&
       this.setData({
         list:res.data,
-        isShowDialog:false
+        isShowDialog:false,
+        animation:app.animation(this.data.animation,0,0)
       })
       wx.setStorageSync('firendsList',res.data)
     })

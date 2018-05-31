@@ -1,20 +1,50 @@
 // pages/other/donate/donate.js
+var app = getApp()
+const format = require('../../../utils/util')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    list:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-  },
+    this.fetchData()
+  },  
 
+  handleClickPraise(e){
+    let id = e.currentTarget.dataset.id
+    app.apiPost('addAlumni_Or',{alumni_id:id}).then(res=>{
+      this.data.list.map(item=>{
+        if(item.id == id){
+          item.alumni_or.or_name = !item.alumni_or.or_name
+        }
+        if(item.alumni_or.or_name){
+          item.praise ++
+        }else{
+          item.praise --
+        }
+      })
+      this.setData({
+        list:this.data.list
+      })
+    })
+  },
+  fetchData(){
+    app.apiPost('getAlumni').then(res=>{
+      res.data.map(item=>{
+        item.time = format.formatTime(new Date(item.time))
+      })
+      this.setData({
+        list:res.data
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
