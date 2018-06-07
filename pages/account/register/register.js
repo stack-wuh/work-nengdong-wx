@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    yearList: ['2011级','2012级'],
+    yearList: [],
     formInfo:{
       name:'',
       number:'',
@@ -20,7 +20,7 @@ Page({
    */
   onLoad: function (options) {
     app.apiPost('getYear').then(res=>{
-      let yearList = res.map(item=>{
+      let yearList = res.data.map(item=>{
         return item.age_name
       })
       this.setData({

@@ -1,0 +1,21 @@
+<!--pages/schoolfellow/list.wxml-->
+<view class="container other-bg">
+  <view class="search-box other-bg">
+    <view class="input-box" bindtap="showInput">
+      <image wx:if="{{!showInput}}" src="../../../images/icon-search.png" class="icon-search" />
+      <text  wx:if="{{!showInput}}" class="search-btn">请输入关键字</text>
+      <input bindblur="bindblur" bindconfirm="fetchData" value="{{title}}" bindinput="saveInput" wx:if="{{showInput}}" auto-focus="{{true}}" />
+    </view>
+  </view>
+  <view class="search-content">
+    <navigator url="/pages/schoolfellow/detail?id={{item.id}}" hover-class='none' class="item-wrapper" wx:for="{{10}}">
+      <image src="http://sep.whut.edu.cn/xydt/201805/W020180502579071643688.jpg"></image>
+      <view class="item-info">
+        <view class="title">能动学院第35期党课</view>
+        <view class="content">能动学院第35期党课研究生入党积极分子志愿活动顺利开展分子志愿活动顺利开展</view>
+        <view class="time">2018-05-04 19:01:20</view>
+      </view>
+    </navigator>
+    <view class="btm-remind">没有更多啦</view>
+  </view>
+</view>

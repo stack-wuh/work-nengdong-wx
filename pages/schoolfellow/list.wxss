@@ -1,0 +1,83 @@
+/* pages/schoolfellow/list.wxss */
+.icon-search{
+  width:30rpx;
+  height:30rpx;
+  margin-right:10rpx;
+}
+.icon-time,
+.icon-location,
+.icon-user{
+  width:24rpx;
+  height:24rpx;
+  margin-right:10rpx;
+}
+.act-list-img{
+  width:200rpx;
+  height:200rpx;
+}
+.act-top-title{
+  display: inline-block;
+  width:124rpx;
+  height:40rpx;
+  color: #fff;
+  text-align: center;
+  line-height:40rpx;
+  border-radius: 4rpx;
+}
+.friend{
+  background-color: #FABC50;
+}
+.school{
+  background-color: #8FCD52;
+}
+.college{
+  background-color: #FF8888;
+}
+.classify{
+  background-color: #9487FB;
+}
+.container{
+  padding-top: 120rpx;
+}
+.search-btn{
+  color: #999;
+  font-size: 24rpx;
+}
+.search-box{
+  height:108rpx;
+}
+.search-content{
+  padding: 0 30rpx;
+  background-color: #fff;
+}
+.item-wrapper{
+  display: flex;
+  width: 100%;
+  padding: 30rpx 0;
+  border-bottom: 1px solid #eee;
+  box-sizing: border-box;
+}
+.item-wrapper image{
+  width: 180rpx;
+  height: 120rpx;
+  margin-right: 20rpx;
+}
+.item-info{
+  width: 510rpx;
+  font-size: 24rpx;
+}
+.title{
+  font-size: 30rpx;
+}
+.content{
+  width: 510rpx;
+  margin-top: 6rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color: #666;
+}
+.time{
+  margin-top: 12rpx;
+  color: #666;
+}

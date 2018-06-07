@@ -70,7 +70,7 @@
             <text class="item-title" style="width:250rpx;">是否借用学校场地</text>
             <view class="picker">
               <text></text>
-              <switch color="#0E90F5" name="site" />
+              <switch color="#00998D" name="site" />
             </view>
           </view> 
           <view class="card-list-item">
@@ -95,7 +95,7 @@
           </view>
           <view class="card-list-item align-top">
             <text class="item-title" style="width:120rpx;">费用</text>
-            <textarea name="money" placeholder="是否产生费用,若有费用请说明详情" class="item-input item-textarea"></textarea>
+            <textarea name="money" placeholder="是否产生费用，若有费用请说明详情" class="item-input item-textarea"></textarea>
           </view>                        
       </view>
     </view>
@@ -103,7 +103,7 @@
       <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title">负责人</text>
-            <input name="leading_name" placeholder="默认此账号,可以修改" class="item-input" />
+            <input name="leading_name" placeholder="默认此账号，可以修改" class="item-input" />
           </view>
       </view>
     </view>
@@ -111,20 +111,19 @@
       <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title">手机号</text>
-            <input name="phone" placeholder="默认此账号绑定手机,可以修改" class="item-input" />
+            <input name="phone" placeholder="默认此账号绑定手机，可以修改" class="item-input" />
           </view>
           <view class="card-list-item">
             <text class="item-title">邮箱</text>
-            <input name="email" placeholder="默认此账号绑定邮箱,可以修改" class="item-input" />
+            <input name="email" placeholder="默认此账号绑定邮箱，可以修改" class="item-input" />
           </view>
           <view class="card-list-item">
             <text class="item-title">QQ</text>
-            <input name="qq" placeholder="默认此账号,可以修改" class="item-input" />
+            <input name="qq" placeholder="默认此账号，可以修改" class="item-input" />
           </view> 
           <view class="card-list-item">
             <text class="item-title">微信</text>
-            <input name="weixin" placeholder="默认此账号,可以修改" class="item-input" />
-            <!-- <text class="picker-title">131 2323 3322</text> -->
+            <input name="weixin" placeholder="默认此账号，可以修改" class="item-input" />
           </view> 
       </view>  
     </view>
@@ -133,7 +132,7 @@
       <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title" style="width:120rpx;">交流咨询群</text>
-            <input name="group" placeholder="默认此账号绑定手机,可以修改" class="item-input" />
+            <input name="group" class="item-input" />
           </view>
       </view> 
     </view>
@@ -199,7 +198,7 @@
       <text data-btn="ok" bindtap="pickerBtn" class="btn-ok">确定</text>
     </view>
     <view class="my-picker">
-      <picker-view class="picker" indicator-style="height:100rpx;" bindchange="pickerViewChange">
+      <picker-view class="picker" indicator-style="height:100rpx;" bindchange="pickerViewChange" value="{{nowTime}}">
         <picker-view-column class="picker-column">
           <view class="picker-item" wx:for="{{years}}" >{{item}}年</view>
         </picker-view-column>

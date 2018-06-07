@@ -3,10 +3,12 @@ App({
   onLaunch: function () {
     let that = this
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
+    let localId = wx.getStorageSync('number')
+    if (!localId){
+      wx.reLaunch({
+        url: '/pages/account/login/login',
+      })
+    }
     // 登录
     wx.login({
       success: res => {
@@ -143,6 +145,10 @@ App({
 
 
   server:'http://192.168.10.122:8686/SchoolFellow/'
+<<<<<<< HEAD
 })
 
 // 这是来自于吴红的更新
+=======
+})
+>>>>>>> b463a279e4a2075af46dd74583f4adec23d8296c

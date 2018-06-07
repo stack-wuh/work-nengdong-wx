@@ -12,17 +12,17 @@ Page({
           {
             imgUrl:'/images/icon-list-1.png',
             name:'行业动态',
-            pathUrl:''
+            pathUrl:'/pages/schoolfellow/list?name=行业动态'
           },
           {
             imgUrl:'/images/icon-list-2.png',
             name:'企业文化',
-            pathUrl:''
+            pathUrl:'/pages/schoolfellow/list?name=企业文化'
           },
           {
             imgUrl:'/images/icon-list-3.png',
             name:'校友名录',
-            pathUrl:''
+            pathUrl:'/pages/schoolfellow/list?name=校友名录'
           }
         ]
       },

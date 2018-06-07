@@ -321,7 +321,7 @@ page{
 }
 
 /*bottom到手机底部提示*/
-.btm-text{
+.btm-text, .btm-remind{
   display: inline-block;
   width:100%;
   margin-bottom:20rpx;
@@ -371,7 +371,7 @@ page{
   border-radius: 4rpx;
   border-bottom:1px solid #eee;
 }
-.act-card .card-list-item:last-of-type{
+.act-card .card-list-item:last-child{
   border-bottom:none;
 }
 .act-card .card-list-item .item-title{

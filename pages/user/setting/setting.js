@@ -32,10 +32,7 @@ Page({
           showIcon:false,
           click:'signout'
         },
-        {
-          name:'清除记录',
-          showIcon:false
-        }
+        
       ]
     ]
   },

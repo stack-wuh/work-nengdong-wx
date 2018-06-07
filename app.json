@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/account/login/login",
     "pages/account/register/register",
     "pages/account/bind/bind",
@@ -11,7 +12,6 @@
     "pages/activity/mine/index",
     "pages/activity/action/index",
     "pages/activity/detail/index",
-    "pages/index/index",
     "pages/map/firend/firend",
     "pages/map/firend/detail",
     "pages/map/alumni/alumni",
@@ -29,8 +29,13 @@
     "pages/user/setting/setting",
     "pages/user/recoed/recoed",
     "pages/user/private/private",
+<<<<<<< HEAD
     "pages/404/index",
     "pages/message/message"
+=======
+    "pages/schoolfellow/list",
+    "pages/schoolfellow/detail"
+>>>>>>> b463a279e4a2075af46dd74583f4adec23d8296c
   ],
   "window":{
     "backgroundTextStyle":"light",

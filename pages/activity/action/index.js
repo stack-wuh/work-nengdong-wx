@@ -22,7 +22,8 @@ Page({
     days:[],
     hours:[],
     munite:[],
-    showPickerView:false
+    showPickerView:false,
+    nowTime: []
   },
 
   /**
@@ -31,8 +32,33 @@ Page({
   onLoad: function (options) {
     this.newTimeStr()
   },
+
+  setMonthDay: function(day){
+    this.data.days = []
+    for (var i = 1; i <= day; i++) {
+      this.data.days.push(i)
+    }
+    this.setData({
+      days: this.data.days
+    })
+  },
   pickerViewChange(e){
     let indexArr = e.detail.value
+    let month_arr = [1,3,5,7,8,10,12]
+    let month = indexArr[1] + 1
+    if(month == 2){
+      if (this.data.years[indexArr[0]]%4){
+        this.setMonthDay(28)
+      }else{
+        this.setMonthDay(29)
+      }
+      
+    }else if(month_arr.indexOf(month)>-1){
+      this.setMonthDay(31)
+    }else{
+      this.setMonthDay(30)
+    }
+
     if(this.data.showPickerView == 'start'){
       this.data.start = this.data.years[indexArr[0]] +'-'+this.data.months[indexArr[1]]+'-'+this.data.days[indexArr[2]]+' '+this.data.hours[indexArr[3]]+':'+this.data.munite[indexArr[4]]+':'+'00'
     }
@@ -54,15 +80,17 @@ Page({
       })
     }
   },
+  timeConfirm(){
+
+  },
   newTimeStr(){
     let date = new Date()
-    for(var i = 1990; i<date.getFullYear()+5;i++){
+
+    for(var i = 2018; i<date.getFullYear()+5;i++){
       this.data.years.push(i)
     }
     for(var i=1;i<=12;i++){
-      if(i<10){
-        i = '0' + i
-      }
+      
       this.data.months.push(i)
     }
     for(var i=1;i<=31;i++){
@@ -85,7 +113,8 @@ Page({
       months:this.data.months,
       days:this.data.days,
       hours:this.data.hours,
-      munite:this.data.munite
+      munite:this.data.munite,
+      nowTime: [this.data.years.indexOf(date.getFullYear()), this.data.months.indexOf(date.getMonth() + 1), this.data.days.indexOf(date.getDate()), this.data.hours.indexOf(date.getHours() < 10 ? '0' + date.getHours() : date.getHours()), this.data.munite.indexOf(date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())]
     })
   },
   chooseTime(e){
@@ -196,10 +225,10 @@ Page({
       app.toastMsg('error','请填写参与人数')
       return
     }
-    if(!data.phone && !data.email && !data.weixin && !data.qq){
-      app.toastMsg('error','请填写联系方式')
-      return
-    }
+    // if(!data.phone && !data.email && !data.weixin && !data.qq){
+    //   app.toastMsg('error','请填写联系方式')
+    //   return
+    // }
     app.apiPost('addActivity',data).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)

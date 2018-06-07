@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.98",
 	"appid": "wx2e21d90cedf48171",
-	"projectname": "xiaoyou",
+	"projectname": "%E8%83%BD%E5%8A%A8%E6%A0%A1%E5%8F%8B%E7%AB%AF",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -33,7 +33,11 @@
 			"list": []
 		},
 		"miniprogram": {
+<<<<<<< HEAD
 			"current": 10,
+=======
+			"current": 31,
+>>>>>>> b463a279e4a2075af46dd74583f4adec23d8296c
 			"list": [
 				{
 					"id": -1,
@@ -223,6 +227,7 @@
 				},
 				{
 					"id": -1,
+<<<<<<< HEAD
 					"name": "404",
 					"pathName": "pages/404/index",
 					"query": ""
@@ -232,6 +237,11 @@
 					"name": "我的消息",
 					"pathName": "pages/message/message",
 					"query": ""
+=======
+					"name": "行业动态",
+					"pathName": "pages/schoolfellow/list",
+					"query": "name=行业动态"
+>>>>>>> b463a279e4a2075af46dd74583f4adec23d8296c
 				}
 			]
 		}
