@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/account/login/login",
     "pages/account/register/register",
     "pages/account/bind/bind",
@@ -11,7 +12,6 @@
     "pages/activity/mine/index",
     "pages/activity/action/index",
     "pages/activity/detail/index",
-    "pages/index/index",
     "pages/map/firend/firend",
     "pages/map/firend/detail",
     "pages/map/alumni/alumni",
@@ -28,7 +28,9 @@
     "pages/user/index/index",
     "pages/user/setting/setting",
     "pages/user/recoed/recoed",
-    "pages/user/private/private"
+    "pages/user/private/private",
+    "pages/schoolfellow/list",
+    "pages/schoolfellow/detail"
   ],
   "window":{
     "backgroundTextStyle":"light",

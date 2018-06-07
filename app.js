@@ -3,10 +3,12 @@ App({
   onLaunch: function () {
     let that = this
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
+    let localId = wx.getStorageSync('number')
+    if (!localId){
+      wx.reLaunch({
+        url: '/pages/account/login/login',
+      })
+    }
     // 登录
     wx.login({
       success: res => {
@@ -133,5 +135,5 @@ App({
   },
 
 
-  server:'http://192.168.10.116:8686/SchoolFellow/'
+  server:'http://192.168.10.122:8686/SchoolFellow/'
 })

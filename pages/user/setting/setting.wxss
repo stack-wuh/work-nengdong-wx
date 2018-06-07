@@ -5,3 +5,7 @@
 .act-card .card-list-item{
   width: 100%;
 }
+.act-card .card-list-item .item-title{
+  width: 200rpx;
+  font-size: 30rpx !important;
+}

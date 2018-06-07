@@ -1,7 +1,0 @@
-/* pages/user/setting/setting.wxss */
-.act-card{
-  width: 100%;
-}
-.act-card .card-list-item{
-  width: 100%;
-}
