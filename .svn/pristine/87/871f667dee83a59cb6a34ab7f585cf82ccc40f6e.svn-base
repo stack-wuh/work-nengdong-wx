@@ -1,0 +1,27 @@
+<!--pages/account/forgetPwd/forgetPwd.wxml-->
+<view class="container">
+  <view class="form-wrapper">
+    <form bindsubmit="formSubmit">
+      <view class="icon-input-group">
+        <image src="/images/icon-user.png"></image>
+        <input name="number" type="idcard" placeholder='请输入您的身份证号/学号'></input>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-email.png"></image>
+        <input value="{{formInfo.email}}" bindinput="saveInputValue" placeholder='请输入您的绑定邮箱'></input>
+        <view bindtap="handleClickGetCode"  class="icon-input-group-suffix">发送验证码</view>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-token.png"></image>
+        <input name="inputCode"  placeholder='请输入验证码'></input>
+      </view>
+      <view class="form-button">
+        <button formType="submit">提交</button>
+      </view>
+      <view class="form-operate">
+        <view></view>
+        <navigator url="/pages/account/contact/contact" hover-class="none">忘记邮箱</navigator>
+      </view>
+    </form>
+  </view>
+</view>

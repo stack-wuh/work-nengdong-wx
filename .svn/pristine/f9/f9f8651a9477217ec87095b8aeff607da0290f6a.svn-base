@@ -1,0 +1,75 @@
+<!--pages/other/help/publish.wxml-->
+<view class="container other-bg">
+  <form bindsubmit="submit">
+    <view class="act-card">
+      <view class="card-list-item">
+        <text class="item-title">类型</text>
+        <picker name="type" value="{{type}}" bindchange="pickerChange"  range="{{typeList}}" range-key="{{'name'}}">
+          <view class="picker">
+            <text class="picker-title">{{type ? type : '请选择类型'}}</text>
+            <image src='/images/icon-arrow-right.png' class="icon-arrow-right" />
+          </view>
+        </picker>
+      </view>
+      <view class="card-list-item">
+        <text class="item-title">标题</text>
+        <input name="title" value="{{title}}" placeholder="请输入标题" class="item-input" />
+      </view>
+      <view class="card-list-item align-top">
+        <text class="item-title">内容</text>
+        <textarea value="{{content}}" name="content" placeholder="请输入内容" class="item-input item-textarea" />
+      </view> 
+      <view class="card-list-item align-top">
+        <text class="item-title">图片</text>
+        <view class="img-list">
+          <view class="img-item-box" wx:if="{{address.length<4}}">
+            <image data-type="2" bindtap="uploadImg" src="/images/upload.png" class="icon-upload" />
+          </view>
+          <view class="img-item-box" wx:for="{{address}}">
+            <image data-type="2" bindtap="deleteImg" src="/images/icon-delete.png" class="icon-delete" />
+            <image src="{{item}}" class="icon-upload" />
+          </view>
+        </view>
+      </view>           
+    </view>
+    <view class="act-card">
+      <view class="card-list-item" wx:for="{{user}}" wx:key="{{index}}">
+        <text class="item-title">{{item.name}}</text>
+        <input data-prop="{{item.prop}}" bindinput="bindinput" name="{{item.prop}}" value="{{item.value}}" class="picker-title" placeholder="{{item.msg}}"/>
+        <view class="empty"></view>
+        <block wx:if="{{item.showimg}}">
+          <image data-prop="{{item.prop}}" bindtap="checkShow" wx:if="{{!item.hide}}" src="/images/icon-check-default.png" class="icon-check" />
+          <image data-prop="{{item.prop}}" bindtap="checkHide" wx:if="{{item.hide}}" src="/images/icon-check-action.png" class="icon-check" />
+        </block>
+      </view>
+    </view>   
+    <view class="form-msg">联系方式对管理员全部可见, 勾选项对全部用户可见, 至少勾选一项。</view> 
+    <button form-type="submit" class="btn-area">提交</button>
+  </form>
+    <view class="dialog-wrapper" wx:if="{{false}}">
+      <block wx:if="{{false}}">
+        <view class="dialog">
+          <image src="/images/publish-unpass.png" class="publish" />
+          <view class="text">提交失败</view>
+          <view class="tips">请核对您的信息</view>
+          <view class="tips">重新提交</view>
+          <view class="dialog-btn-wrapper">
+            <text class="btn btn-gray">取消</text>
+            <text class="btn btn-blue">查看</text>
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{false}}">
+        <view class="dialog">
+          <image src="/images/publish-pass.png" class="publish" />
+          <view class="text">提交成功</view>
+          <view class="tips">请在 "我的校友会板块"</view>
+          <view class="tips">查看审核进度</view>
+          <view class="dialog-btn-wrapper">
+            <text class="btn btn-gray">取消</text>
+            <text class="btn btn-blue">查看</text>
+          </view>
+        </view>
+      </block>
+    </view>
+</view>

@@ -1,0 +1,53 @@
+<!--pages/activity/mine/index.wxml-->
+<view class="container other-bg">
+  <view class="search-box other-bg">
+    <view class="input-box">
+      <image wx:if="{{!showInput}}" src="../../../images/icon-search.png" class="icon-search" />
+      <text bindtap="showInput" wx:if="{{!showInput}}" class="search-btn">请输入关键字</text>
+      <input bindblur="bindblur" bindconfirm="fetchData" value="{{title}}" bindinput="saveInput" wx:if="{{showInput}}" auto-focus="{{true}}" />
+    </view>
+  </view>
+  <view style="height:108rpx;"></view>
+  <view class="search-content">
+      <view class="nav-box">
+        <view class="nav-list">
+          <text data-type="1" data-title="待审核" bindtap="changeActive" class="{{type == 1 ? 'nav-list-item nav-list-item-active' : 'nav-list-item'}}">待审核</text>
+          <text data-type="2" data-title="已审核" bindtap="changeActive" class="{{type == 2 ? 'nav-list-item nav-list-item-active' : 'nav-list-item'}}">已审核</text>
+        </view>
+      </view>
+  <view class="act-father">
+      <view class="act-list" wx:for="{{list}}">
+        <navigator hover-class="none" url="/pages/activity/detail/index?id={{item.id}}" class="act-list-img-box">
+          <image class="act-list-img" src="../../../images/avatar.jpg" />
+        </navigator>
+        <view class="act-list-content">
+          <view>
+            <text wx:if="{{item.type == '校友活动'}}" class="act-top-title friend">校友活动</text>
+            <text wx:if="{{item.type == '学校活动'}}" class="act-top-title school">学校活动</text>
+            <text wx:if="{{item.type == '学院活动'}}" class="act-top-title college">学院活动</text>
+            <text wx:if="{{item.type == '讲座活动'}}" class="act-top-title college">讲座活动</text>
+            <text wx:if="{{item.type == '专业活动'}}" class="act-top-title classify">专业活动</text>
+            <text wx:if="{{item.type == '班级活动'}}" class="act-top-title classify">班级活动</text>
+            <!-- <text wx:if="{{index % 2 == 0}}" class="act-ing">进行中</text> -->
+            <!-- <text wx:else="{{index % 2 == 0}}" class="act-end">进行中</text> -->
+          </view>
+          <view>{{item.title}}</view>
+          <view class="list-item">
+            <image src="../../../images/icon-time.png" class="icon-time" alt="icon-time" />
+            <text>{{item.starttime}}</text>
+          </view>
+          <view class="list-item">
+            <image src="../../../images/icon-location.png" class="icon-location" alt="icon-location" />
+            <text>{{item.place}}</text>
+          </view>
+          <view class="list-item">
+            <image src="../../../images/icon-user.png" class="icon-user" alt="icon-user" />
+            <text>{{item.organizer}}</text>
+            <text></text>
+          </view>
+        </view>
+      </view>
+      <text class="btm-text">没有更多啦...</text>
+  </view> 
+  </view>
+</view>

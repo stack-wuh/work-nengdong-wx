@@ -1,0 +1,8 @@
+<!--pages/404/index.wxml-->
+<view class="container other-bg">
+    <view class="img-box">
+      <image src="/images/404.png" class="icon-404" />
+    </view>
+    <view class="title">此功能暂未开放</view>
+    <view class="sub-title">去别处转转吧!</view>
+</view>

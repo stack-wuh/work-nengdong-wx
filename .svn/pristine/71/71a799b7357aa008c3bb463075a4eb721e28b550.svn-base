@@ -1,0 +1,66 @@
+<!--pages/activity/index/index.wxml-->
+<view class="container other-bg">
+  <!-- <view class="top-wrapper">
+    <view class="top-wrapper-btn"></view>
+  </view> -->
+  <view class="act-wrapper-header">
+    <view class="act-wrapper-nav bor-default" bindtap="handleClickShowSearch">
+      <image class="icon-search-g" src="../../../images/icon-search-g.png" alt="icon-search-g"/>
+      <text class="txt-default">搜索</text>
+    </view>
+    <view class="act-wrapper-nav bor-default">
+      <image class="icon-menu-g" src="../../../images/icon-menu-g.png" alt="icon-menu-g" />
+      <picker bindchange="bindchange" value="{{item}}" range="{{typeList}}">
+        <view class="txt-default">筛选</view>
+      </picker>
+    </view>
+  </view>
+  <view style="height:87rpx;"></view>
+  <view class="act-father">
+      <navigator hover-class="none" url="/pages/activity/detail/index?id={{item.id}}" class="act-list" wx:for="{{newList}}" wx:key="{{index}}">
+        <view class="act-list-img-box">
+          <image class="act-list-img" src="{{item.cover ? item.cover : '../../../images/avatar.jpg'}}" />
+        </view>
+        <view class="act-list-content">
+          <view>
+            <text wx:if="{{item.type == '校友活动'}}" class="act-top-title friend">校友活动</text>
+            <text wx:if="{{item.type == '学校活动'}}" class="act-top-title school">学校活动</text>
+            <text wx:if="{{item.type == '学院活动'}}" class="act-top-title college">学院活动</text>
+            <text wx:if="{{item.type == '讲座活动'}}" class="act-top-title college">讲座活动</text>
+            <text wx:if="{{item.type == '专业活动'}}" class="act-top-title classify">专业活动</text>
+            <text wx:if="{{item.type == '班级活动'}}" class="act-top-title classify">班级活动</text>
+            <text class="{{item.check_text === '进行中' ? 'act-ing' : item.check_text === '待审核' ? 'act-end' : 'act-danger'}}">{{item.check_text}}</text>
+          </view>
+          <view>{{item.title}}</view>
+          <view class="list-item">
+            <image src="../../../images/icon-time.png" class="icon-time" alt="icon-time" />
+            <text>{{item.starttime}} </text>
+          </view>
+          <view class="list-item">
+            <image src="../../../images/icon-location.png" class="icon-location" alt="icon-location" />
+            <text>{{item.place}}</text>
+          </view>
+          <view class="list-item">
+            <image src="../../../images/icon-user.png" class="icon-user" alt="icon-user" />
+            <text>{{item.organizer}}</text>
+            <text> <text class="act-empty">{{item.number ? item.number : '0'}}</text>/{{item.participants}}人</text>
+          </view>
+        </view>
+      </navigator>
+      <text class="btm-text">没有更多啦...</text>
+  </view>
+
+  <!--搜索模态框-->
+  <view wx:if="{{isShowSearch}}" class="search-box" catchtap="hiddenSearchBox">
+    <view class="input-box" catchtap="handleClickShowInput">
+      <image wx:if="{{!isShowInput}}" src="../../../images/icon-search.png" class="icon-search" />
+      <text class="search-btn" wx:if="{{!isShowInput}}" >请输入关键字</text>
+      <input value="{{title}}" focus bindconfirm="searchData"  wx:if="{{isShowInput}}" class="my-input"  />
+    </view>
+  </view>
+
+  <!--发起活动-->
+  <navigator wx:if="{{isShowEdit}}" hover-class="none" url="/pages/activity/action/index" class="action-box">
+    <image src="../../../images/icon-action.png" class="icon-action"/>
+  </navigator>
+</view>

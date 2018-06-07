@@ -142,7 +142,5 @@ App({
   },
 
 
-  server:'http://192.168.10.122:8686/SchoolFellow/'
+  server:'http://192.168.10.116:8686/SchoolFellow/'
 })
-
-// 这是来自于吴红的更新

@@ -1,0 +1,139 @@
+<!--pages/activity/detail/index.wxml-->
+<view class="container other-bg-gray">
+  <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" doration="{{1000}}" indicator-active-color="#0E90F5" indicator-color="RGBA(14, 144, 245, .5)">
+    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+      <swiper-item>
+        <image src="{{item}}" style="width:100%;height:347rpx;"/>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="card-list">
+    <view class="list-item">
+      <view class="list-item-first">
+       <text>{{list.title}}</text>
+       <text class="act-top-title school">{{list.type}}</text>
+       <text class="{{list.check_text === '进行中' ? 'act-ing' : list.check_text === '待审核' ? 'act-end' : 'act-danger'}}">{{list.check_text}}</text>
+      </view>
+      <view>
+        <image src="../../../images/icon-time.png" class="icon-time" />
+        <text>{{list.starttime}} 至 {{list.endtime}}</text>
+     </view>
+     <view class="list-item-last">
+       <view>
+         <image src="../../../images/icon-location.png" class="icon-location" />
+         <text>{{list.place}}</text>
+       </view>
+       <view>
+         <image  src="../../../images/icon-user.png" class="icon-user"/>
+         <text>{{list.organizer}}</text>
+       </view>
+       <view>
+         <text class="txt-empty">{{list.number}}</text>/{{list.participants}}人
+       </view>
+     </view>
+    </view>
+  </view>
+  <view class="card-list">
+    <view class="card-list-item">
+      <view>参与费用:</view>
+      <view>{{list.money}}</view>
+    </view>
+    <view class="card-list-item">
+      <view>参与要求:</view>
+      <view>{{list.require}}</view>
+    </view>
+    <view class="card-list-item">
+      <view>活动介绍: </view>
+      <view>{{list.activity_introduction}}</view>
+    </view>    
+  </view>
+  <view class="card-list">
+    <view class="card-list-item">
+      <view>负责人: </view>
+      <view>{{list.organizer}}</view>
+    </view> 
+    <view class="card-list-item">
+      <view>手机号: </view>
+      <view>{{list.phone}}</view>
+    </view>
+    <view class="card-list-item">
+      <view>邮箱: </view>
+      <view>{{list.email}}</view>
+    </view>
+    <view class="card-list-item">
+      <view>QQ: </view>
+      <view>{{list.qq}}</view>
+    </view> 
+    <view class="card-list-item">
+      <view>微信: </view>
+      <view>{{list.weixin}}</view>
+    </view>                    
+  </view>
+  <view class="card-list">
+    <view class="card-list-item no-border">
+      <view>QQ群</view>
+      <view>{{list.group}}</view>
+    </view>
+  </view>
+  <view class="card-list">
+    <view class="card-list-item no-border">
+      <view>备注:</view>
+      <view>{{list.remark}}
+      </view>
+    </view>
+  </view>
+  <view class="card-list no-bottom">
+    <view class="card-list-item no-border">
+      <view>报名详情:</view>
+      <view>
+        <view class="table">
+          <view class="tr bg-w">
+            <view class="th">序号</view>
+            <view class="th">姓名</view>
+            <view class="th ">专业班级</view>
+            <view class="th ">手机号</view>
+          </view>
+          <block wx:for="{{listData}}" wx:key="{{code}}">
+            <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+              <view class="td">{{item.index}}</view>
+              <view class="td">{{item.name}}</view>
+              <view class="td">{{item.classify}}</view>
+              <view class="td">{{item.tel}}</view>
+            </view>
+            <view class="tr" wx:else>
+              <view class="td">{{item.index}}</view>
+              <view class="td">{{item.name}}</view>
+              <view class="td">{{item.classify}}</view>
+              <view class="td">{{item.tel}}</view>
+            </view>
+          </block>
+        </view>
+        <view class="btn-more">
+          <text>查看更多</text>
+          <!-- <image  /> -->
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="btm-btn-list" wx:if="{{false}}">
+    <text>分享</text>
+    <text>编辑</text>
+    <text>导出名单</text>
+  </view>
+  <view class="btm-btn-list actioned">
+    <text>分享</text>
+    <text data-type="submit" wx:if="{{!isActioned}}" bindtap="handleSubmit">我要报名</text>
+    <text data-type="cancel" wx:if="{{isActioned}}" bindtap="handleSubmit">取消报名</text>
+  </view>  
+
+  <!--报名成功-->
+  <view class="dialog-wrapper" wx:if="{{showMsg}}">
+    <view class="dialog">
+      <image src="../../../images/prev-pass.png" class="prev-pass" />
+      <view class="text">恭喜您!</view>
+      <view class="text">本次报名成功</view>
+      <image bindtap="hideBox" src="../../../images/icon-close-white.png" class="icon-close-white" />
+      <view class="bg-white-line"></view>
+    </view>    
+  </view>
+</view>

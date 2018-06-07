@@ -1,0 +1,18 @@
+<!--pages/account/resetPwd/resetPwd.wxml-->
+<view class="container">
+  <view class="form-wrapper">
+    <form bindsubmit="formSubmit">
+      <view class="icon-input-group">
+        <image src="/images/icon-pwd.png"></image>
+        <input name="password" type="password" placeholder='请设置新密码'></input>
+      </view>
+      <view class="icon-input-group">
+        <image src="/images/icon-pwd2.png"></image>
+        <input name="checkpwd" type="password" placeholder='请再次输入新密码'></input>
+      </view>
+      <view class="form-button">
+        <button formType="submit">保存</button>
+      </view>
+    </form>
+  </view>
+</view>

@@ -1,0 +1,53 @@
+<!--pages/other/donate/donate.wxml-->
+<view class="container other-bg">
+  <view class="top-msg">
+    <text>感谢以下校友企业、组织以及个人对XX院校XX学院的捐赠!</text>
+  </view>
+  <view class="list-content">
+    <view class="list-item" wx:for="{{list}}" wx:key="{{index}}">
+      <view class="img-content">
+        <image wx:if="{{item.image}}" src="{{image}}" class="avatar" />
+        <image wx:else src="/images/avatar.jpg" class="avatar" />
+      </view>
+      <view class="right-content">
+        <view class="over-text">{{item.title}}</view>
+        <view class="over-text">{{item.proclaim}}</view>
+        <view class="flex-box">
+          <text>{{item.time}}</text>
+          <text class="empty"></text>
+          <image wx:if="{{!item.alumni_or.or_name}}" data-id="{{item.id}}" bindtap="handleClickPraise" src="/images/icon-prise-default.png" class="icon-prise" />
+          <image wx:if="{{item.alumni_or.or_name}}" data-id="{{item.id}}" bindtap="handleClickPraise" src="/images/icon-prise-active.png" class="icon-prise" />
+          <text>{{item.praise}}人赞</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="btm-text">没有更多啦</view>
+  <view class="search-box" hidden>
+    <view class="dialog-box">
+      <image src="/images/icon-close-white.png" class="icon-close-white" />
+      <view class="cutline"></view>
+      <view class="dialog-head">联系学院</view>
+      <view class="dialog-item">
+        <text>地址:</text>
+        <view>地址地址地址地址地址地址地址地址地址地址地址地址</view>
+      </view>
+      <view class="dialog-item">
+        <text>邮编:</text>
+        <view>000000</view>
+      </view>
+      <view class="dialog-item">
+        <text>电话:</text>
+        <view>13132322323</view>
+      </view>
+      <view class="dialog-item">
+        <text>传真:</text>
+        <view>027-1111-1111</view>
+      </view> 
+      <view class="dialog-item">
+        <text>邮箱:</text>
+        <view>1111@qq.com</view>
+      </view>                       
+    </view>
+  </view>
+</view>

@@ -1,0 +1,70 @@
+/* pages/user/recoed/recoed.wxss */
+.recoed{
+  width: 114rpx;
+  height:114rpx;
+}
+.container{
+  padding:0 30rpx 76rpx 30rpx;
+  box-sizing: border-box;
+}
+.img-box{
+  width:110rpx;
+  height:110rpx;
+}
+.avatar{
+  width:110rpx;
+  height:110rpx;
+  border-radius: 50%;
+}
+.icon-info{
+  width:34rpx;
+  height:30rpx;
+  margin-right:10rpx;
+}
+.head-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height:155rpx;
+  padding-left:20rpx;
+  padding-right:30rpx;
+  background-color: #fff;
+}
+.right-content{
+  flex:1;
+  margin-left:20rpx;
+  font-size: 30rpx;
+  color: #999;
+}
+.right-content text:nth-child(2n){
+  color: #333;
+}
+.option-title{
+  padding:25rpx 0;
+}
+.option-txt{
+  font-size: 28rpx;
+}
+.act-card .card-list-item .item-title{
+  width:200rpx;
+}
+.txt-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+.icon-add{
+  margin-left:10rpx;
+}
+.img-box{
+  position: fixed;
+  right: -60rpx;
+  bottom:120rpx;
+  width: 120rpx;
+  height:120rpx;
+}
+
+.picker{
+  width: 450rpx !important;
+}

@@ -1,0 +1,20 @@
+/* pages/404/index.wxss */
+
+.img-box , .title , .sub-title{
+  text-align: center;
+}
+.icon-404{
+  /* border:1px solid red; */
+}
+.title{
+  margin-right:20rpx;
+  margin-top:10rpx;
+  color: #333;
+  font-size: 30rpx;
+}
+.sub-title{
+  margin-top:10rpx;
+  margin-right:20rpx;
+  color: #999;
+  font-size: 24rpx;
+}

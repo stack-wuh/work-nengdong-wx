@@ -1,0 +1,31 @@
+/* pages/other/help/publish.wxss */
+.container{
+  padding:40rpx 30rpx;
+}
+.icon-check{
+  width:30rpx;
+  height:30rpx;
+}
+.align-top{
+  padding:10rpx;
+}
+.icon-upload{
+  margin-right:10rpx;
+}
+.flex-box{
+  flex:1;
+}
+.icon-delete{
+  position: absolute;
+  right:-10rpx;
+  top:-10rpx;
+}
+.img-list{
+  display: flex;
+}
+.img-list .img-item-box{
+  margin-right:10rpx;
+}
+.empty{
+  flex:1 !important;
+}

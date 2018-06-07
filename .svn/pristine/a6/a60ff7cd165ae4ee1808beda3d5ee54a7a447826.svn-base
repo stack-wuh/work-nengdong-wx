@@ -1,0 +1,27 @@
+<!--pages/other/help/detail.wxml-->
+<view class="container other-bg">
+  <view class="nav-box">
+    <view class="nav-list">
+      <text data-check="待审核" bindtap="changeActive" class="{{check_text === '待审核' ? 'nav-list-item nav-list-item-active ' : 'nav-list-item'}}">待审核</text>
+      <text data-check="已审核" bindtap="changeActive" class="{{check_text === '已审核' ? 'nav-list-item nav-list-item-active ' : 'nav-list-item'}}">已审核</text>
+    </view>
+  </view>
+  <view style="height:140rpx;"></view>
+  <view class="list-content">
+    <view  class="list-item flex-box" wx:for="{{list}}" wx:key="{{index}}">
+      <navigator hover-class="none" url="/pages/other/help/common?argus={{item.id}}&type=2"  class="img-box">
+        <image src="/images/avatar.png" class="avatar" />
+      </navigator>
+      <view class="empty">
+        <view class="over-text">{{item.title}}</view>
+        <view class="title-pedding {{item.type === '寻求帮助' ? 'info-pedding ' : 'success-pedding'}}">{{item.type}}</view>
+        <view><text>发布时间：</text>{{item.time}}</view>
+      </view>
+      <view>
+        <image data-id="{{item.id}}" bindtap="delSubmit" src="/images/icon-delete-gray.png" class="icon-delete-gray" />
+      </view>
+    </view>
+
+  </view>
+  <view class="btm-text">没有更多啦</view>
+</view> 
