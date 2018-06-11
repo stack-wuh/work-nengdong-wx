@@ -17,7 +17,7 @@
   margin-right:15rpx;
 }
 .search-box{
-  height:80rpx;
+  height:108rpx;
 }
 .input-box{
   color: #999;
@@ -73,22 +73,24 @@
   line-height:42rpx;
 }
 .list-item{
-  display:flex;
-  align-items: flex-end;
+  
   padding:30rpx 0;
   box-sizing: border-box;
   border-bottom:1px solid #eee;
 }
 .list-item .img-box{
+  display:flex;
+  align-items: flex-end;
+}
+.list-item .img-box .avatar{
   width:140rpx;
   height:140rpx;
   border-radius: 4rpx;
-  overflow: hidden;
 }
 .list-item .right-content{
   flex:1;
   height:170rpx;
-  padding-left:10rpx;
+  padding-left:20rpx;
   font-size: 24rpx;
 }
 .list-item .right-content .title-bold{
@@ -128,5 +130,4 @@
   position: fixed;
   right:0;
   bottom:0;
-  transform:translateX(60%);
 }

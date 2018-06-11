@@ -75,6 +75,41 @@ App({
   },
 
   /**
+   * 网络请求，post
+   */
+  apiPost: function (url, data = {}, need_id = true, title ='加载中') {
+    wx.showLoading({
+      title: title,
+    })
+    if (need_id && wx.getStorageSync('number')){
+      data.student_info_id = wx.getStorageSync('number')
+    }
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: this.server + url,
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: data,
+        success: (response) => {
+          wx.hideLoading()
+          resolve(response.data)
+        },
+        fail: (response) => {
+          wx.hideLoading()
+          reject(response.data)
+          wx.showToast({
+            title: '请求超时',
+            image: '/images/error.png',
+          })
+        }
+      })
+    })
+
+  },
+
+  /**
    * 弹框消息，cate: 0成功，1失败，2警告
    */
   toastMsg: function (cate, msg) {

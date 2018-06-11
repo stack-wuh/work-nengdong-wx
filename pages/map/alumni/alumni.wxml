@@ -1,10 +1,10 @@
 <!--pages/map/alumni/alumni.wxml-->
 <view class="container other-bg">
   <view class="search-box other-bg">
-    <view class="input-box">
+    <view class="input-box" bindtap="changeActive">
       <image src="/images/icon-search.png" class="icon-search" />
-      <text wx:if="{{!isShowInput}}" bindtap="changeActive">请输入关键词</text>
-      <input auto-focus="{{true}}" bindblur="bindblur" bindconfirm="fetchData" wx:if="{{isShowInput}}" bindinput="saveInput" class="my-input" />
+      <text wx:if="{{!isShowInput}}" >请输入关键词</text>
+      <input auto-focus="{{true}}" bindblur="bindblur" bindconfirm="searchInput" wx:if="{{isShowInput}}" class="my-input" />
     </view>
   </view>
   <view style="height:110rpx"></view>
@@ -19,28 +19,28 @@
      </picker>
   </view>
   <view class="item-list" wx:for="{{list}}" wx:key="{{index}}">
-    <view class="item">
-      <navigator hover-class="none" url="/pages/map/alumni/detail?id={{item.id}}" class="img-box">
+    <navigator hover-class="none" url="/pages/map/alumni/detail?id={{item.id}}" class="item">
+      <view  class="img-box">
         <image wx:if="{{!item.image}}" src="/images/avatar.jpg" class="avatar" />
         <image wx:if="{{item.image}}" src="{{item.image}}" class="avatar" />
-      </navigator>
+      </view>
       <view class="right-content">
           <view class="flex-box">
             <text>类型：{{item.type}}</text>
-            <image wx:if="{{!item.alumni_pages_collect.or_name}}" data-id="{{item.id}}" bindtap="collected" src="/images/icon-collect-default.png" class="icon-collect" />
-            <image wx:if="{{item.alumni_pages_collect.or_name}}" data-id="{{item.id}}" bindtap="collected" src="/images/icon-collect-active.png" class="icon-collect" />
+            <image wx:if="{{!item.is_collect}}" data-id="{{item.id}}" catchtap="collected" src="/images/icon-collect-default.png" class="icon-collect" />
+            <image wx:if="{{item.is_collect}}" data-id="{{item.id}}" catchtap="collected" src="/images/icon-collect-active.png" class="icon-collect" />
           </view>
           <view>{{item.title}}</view>
           <view>创建时间：{{item.time}}</view>
           <view>{{item.praise}}人觉得赞 
-            <image wx:if="{{!item.alumni_praise.praise_or}}" bindtap="parised" data-id="{{item.id}}" src="/images/icon-prise-default.png" class="icon-prise" />
-            <image wx:if="{{item.alumni_praise.praise_or}}" bindtap="parised" data-id="{{item.id}}" src="/images/icon-prise-active.png" class="icon-prise" />
+            <image wx:if="{{!item.is_praise}}" catchtap="parised" data-id="{{item.id}}" src="/images/icon-prise-default.png" class="icon-prise" />
+            <image wx:if="{{item.is_praise}}" catchtap="parised" data-id="{{item.id}}" src="/images/icon-prise-active.png" class="icon-prise" />
           </view>
       </view>
-    </view>
+    </navigator>
   </view>
-  <view data-back="{{isBack}}" animation="{{animation}}" bindtap="showImgBtn"  class="img-btn">  
+  <view class="img-btn">  
     <image bindtap="jumpToOther" src="/images/icon-action.png" class="icon-action" />
   </view>
-  <view class="btm-text">没有更多啦</view>
+  <view class="btm-text">{{remind}}</view>
 </view>

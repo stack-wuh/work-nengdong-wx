@@ -18,17 +18,23 @@ Page({
     this.fetchData()
   },
   delSubmit(e){
-    let id = e.currentTarget.dataset.id 
-    app.apiPost('delMutual_HelpByMe',{id:id}).then(res=>{
-      let error = res.error == 0 ? 'success' : 'error'
-      app.toastMsg(error,res.msg)
-      if(res.error == 0){
-        app.toastMsg('success','删除成功')
-        this.fetchData()
-      }else{
-        app.toastMsg('error','删除失败')
+    wx.showModal({
+      title: '提示',
+      content: '确认删除',
+      success: res=>{
+        if(res.confirm){
+          let id = e.currentTarget.dataset.id
+          app.apiPost('delMutual_HelpByMe', { id: id }).then(res => {
+            let error = res.error == 0 ? 'success' : 'error'
+            app.toastMsg(error, res.msg)
+            if (res.error == 0) {
+              this.fetchData()
+            } 
+          })
+        }
       }
     })
+    
   },
   changeActive(e){
     this.setData({
@@ -47,41 +53,7 @@ Page({
       wx.setStorageSync('MutualByMe',res)
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
   
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -89,10 +61,4 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

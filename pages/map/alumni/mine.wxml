@@ -15,6 +15,8 @@
           <view>类型：{{item.type}}</view>
           <view class="over-text">{{item.title}}</view>
           <view>创建时间：{{item.time}}</view>
+          <view class="praise-wrapper"  wx:if="{{check_text === '已审核' && item.check_text == '进行中'}}">{{item.praise}}人觉得赞</view>
+          <view class="status-wrapper" wx:if="{{check_text === '已审核' && item.check_text == '未通过'}}">未通过</view>
       </view>
     </navigator>
   </view>

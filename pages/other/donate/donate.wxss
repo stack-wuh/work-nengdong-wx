@@ -28,7 +28,7 @@
 }
 .list-content{
   margin-top:20rpx;
-  padding:10rpx 30rpx;
+  padding:10rpx 30rpx 0 30rpx;
   background-color: #fff;
 }
 .list-item{
@@ -36,6 +36,9 @@
   align-items: center;
   padding:20rpx 0;
   border-bottom:1px solid #eee;
+}
+.list-item:last-child{
+  border-bottom: 0;
 }
 .list-item .img-content{
   width: 210rpx;

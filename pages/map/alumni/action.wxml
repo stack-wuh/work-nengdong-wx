@@ -13,48 +13,39 @@
       </view>
       <view class="card-list-item">
         <text class="item-title">名称</text>  
-        <input name="title" placeholder="请输入校友会名称" class="item-input" />
+        <input name="title" value="{{info.title}}" placeholder="请输入校友会名称" class="item-input" />
       </view>    
       <view class="card-list-item align-top">
         <text class="item-title" >校友会介绍</text>  
-        <textarea name="introduced" placeholder="请输入校友会名称" class="item-input item-textarea" />
+        <textarea name="introduced" value="{{info.introduced}}" placeholder="请输入校友会名称" class="item-input item-textarea" />
       </view>  
       <view class="card-list-item">
         <text class="item-title">入会要求</text>  
-        <input name="require_text" placeholder="请输入入会要求" class="item-input" /> 
+        <input name="require_text" value="{{info.require_text}}" placeholder="请输入入会要求" class="item-input" /> 
       </view>  
       <view class="card-list-item">
         <text class="item-title">入会方式</text>  
-        <input name="way" placeholder="请输入入会方式" class="item-input" /> 
+        <input name="way" value="{{info.way}}"  placeholder="请输入入会方式" class="item-input" /> 
       </view>    
       <view class="card-list-item">
         <text class="item-title">发起人</text>  
-        <input name="name" placeholder="请输入发起人" class="item-input" /> 
+        <input name="name" value="{{info.name}}"  placeholder="请输入发起人" class="item-input" /> 
       </view>   
       <view class="card-list-item">
         <text class="item-title">学院专业班级</text>  
-        <input name="class_text" placeholder="请输入学院专业班级" class="item-input" /> 
-      </view>          
-    </view>
-    <view class="act-card">
-      <view class="card-list-item">
-        <text class="item-title">手机号</text>
-        <input name="phone" class="item-input" placeholder="请输入手机号" />
-      </view>
-      <view class="card-list-item">
-        <text class="item-title">邮箱</text>
-        <input name="email" class="item-input" placeholder="请输入邮箱" />
-      </view>
-      <view class="card-list-item">
-        <text class="item-title">QQ</text>
-        <input name="qq" class="item-input" placeholder="请输入QQ" />
+        <input name="class_text" value="{{info.class_text}}" placeholder="请输入学院专业班级" class="item-input" /> 
       </view>  
-      <view class="card-list-item">
-        <text class="item-title">微信</text>
-        <input name="weixin" class="item-input" placeholder="请输入微信" />
-      </view>    
+      <view class="card-list-item" wx:for="{{user}}" wx:key="{{index}}">
+        <text class="item-title">{{item.name}}</text>
+        <input data-prop="{{item.prop}}" bindinput="bindinput" name="{{item.prop}}" value="{{item.value}}" class="picker-title" placeholder="{{item.msg}}"/>
+        <view class="empty"></view>
+        <block wx:if="{{item.showimg}}">
+          <image data-prop="{{item.prop}}" bindtap="checkShow" wx:if="{{!item.hide}}" src="/images/icon-check-default.png" class="icon-check" />
+          <image data-prop="{{item.prop}}" bindtap="checkHide" wx:if="{{item.hide}}" src="/images/icon-check-action.png" class="icon-check" />
+        </block>
+      </view>
     </view>
-    <view class="form-msg">手机号、邮箱、QQ、微信至少填写一项</view>
+    <view class="form-msg"><text class="star">*</text>联系方式对管理员全部可见，勾选项对全部用户可见，至少勾选一项。</view>
     <view class="act-card">
       <view class="act-card-list">
           <view class="card-list-item align-top">
@@ -63,29 +54,25 @@
               <view class="img-box avatar">
                 <image wx:if="{{cover}}" src="{{cover}}" class="avatar" />
                 <image data-type="1" wx:else bindtap="uploadImg" src="/images/upload.png" class="avatar" />
-                <image src="/images/icon-delete.png" class="icon-delete" />
+                <image src="/images/icon-delete.png" class="icon-delete" wx:if="{{cover}}" bindtap="deleteImg" data-type="1"/>
               </view>
-              <!-- <image src="../../../images/image.png" class="avatar" /> -->
             </view>
           </view>
           <view class="card-list-item align-top">
             <text class="item-title">其他图片</text>
             <view class="item-img-list">
-              <view class="img-box" wx:if="{{address.length<4}}">
-                <image  src="/images/icon-delete.png" class="icon-delete" />
-                <image data-type="2" bindtap="uploadImg" src="/images/upload.png" class="avatar" />
-              </view>
+              
               <view class="img-box" wx:if="{{address.length>0}}" wx:for="{{address}}">
-                <image  src="/images/icon-delete.png" class="icon-delete" />
+                <image src="/images/icon-delete.png" class="icon-delete" bindtap="deleteImg" data-index="{{index}}" data-type="2"/>
                 <image data-type="2" bindtap="uploadImg" src="{{item}}" class="avatar" />
               </view>
-              <!-- <image src="../../../images/image.png" class="avatar" />
-              <image src="../../../images/upload.png" class="avatar" /> -->
+              <view class="img-box">
+                <image data-type="2" bindtap="uploadImg" src="/images/upload.png" class="avatar" />
+              </view>
             </view>
           </view> 
       </view> 
     </view>
-    <view class="form-msg">附件只能PC端上传,或者加群下载;图片上限为4张</view>
     <button formType="submit" class="btn-area">提交</button>
   </form>
   <view class="dialog-wrapper" wx:if="{{isShowDialog}}">

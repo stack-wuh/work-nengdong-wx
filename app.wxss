@@ -298,17 +298,20 @@ page{
   height:68rpx;
   margin:0 auto;
   margin-top:20rpx;
+  padding-left: 20rpx;
   font-size: 24rpx;
   line-height:68rpx;
   text-align: center;
   border-radius: 4rpx;
   background-color: #fff;
+  color: #999;
 }
 .search-box .my-input{
   width:100%;
   height:68rpx;
   padding:0 10rpx;
   text-align: left;
+  color: #333;
 }
 
 
@@ -375,7 +378,8 @@ page{
   border-bottom:none;
 }
 .act-card .card-list-item .item-title{
-  width:120rpx;
+  flex: none;
+  min-width:120rpx; 
   margin-right:30rpx;
   padding:30rpx 0 ;
   font-size: 24rpx;
@@ -388,6 +392,7 @@ page{
   width:500rpx;
 }
 .act-card .card-list-item .picker-title{
+  flex: auto;
   font-size: 28rpx;
   color: #333;
 }
@@ -395,8 +400,8 @@ page{
   margin-right:20rpx;
 }
 .act-card .card-list-item .item-input{
-    /* width:100%; */
-    width: 500rpx;
+     width:100%; 
+    /* width: 500rpx; */
     font-size: 28rpx;
 }
 .act-card .card-list-item .item-textarea{
@@ -431,10 +436,13 @@ page{
   align-items: flex-start !important;
 }
 .form-msg{
-  margin-top:30rpx;
+  margin-top:20rpx;
   margin-bottom:30rpx;
   font-size: 24rpx;
   color: #999;
+}
+.form-msg .star{
+  color: #F42D2D;
 }
 
 .flex-box{
@@ -469,5 +477,68 @@ page{
 }
 .act-danger{
   color: #FF8888
+}
+
+/* 详情页下面的分享、点赞按钮 */
+.btn-group-wrapper{
+  position: fixed;
+  bottom:0;
+  left:0;
+  width: 100%;
+}
+.btn-group{
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top:0;
+  margin-bottom:0;
+  padding:20rpx;
+  font-size: 36rpx;
+  color: #333;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.btn-group .btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 334rpx;
+  height:80rpx;
+  border:1px solid #00998d;
+  border-radius: 4rpx;
+  font-size: 36rpx;
+}
+.btn-group .bg-btn{
+  display: flex;
+  align-items: center;
+  margin-right:22rpx;
+  background-color: #00998d;
+  color: #fff;
+}
+.btn-group .btn image{
+  margin-right: 22rpx;
+}
+.btn-group .btn .icon-prise{
+  width: 41rpx;
+  height: 35rpx;
+}
+
+.btn-group-wrapper .btn-group-placeholder{
+  height: 15rpx;
+  background: #e8f0f0;
+}
+
+/*富文本编辑器内容样式*/
+.wxParse-p, .wxParse-inline{
+  font-size: 28rpx;
+}
+.wxParse-div{
+  max-width: 100%;
+  font-size: 28rpx;
+}
+.wxParse-table{
+  max-width: 100%;
 }
 

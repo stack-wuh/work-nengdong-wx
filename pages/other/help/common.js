@@ -33,10 +33,24 @@ Page({
     app.apiPost('UpdateMutual_Help_Praise',{id:this.id}).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
-      this.data.list.mutual_help_praise.praise_or = !this.data.list.mutual_help_praise.praise_or
-      this.setData({
-        list:this.data.list
-      })
+      if(!res.error){
+        this.data.list.praise_or = !this.data.list.praise_or
+        this.data.list.praise += res.data? -1: 1
+        this.setData({
+          list: this.data.list
+        })
+        let pages = getCurrentPages()
+        let prevPage = pages[pages.length - 2]
+        prevPage.data.list.forEach(item=>{
+          if(item.id == this.id){
+            item.praise_or = this.data.list.praise_or
+            item.praise = this.data.list.praise
+          }
+        })
+        prevPage.setData({
+          list: prevPage.data.list
+        })
+      }
     })
   },
 
@@ -50,51 +64,12 @@ Page({
     obj = data.find(item=>{
       return item.id == id
     })
+    obj.is_self = obj.student_info_id == wx.getStorageSync('number')
     this.setData({
       list:obj
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
   
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
 
   /**
    * 用户点击右上角分享

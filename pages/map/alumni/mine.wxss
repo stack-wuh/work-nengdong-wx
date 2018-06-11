@@ -22,6 +22,7 @@
   border-bottom:1px solid #eee;
 }
 .list-content .right-content{
+  position: relative;
   flex:1;
   padding-left:15rpx;
   font-size: 24rpx;
@@ -37,4 +38,16 @@
 .list-content .right-content > view:nth-child(2){
   font-size: 30rpx;
   color: #333;
+}
+.status-wrapper{
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  padding-left:20rpx;
+  padding-right:10rpx;
+  color: #F87070;
+  border:1px solid #F87070;
+  border-top-left-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
 }
