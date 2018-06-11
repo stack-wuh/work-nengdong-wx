@@ -76,9 +76,11 @@ Page({
       })
       this.data.user.map(item => {
         for (var k in list) {
-          if (item.prop === k) {
+          if (item.prop === k ) {
             item.value = list[k]
-            item.hide = list.mutual_help_hide[item.prop+'_hide'] == 'false'
+            if (list.mutual_help_hide){
+              item.hide = list.mutual_help_hide[item.prop + '_hide'] == 'false'
+            }
           }
         }
       })

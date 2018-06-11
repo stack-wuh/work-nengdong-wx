@@ -12,11 +12,11 @@
   </view>
   <view style="height:87rpx;"></view>
   <view class="father other-bg">
-    <view  class="item-content" wx:for="{{list}}" wx:key="{{index}}">
-      <navigator  hover-class="none" url="/pages/map/firend/detail?id={{item.id}}" class="img-box">
+    <navigator hover-class="none" url="/pages/map/firend/detail?id={{item.id}}" class="item-content" wx:for="{{list}}" wx:key="{{index}}">
+      <view class="img-box">
         <image wx:if="{{!item.image}}" src="/images/avatar.png" class="avatar" />
         <image  wx:else src="{{item.image}}" class="avatar" />
-      </navigator>
+      </view>
       <view class="right-content">
         <view class="flex-box">
           <text>姓名：</text>
@@ -25,26 +25,27 @@
           <text wx:elif="{{index == 1}}" class="pedding-text pedding-up">升学</text>
           <text wx:else="{{index == 2}}" class="pedding-text pedding-up-school">升学就业</text>
           <text class="empty-box"></text>
-          <image data-id="{{item.id}}" bindtap="handleClickCollect" wx:if="{{!item.student_info_collect.or_name}}" src="/images/icon-collect-default.png" class="icon-collect" />
-          <image data-id="{{item.id}}" bindtap="handleClickCollect" wx:if="{{item.student_info_collect.or_name}}" src="/images/icon-collect-active.png" class="icon-collect" />
+          <image data-id="{{item.id}}" catchtap="handleClickCollect" wx:if="{{!item.student_info_collect.or_name}}" src="/images/icon-collect-default.png" class="icon-collect" />
+          <image data-id="{{item.id}}" catchtap="handleClickCollect" wx:if="{{item.student_info_collect.or_name}}" src="/images/icon-collect-active.png" class="icon-collect" />
         </view>
         <view class="flex-box">
           <text>入学年份：</text>
-          <text>{{item.school_age}}级</text>
+          <text>{{item.school_age+'级'||''}}</text>
           <text>学院：</text>
-          <view class="fixed-over">{{item.school}}</view>
+          <view class="fixed-over">{{item.school||''}}</view>
           <view class="empty-box"></view>
         </view>
         <view>
           <text>专业班级：</text>
-          <text>{{item.line}}{{item.classes}}</text>
+          <text>{{item.line||''}}{{item.classes||''}}</text>
         </view>
         <view>
           <text>工作/升学所在地：</text>
-          <text>{{item.site_provinces}}{{item.site_cities}}{{item.site_areas}}</text>
+          <text>{{item.site_provinces||''}}{{item.site_cities||''}}{{item.site_areas||''}}</text>
         </view>
       </view>
-    </view>
+    </navigator>
+    <view class="btm-remind">{{remind}}</view>
   </view>
 
   <view animation="{{animation}}" class='menu-slide'>

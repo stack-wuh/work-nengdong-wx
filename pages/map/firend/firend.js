@@ -69,7 +69,10 @@ Page({
       unit_way:'',
       school_age:'',
       site:'',
-    }
+    },
+    page: 1,
+    showMore: true,
+    remind: '正在加载中'
   },
 
   /**
@@ -197,14 +200,18 @@ Page({
   handleClickCollect(e){
     let id = e.currentTarget.dataset.id
     app.apiPost('addStudent_Info_Collect',{others_id:id}).then(res=>{
-      this.data.list.map(item=>{
-        if(item.id == id){
-          item.student_info_collect.or_name = !item.student_info_collect.or_name
-        }
-      })
-      this.setData({
-        list:this.data.list
-      })
+      app.toastMsg(res.error?'error':'success', res.msg)
+      if(!res.error){
+        this.data.list.map(item => {
+          if (item.id == id) {
+            item.student_info_collect.or_name = !item.student_info_collect.or_name
+          }
+        })
+        this.setData({
+          list: this.data.list
+        })
+      }
+      
     })
   },
   showCheckBox(e){
@@ -218,57 +225,40 @@ Page({
   },
 
   fetchData(){
-    app.apiPost('getStudent_Info',this.data.info).then(res=>{
+    let data = Object.assign(this.data.info, {pageNo: this.data.page}, {aid: wx.getStorageSync('number')})
+    app.apiPost('getStudent_Info',data, false).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       res.error == 0 &&
       this.setData({
-        list:res.data,
+        list: this.data.list.concat(res.data),
         isShowDialog:false,
         animation:app.animation(this.data.animation,0,0)
       })
+      if(res.data.length==10){
+        this.setData({
+          showMore: true,
+          remind: '上拉加载更多'
+        })
+      }else{
+        this.setData({
+          showMore: false,
+          remind: '没有更多啦'
+        })
+      }
       wx.setStorageSync('firendsList',res.data)
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
   
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    if(this.data.showMore){
+      this.setData({
+        page: this.data.page + 1
+      })
+      this.fetchData()
+    }
   },
 
   /**

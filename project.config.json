@@ -238,6 +238,12 @@
 					"name": "文本页",
 					"pathName": "pages/text/detail",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "行业动态",
+					"pathName": "pages/schoolfellow/list",
+					"query": "name=行业动态"
 				}
 			]
 		}

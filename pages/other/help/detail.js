@@ -8,7 +8,10 @@ Page({
    */
   data: {
     list:[],
-    check_text:'待审核'
+    check_text:'待审核',
+    page: 1,
+    showMore: true,
+    remind: '正在加载中'
   },
 
   /**
@@ -38,19 +41,42 @@ Page({
   },
   changeActive(e){
     this.setData({
-      check_text:e.currentTarget.dataset.check
+      check_text:e.currentTarget.dataset.check,
+      list: [],
+      page: 1,
+      showMore: true,
+      remind: '正在加载中'
     })
     this.fetchData()
   },
   fetchData(){
-    app.apiPost("getMutual_HelpByMe",{check_text:this.data.check_text}).then(res=>{
-      res.map(item=>{
+    let data = { 
+      check_text: this.data.check_text,
+      pageNo: this.data.page 
+    }
+    app.apiPost("getMutual_HelpByMe", data).then(res=>{
+      res.data.map(item=>{
         item.time = format.formatTime(new Date(item.time))
+        item.praise_or = item.mutual_help_praise ? 1 : 0
+        if (item.mutual_help_image){
+          item.mutual_help_image.address = item.mutual_help_image.address.split(',')
+        }
       })
       this.setData({
-        list:res
+        list: this.data.list.concat(res.data)
       })
-      wx.setStorageSync('MutualByMe',res)
+      if(res.data.length == 10){
+        this.setData({
+          remind: '上拉加载更多',
+          showMore: true
+        })
+      }else{
+        this.setData({
+          remind: '没有更多啦',
+          showMore: false
+        })
+      }
+      wx.setStorageSync('MutualByMe',this.data.list)
     })
   },
   
@@ -58,7 +84,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    if(this.data.showMore){
+      this.setData({
+        page: this.data.page + 1
+      })
+      this.fetchData()
+    }
   },
 
 })

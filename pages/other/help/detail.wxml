@@ -10,11 +10,11 @@
   <view class="list-content">
     <navigator hover-class="none" url="/pages/other/help/common?argus={{item.id}}&type=2"  class="list-item flex-box" wx:for="{{list}}" wx:key="{{index}}">
       <view class="img-box">
-        <image src="/images/avatar.png" class="avatar" />
+        <image src="{{item.image||item.mutual_help_image.address[0]||'/images/avatar.png'}}" class="avatar" />
       </view>
       <view class="empty">
         <view class="over-text">{{item.title}}</view>
-        <view class="title-pedding ">{{item.type}}</view>
+        <view class="title-pedding " style="background-color:{{item.mutual_help_type.color||'#FFBF50'}}">{{item.type}}</view>
         <view><text>发布时间：</text>{{item.time}}</view>
       </view>
       <view>
