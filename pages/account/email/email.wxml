@@ -5,18 +5,19 @@
     <form bindsubmit="formSubmit">
       <view class="icon-input-group" wx:if="{{type == 1}}">
         <image src="/images/icon-email.png"></image>
-        <input type="idcard" placeholder='请输入您的手机号码'></input>
+        <input name="phone_number" bindinput="saveInput" type="idcard" placeholder='请输入您的手机号码'></input>
       </view>
       <view class="icon-input-group" wx:if="{{type == 2}}">
         <image src="/images/icon-email.png"></image>
-        <input type="idcard" placeholder='请输入您的邮箱地址'></input>
+        <input name="email" value="{{email}}" bindinput="saveInput" type="idcard" placeholder='请输入您的邮箱地址'></input>
+        <view bindtap="getCode" data-type="2" class="icon-input-group-suffix">发送验证码</view>
       </view>
-      <view class="icon-input-group">
+      <view class="icon-input-group" wx:if="{{type == 2}}">
         <image src="/images/icon-token.png"></image>
-        <input placeholder='请输入验证码'></input>
+        <input name="code" placeholder='请输入验证码'></input>
       </view>
       <view class="form-button">
-        <button>提交</button>
+        <button form-type="submit">提交</button>
       </view>
       <view class="form-operate">
         <view></view>

@@ -114,6 +114,7 @@ App({
             'content-type': 'application/x-www-form-urlencoded'
           },
           success: function (res) {
+            console.log(res)
           }
         })
       }
@@ -145,10 +146,4 @@ App({
 
 
   server:'http://192.168.10.122:8686/SchoolFellow/'
-<<<<<<< HEAD
 })
-
-// 这是来自于吴红的更新
-=======
-})
->>>>>>> b463a279e4a2075af46dd74583f4adec23d8296c

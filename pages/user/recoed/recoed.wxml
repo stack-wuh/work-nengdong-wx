@@ -7,8 +7,8 @@
       <text class="option-txt">{{item.title}}</text>
       <text class="empty"></text>
     </view>
-    <view class="act-card">
-      <view class="card-list-item" wx:for="{{item.list}}" wx:key="{{index}}">
+    <view class="act-card" wx:if="{{item.title != '升学档案'}}">
+      <view class="card-list-item" wx:if="{{item.title != '升学档案'}}" wx:for="{{item.list}}" wx:key="{{index}}">
         <text class="item-title">{{item.name}}</text>
         <input data-name="{{item.name}}" bindinput="saveInput" wx:if="{{item.isInput}}" name="{{item.prop}}" class="item-input" placeholder="{{'请输入'+item.name}}" value="{{item.value}}" />
         <picker value="{{item.value}}" name="{{item.prop}}" data-name="{{item.name}}" wx:elif="{{item.name !== '工作/升学所在地'}}" range="{{item.list}}" range-key="{{item.range}}" bindchange="pickerChange">
@@ -27,7 +27,7 @@
     </view>
     <view wx:if="{{index == 0}}" class="form-msg">就业者填写就业档案, 生学者提供升学档案</view>
     <view wx:if="{{index == 2 && recoedType != 3}}" class="form-msg txt-btn">
-      <text>继续添加</text>
+      <text bindtap="addNew">继续添加</text>
       <image src="/images/icon-add.png" class="icon-add" />
     </view>
   </view>

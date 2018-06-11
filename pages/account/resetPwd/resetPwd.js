@@ -32,12 +32,19 @@ Page({
       app.toastMsg('error','密码不一致!')
       return
     }
-    let id = wx.getStorageSync('id')
-    var data = Object.assign({id:id},data)
+    let id = wx.getStorageSync('number')
+    var data = Object.assign({id:id},{password:data.password})
     app.apiPost('UpdatePassword',data).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
-      
+      if(res.error == 0){
+        setTimeout(()=>{
+          wx.navigateBack({
+            delta:1
+          })
+        },1000)
+
+      }
     })
   },
   /**

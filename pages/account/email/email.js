@@ -1,11 +1,14 @@
 // pages/account/email/email.js
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    type:''
+    type:'',
+    value:'',
+    code:''
   },
 
   /**
@@ -21,7 +24,47 @@ Page({
       type:options.type
     })
   },
-
+  saveInput(e){
+    this.setData({
+      value:e.detail.value
+    })
+  },
+  getCode(e){
+    let data = {}
+    data = e.currentTarget.dataset.type == 1 ? {phone_number:this.data.value} : {email:this.data.value}
+    app.apiPost('ClickCode',data).then(res=>{
+      res && app.toastMsg('success','验证码已发送')
+      res && this.setData({
+        code:res
+      })
+    })
+  },
+  formSubmit(e){
+    let data = {}
+    data.id = wx.getStorageSync('number')
+    if(e.detail.value.email){
+      data.email = e.detail.value.email
+    }else if(e.detail.value.phone_number){
+      data.phone_number = e.detail.value.phone_number
+    }
+    if(e)
+    if(e.detail.value.code == this.data.code){
+      app.apiPost('updateStudent_Info',data).then(res=>{
+        if(res.error == 0){
+          app.toastMsg('success',res.msg)
+          setTimeout(()=>{
+            wx.navigateBack({
+              delta:1
+            })
+          },1000)
+        }else{
+          app.toastMsg('error',res.msg)
+        }
+      })
+    }else{
+      app.toastMsg('error','验证码错误')
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -8,12 +8,12 @@
       </view>
       <view class="right-content">
         <view>
-          <text>孙二三</text>
-          <text class="txt-title">2013</text>
+          <text>{{info.name}}</text>
+          <text class="txt-title">{{info.school_age}}</text>
         </view>
-        <view>学号: 2013060812</view>
-        <view>身份证: 420113199504151011</view>
-        <view>学院专业班级: 能动学院XXXX</view>
+        <view>学号: {{info.number}}</view>
+        <view>身份证: {{info.no}}</view>
+        <view>学院专业班级: {{info.school}}{{info.line}}{{info.classes}}</view>
       </view>
     </view>
  </view>
@@ -39,12 +39,12 @@
         <text class="empty"></text>
         <image src="/images/icon-arrow-right.png" class="icon-arrow-right" />
       </navigator>
-      <view class="card-list-item flex-box">
+      <navigator hover-class="none" url="/pages/404/index" class="card-list-item flex-box">
         <image src="/images/user-list-4.png" class="user-list-img" />
         <text class="picker-title">关于我们</text>
         <text class="empty"></text>
         <image src="/images/icon-arrow-right.png" class="icon-arrow-right" />
-      </view>
+      </navigator>
       <navigator hover-class="none" url="/pages/user/setting/setting" class="card-list-item flex-box">
         <image src="/images/user-list-5.png" class="user-list-img" />
         <text class="picker-title">更多设置</text>

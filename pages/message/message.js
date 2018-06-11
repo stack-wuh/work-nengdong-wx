@@ -1,4 +1,28 @@
 var app = getApp()
 Page({
-
+  data:{
+    current:0,
+    navList:[
+      {
+        name:'全部',
+        value:''
+      },
+      {
+        name:'个人',
+        value:'个人'
+      },
+      {
+        name:'学院',
+        value:'学院'
+      },
+      {
+        name:'年级',
+        value:'年级'
+      },
+      {
+        name:'我的收藏',
+        value:'我的收藏'
+      }
+    ]
+  }
 })

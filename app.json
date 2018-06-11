@@ -29,13 +29,10 @@
     "pages/user/setting/setting",
     "pages/user/recoed/recoed",
     "pages/user/private/private",
-<<<<<<< HEAD
-    "pages/404/index",
-    "pages/message/message"
-=======
     "pages/schoolfellow/list",
-    "pages/schoolfellow/detail"
->>>>>>> b463a279e4a2075af46dd74583f4adec23d8296c
+    "pages/schoolfellow/detail",
+    "pages/message/message",
+    "pages/404/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

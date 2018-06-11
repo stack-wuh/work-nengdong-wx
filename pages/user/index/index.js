@@ -1,11 +1,13 @@
 // pages/user/index/index.js
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    recoedType:1
+    recoedType:1,
+    info:[]
   },
 
   /**
@@ -22,8 +24,16 @@ Page({
         recoedType:2
       })
     }
+    this.getInfo()
   },
 
+  getInfo(){
+    app.apiPost('showStudent_Info',{id:wx.getStorageSync('number')}).then(res=>{
+      this.setData({
+        info:res.data[0]
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

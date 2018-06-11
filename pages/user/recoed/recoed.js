@@ -1,6 +1,7 @@
 // pages/user/recoed/recoed.js
 var app = getApp()
-const optionList = [{
+const optionList = [
+  {
     title: '基础信息',
     iconPath: '/images/icon-info.png',
     list: [{
@@ -57,14 +58,14 @@ const optionList = [{
         value: ['湖北省', '武汉市', '洪山区'],
         require: true,
         isInput: false,
-        list:[],
+        list: [],
         prop: 'site'
       }, {
         name: '详细地址（选填）',
         value: '',
         prop: 'address',
         isInput: true,
-        require:false
+        require: false
       }
     ]
   },
@@ -106,19 +107,21 @@ const optionList = [{
       value: '',
       prop: 'post_name',
       isInput: true,
-      require:false
+      require: false
     }, {
       name: '起薪（选填）',
       value: '',
       prop: 'money',
       isInput: true,
-      require:false
+      require: false
     }]
   },
   {
     title: '升学档案',
     iconPath: '/images/icon-student.png',
-    list: [{
+    list: [
+      [
+      {
         name: '层次',
         value: '',
         list: [],
@@ -149,6 +152,7 @@ const optionList = [{
         isInput: true
       },
     ]
+    ]
   }
 ]
 /**
@@ -167,10 +171,10 @@ Page({
     recoedType: 2,
     schoolList: [],
     school: '',
-    type:1,
-    animation:'',
-    isBack:false,
-    isbtn:false
+    type: 1,
+    animation: '',
+    isBack: false,
+    isbtn: false
   },
 
   /**
@@ -178,15 +182,15 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      type:options.type
+      type: options.type
     })
-    if(options.type == 2){
+    if (options.type == 2) {
       let data = wx.getStorageSync('myinfo')
       this.setData({
-        optionList:data
+        optionList: data
       })
       wx.setNavigationBarTitle({
-        title:'编辑档案'
+        title: '编辑档案'
       })
     }
     this.getSchool()
@@ -199,30 +203,40 @@ Page({
 
   },
 
-  showImgBtn(e){
-    let isBack = e.currentTarget.dataset.back    
+  //点击继续添加
+  addNew() {
+    this.data.optionList[2].list.push[this.data.optionList[2].list[0]]
+    console.log(this.data.optionList)
+    return
     this.setData({
-      // animation:app.animation(this.data.animation,-40,-180)
-      isBack:!this.data.isBack
+      optionList: this.data.optionList
     })
-    if(!isBack){
+    console.log(this.data.optionList[2].list)
+  },
+
+  showImgBtn(e) {
+    let isBack = e.currentTarget.dataset.back
+    this.setData({
+      isBack: !this.data.isBack
+    })
+    if (!isBack) {
       this.setData({
-        animation:app.animation(this.data.animation,-40,-180),
-        isbtn:true
+        animation: app.animation(this.data.animation, -40, -180),
+        isbtn: true
       })
-    }else{
-      setTimeout(()=>{
+    } else {
+      setTimeout(() => {
         this.setData({
-          animation:app.animation(this.data.animation,0,0),
-          isbtn:false
+          animation: app.animation(this.data.animation, 0, 0),
+          isbtn: false
         })
       })
     }
   },
-  jumpToOther(){
-    if(this.data.isbtn){
+  jumpToOther() {
+    if (this.data.isbtn) {
       wx.navigateTo({
-        url:'/pages/user/private/private'
+        url: '/pages/user/private/private'
       })
     }
   },
@@ -244,11 +258,11 @@ Page({
     let index = e.detail.value
     this.data.optionList.map(item => {
       item.list.map(list => {
-        if(name !=='工作/升学所在地'){
+        if (name !== '工作/升学所在地') {
           if (list.name === name && list.list !== undefined && list.list !== null) {
             list.value = list.list[index][list.range]
           }
-        }else if(name === '工作/升学所在地'){
+        } else if (name === '工作/升学所在地') {
           list.value = e.detail.value
         }
       })
@@ -344,23 +358,23 @@ Page({
   },
   handleSubmit(e) {
     let data = e.detail.value
-    for(var k in data){
-      if(data[k] == '' && k !== 'address' && k !== 'post_name' && k !== 'money' ){
-        app.toastMsg('error','请提交必填项')
+    for (var k in data) {
+      if (data[k] == '' && k !== 'address' && k !== 'post_name' && k !== 'money') {
+        app.toastMsg('error', '请提交必填项')
         return
       }
     }
-    app.apiPost('addEmployment_Archives',data).then(res=>{
+    app.apiPost('addEmployment_Archives', data).then(res => {
       let error = res.error == 0 ? 'success' : 'error'
-      app.toastMsg(error,res.msg)
-      if(res.error == 0){
-        setTimeout(()=>{
-          wx.setStorageSync('myinfo',this.data.optionList)
+      app.toastMsg(error, res.msg)
+      if (res.error == 0) {
+        setTimeout(() => {
+          wx.setStorageSync('myinfo', this.data.optionList)
           wx.switchTab({
-            url:'/pages/user/index/index'
+            url: '/pages/user/index/index'
           })
-        },1000)
-       wx.setStorageSync('recodeInfo',this.data.optionList)
+        }, 1000)
+        wx.setStorageSync('recodeInfo', this.data.optionList)
       }
     })
   },

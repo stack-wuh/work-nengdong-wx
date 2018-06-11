@@ -6,4 +6,11 @@
         <input hidden auto-focus="{{true}}" />
       </view>
     </view>
+    <view style="height:100rpx;"></view>
+    <view class="nav-list">
+      <text class="nav-title {{index == current ? 'active' : ''}}" wx:for="{{navList}}" wx:key="{{index}}">{{item.name}}</text>
+    </view>   
+    <view class="list">
+      <view></view>
+    </view> 
 </view>
