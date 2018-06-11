@@ -4,7 +4,7 @@
     <view class="act-card">
       <view class="card-list-item">
         <text class="item-title">类型</text>
-        <picker name="type" value="{{type}}" bindchange="pickerChange"  range="{{typeList}}" range-key="{{'name'}}">
+        <picker name="type" value="{{type}}" bindchange="pickerChange"  range="{{typeList}}" range-key="name">
           <view class="picker">
             <text class="picker-title">{{type ? type : '请选择类型'}}</text>
             <image src='/images/icon-arrow-right.png' class="icon-arrow-right" />
@@ -21,13 +21,13 @@
       </view> 
       <view class="card-list-item align-top">
         <text class="item-title">图片</text>
-        <view class="img-list">
-          <view class="img-item-box" wx:if="{{address.length<4}}">
-            <image data-type="2" bindtap="uploadImg" src="/images/upload.png" class="icon-upload" />
-          </view>
+        <view class="img-list" >
           <view class="img-item-box" wx:for="{{address}}">
-            <image data-type="2" bindtap="deleteImg" src="/images/icon-delete.png" class="icon-delete" />
+            <image data-type="2" bindtap="deleteImg" data-index="{{index}}" src="/images/icon-delete.png" class="icon-delete" />
             <image src="{{item}}" class="icon-upload" />
+          </view>
+          <view class="img-item-box" >
+            <image data-type="2" bindtap="uploadImg" src="/images/upload.png" class="icon-upload" />
           </view>
         </view>
       </view>           
@@ -38,8 +38,12 @@
         <input data-prop="{{item.prop}}" bindinput="bindinput" name="{{item.prop}}" value="{{item.value}}" class="picker-title" placeholder="{{item.msg}}"/>
         <view class="empty"></view>
         <block wx:if="{{item.showimg}}">
-          <image data-prop="{{item.prop}}" bindtap="checkShow" wx:if="{{!item.hide}}" src="/images/icon-check-default.png" class="icon-check" />
-          <image data-prop="{{item.prop}}" bindtap="checkHide" wx:if="{{item.hide}}" src="/images/icon-check-action.png" class="icon-check" />
+          <view class="image-wrapper" data-prop="{{item.prop}}" bindtap="checkShow" wx:if="{{!item.hide}}">
+            <image  src="/images/icon-check-default.png" class="icon-check" />
+          </view>
+          <view class="image-wrapper" data-prop="{{item.prop}}" bindtap="checkHide" wx:if="{{item.hide}}">
+            <image  src="/images/icon-check-action.png" class="icon-check" />
+          </view>
         </block>
       </view>
     </view>   

@@ -6,9 +6,6 @@
   width:30rpx;
   height:30rpx;
 }
-.align-top{
-  padding:10rpx;
-}
 .icon-upload{
   margin-right:10rpx;
 }
@@ -22,10 +19,14 @@
 }
 .img-list{
   display: flex;
+  padding: 20rpx 0;
 }
 .img-list .img-item-box{
   margin-right:10rpx;
 }
 .empty{
   flex:1 !important;
+}
+.image-wrapper{
+  padding: 20rpx 0 20rpx 20rpx;
 }

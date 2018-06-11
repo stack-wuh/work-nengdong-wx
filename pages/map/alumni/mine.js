@@ -8,7 +8,10 @@ Page({
    */
   data: {
     list:[],
-    check_text:'待审核'
+    check_text:'待审核',
+    page: 1,
+    showMore: false,
+    remind: '正在加载中'
   },
 
   /**
@@ -19,70 +22,52 @@ Page({
   },
   changeActive(e){
     this.setData({
-      check_text:e.currentTarget.dataset.check
+      check_text:e.currentTarget.dataset.check,
+      list: [],
+      page: 1,
+      showMore: false,
+      remind: '正在加载中'
     })  
     this.fetchData()
   },
   fetchData(){
     let data = {
-      check_text:this.data.check_text
+      check_text:this.data.check_text,
+      pageNo: this.data.page
     }
     app.apiPost('getAlumni_PagesByCheck',data).then(res=>{
-      res.map(item=>{
+      res.data = res.data || []
+      res.data.map(item=>{
         item.time = format.formatTime(new Date(item.time))
       })
       this.setData({
-        list:res
+        list: this.data.list.concat(res.data)
       })
+      if (res.data.length == 10) {
+        this.setData({
+          showMore: true,
+          remind: '上拉加载更多'
+        })
+      } else {
+        this.setData({
+          showMore: false,
+          remind: '没有更多啦'
+        })
+      }
       wx.setStorageSync('alumniList',res)
     })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    if (this.data.showMore) {
+      this.setData({
+        page: this.data.page + 1
+      })
+      this.fetchData()
+    }
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
   
-  }
 })

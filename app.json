@@ -29,10 +29,14 @@
     "pages/user/setting/setting",
     "pages/user/recoed/recoed",
     "pages/user/private/private",
+
+    "pages/404/index",
+    "pages/message/message",
+
     "pages/schoolfellow/list",
     "pages/schoolfellow/detail",
-    "pages/message/message",
-    "pages/404/index"
+    "pages/text/detail"
+
   ],
   "window":{
     "backgroundTextStyle":"light",

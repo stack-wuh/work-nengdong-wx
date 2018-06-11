@@ -7,7 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[]
+    list:[],
+    page: 1,
+    showMore: true,
+    remind: '正在加载中'
   },
 
   /**
@@ -20,15 +23,17 @@ Page({
   handleClickPraise(e){
     let id = e.currentTarget.dataset.id
     app.apiPost('addAlumni_Or',{alumni_id:id}).then(res=>{
+      app.toastMsg(res.error?'error':'success', res.msg)
       this.data.list.map(item=>{
         if(item.id == id){
           item.alumni_or.or_name = !item.alumni_or.or_name
+          if (item.alumni_or.or_name) {
+            item.praise++
+          } else {
+            item.praise--
+          }
         }
-        if(item.alumni_or.or_name){
-          item.praise ++
-        }else{
-          item.praise --
-        }
+        
       })
       this.setData({
         list:this.data.list
@@ -36,55 +41,40 @@ Page({
     })
   },
   fetchData(){
-    app.apiPost('getAlumni').then(res=>{
+    let data = {
+      pageNo: this.data.page
+    }
+    app.apiPost('getAlumni', data).then(res=>{
       res.data.map(item=>{
         item.time = format.formatTime(new Date(item.time))
       })
       this.setData({
-        list:res.data
+        list: this.data.list.concat(res.data)
       })
+      if(res.data.length == 10){
+        this.setData({
+          showMore: true,
+          remind: '上拉加载更多'
+        })
+      }else{
+        this.setData({
+          showMore: false,
+          remind: '正在加载中'
+        })
+      }
     })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    if(this.data.showMore){
+      this.setData({
+        page: this.data.page + 1
+      })
+      this.fetchData()
+    }
   },
 
   /**

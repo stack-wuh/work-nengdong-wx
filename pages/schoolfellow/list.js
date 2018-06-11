@@ -1,4 +1,5 @@
 // pages/schoolfellow/list.js
+const app = getApp()
 Page({
 
   /**
@@ -23,6 +24,7 @@ Page({
     wx.setNavigationBarTitle({
       title: options.name
     })
+    this.fetchData()
   },
 
   /**
@@ -30,15 +32,37 @@ Page({
    */
   fetchData: function(){
     let data = {
-
+      list: this.data.name,
+      pageNo: this.data.page
     }
+    app.apiPost('getNd_Article', data).then(res=>{
+      this.setData({
+        list: this.data.list.concat(res.data)
+      })
+      if(res.data.length == 10){
+        this.setData({
+          showMore: true,
+          remind: '上拉加载更多'
+        })
+      }else{
+        this.setData({
+          showMore: false,
+          remind: '没有更多啦'
+        })
+      }
+    })
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    if(this.data.showMore){
+      this.setData({
+        page: this.data.page + 1
+      })
+      this.fetchData()
+    }
   },
 
   bindblur() {

@@ -1,0 +1,23 @@
+/* pages/text/detail.wxss */
+@import "/utils/wxParse/wxParse.wxss";
+.container{
+  background: #fff;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+.title{
+  padding: 40rpx 0 20rpx 0;
+  font-size: 32rpx;
+  text-align: center;
+}
+.time{
+  font-size: 24rpx;
+  color: #666;
+  text-align: center;
+}
+.praise-wrapper{
+  margin-top: 20rpx;
+  text-align: right;
+  font-size: 26rpx;
+  color: #666;
+}

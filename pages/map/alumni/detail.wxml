@@ -1,5 +1,5 @@
 <!--pages/map/alumni/unpass.wxml-->
-<view class="container other-bg">
+<view class="container other-bg {{list.check_text != '进行中'?'container1':''}}">
     <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" doration="{{1000}}" indicator-active-color="#0E90F5" indicator-color="RGBA(14, 144, 245, .5)">
     <block wx:for="{{imgList}}" wx:key="{{index}}"> 
       <swiper-item>
@@ -12,7 +12,18 @@
     <view class="list-item">
       <view class="card-list-item item-title">
         <text>类型：{{list.type}}</text>
-        <text>{{list.check_text}}</text>
+        <block wx:if="{{list.is_self}}">
+          <navigator hover-class='none' url="/pages/map/alumni/action?edit=1" class="edit-btn" wx:if="{{list.check_text == '进行中'}}">
+            <image src="/images/icon-edit-g.png"></image>
+            <text>编辑</text>
+          </navigator>
+          <text class="check-text" wx:else>{{list.check_text}}</text>
+        </block>
+        <block wx:else>
+          <image wx:if="{{!list.is_collect}}" data-id="{{item.id}}" catchtap="collected" src="/images/icon-collect-default.png" class="icon-collect" />
+          <image wx:if="{{list.is_collect}}" data-id="{{item.id}}" catchtap="collected" src="/images/icon-collect-active.png" class="icon-collect" />
+        </block>
+        
       </view>
       <view class="list-item-first">
        <text>{{list.title}}</text>
@@ -48,24 +59,29 @@
       <view>{{list.class_text}}</view>
     </view>
     <view class="card-list-item">
-      <view>联系方式: </view>
-      <view wx:if="{{list.email}}">邮箱: {{list.email}}</view>
-      <view wx:if="{{list.qq}}">QQ: {{list.qq}}</view>
-      <view wx:if="{{list.weixin}}">微信: {{list.weixin}}</view>
+      <view wx:if="{{list.alumni_information_hide.phone_hide == 'false'}}">手机号: {{list.phone}}</view>
+      <view wx:if="{{list.alumni_information_hide.email_hide == 'false'}}">邮箱: {{list.email}}</view>
+      <view wx:if="{{list.alumni_information_hide.qq_hide == 'false'}}">QQ: {{list.qq}}</view>
+      <view wx:if="{{list.alumni_information_hide.weixin_hide == 'false'}}">微信: {{list.weixin}}</view>
     </view>                  
   </view>
-  <view class="card-list">
-    <view class="card-list-item no-border">
-      <view>相册展示:</view>
-      <view class="img-list-box">
-        <image class="img-item" src="{{item}}" wx:for="{{imgList}}" wx:key="{{index}}" />
-      </view>
-    </view>
-  </view>
-  <view class="card-list">
+  <view class="card-list" wx:if="{{list.check_text == '未通过' && list.feedback}}">
     <view class="card-list-item no-border">
       <view>反馈意见:</view>
-      <view>{{list.feedback ? list.feedback : ''}}</view>
+      <view>{{list.feedback}}</view>
+    </view>
+  </view>
+  <view class="btn-group-wrapper" wx:if="{{list.check_text == '进行中'}}">
+    <view class="btn-group-placeholder"></view>
+    <view class="btn-group">
+        <button class="btn bg-btn" open-type="share">
+          <image src="/images/icon-share.png" class="icon-share" />
+        <text>分享</text></button>
+      <view class="btn" bindtap="handleClickPraise">
+        <image wx:if="{{list.is_praise}}" src="/images/icon-prise-blue.png" class="icon-prise" />
+        <image wx:if="{{!list.is_praise}}" src="/images/icon-prise-gray.png" class="icon-prise" />
+        <text>点赞</text>
+      </view>
     </view>
   </view>
 </view>

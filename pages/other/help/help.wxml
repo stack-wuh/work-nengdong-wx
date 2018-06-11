@@ -1,10 +1,10 @@
 <!--pages/other/help/help.wxml-->
 <view class="container other-bg">
   <view class="search-box other-bg">
-    <view class="input-box">
+    <view class="input-box" bindtap="showInput">
       <image wx:if="{{!showInput}}" src="/images/icon-search.png" class="icon-search" />
-      <text bindtap="showInput" wx:if="{{!showInput}}">请输入关键词</text>
-      <input bindinput="saveInput" bindconfirm="fetchData" auto-focus="{{true}}" wx:if="{{showInput}}"  class="my-input" />
+      <text  wx:if="{{!showInput}}">请输入关键词</text>
+      <input bindconfirm="searchInput" auto-focus="{{true}}" wx:if="{{showInput}}"  class="my-input" />
     </view>
   </view>
   <view style="height:110rpx"></view>
@@ -24,39 +24,40 @@
       <image src="/images/icon-wraning.png" class="icon-wraning"/>
       <view>该板块发布信息采用实名制,禁止发布虚假、不文明信息，违规信息管理员有权删除，情节严重者永久封号！</view>
     </view>
-    <view  class="list-item" wx:for="{{list}}" wx:key="{{index}}">
+    <view class="list-item" wx:for="{{list}}" wx:key="{{index}}">
        <navigator hover-class="none" url="/pages/other/help/common?argus={{item.id}}" class="img-box">
-         <image wx:if="{{!item.address}}" src="/images/avatar.png" class="avatar" />
-         <image wx:else src="{{item.address}}" class="avatar" />
-       </navigator> 
-       <view class="right-content">
-          <view class="flex-box" >
-            <text class="title-bold">{{item.title}}</text>
-            <text class="{{item.type === '提供帮助' ? 'title-pedding info-pedding' : 'title-pedding success-pedding'}}">{{item.type}}</text>
-          </view>
-          <view>
-            <text>发布人：</text>
-            <text>{{item.college}}</text>
-            <text>学院：</text>
-            <text>{{item.student_info.school}}</text>
-          </view>
-          <view>
-            <text>专业班级：</text>
-            <text>{{item.student_info.classes}}</text>
-          </view>
-          <view class="flex-box">
-            <text>发布时间：</text>
-            <text>{{item.time}}</text>
-            <text class="empty"></text>
-            <image wx:if="{{!item.mutual_help_praise.praise_or}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-default.png" class="icon-prise" />
-            <image wx:if="{{item.mutual_help_praise.praise_or}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-active.png" class="icon-prise" />
-            <text>{{item.praise}}人赞</text>
-          </view>
-       </view> 
+         <image src="{{item.mutual_help_image.address[0]||'/images/avatar.png'}}" class="avatar" />
+       
+          <view class="right-content">
+              <view class="flex-box" >
+                <text class="title-bold">{{item.title}}</text>
+                <text class="title-pedding" style="background-color:{{item.mutual_help_type.color||'#FFBF50'}}">{{item.type}}</text>
+              </view>
+              <view>
+                <text>发布人：</text>
+                <text>{{item.college}}</text>
+                <text>学院：</text>
+                <text>{{item.student_info.school||'未知'}}</text>
+              </view>
+              <view>
+                <text>专业班级：</text>
+                <text>{{item.student_info.classes||'未知'}}</text>
+              </view>
+              <view class="flex-box">
+                <text>发布时间：</text>
+                <text>{{item.time}}</text>
+                <text class="empty"></text>
+                <image wx:if="{{!item.praise_or}}" data-index="{{index}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-default.png" class="icon-prise" />
+                <image wx:if="{{item.praise_or}}" data-index="{{index}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-active.png" class="icon-prise" />
+                <text>{{item.praise}}人赞</text>
+              </view>
+          </view> 
+        </navigator> 
     </view>
+    <view class="btm-text">{{remind}}</view>
   </view>
-  <view class="btm-text">没有更多啦</view>
-  <view data-back="{{isBack}}" bindtap="showImgBtn" animation="{{animation}}" hover-class="none" url="/pages/other/help/publish" class="edit-box">
-    <image  bindtap="jumpToOther" src="/images/icon-action.png" class="icon-action" />
-  </view>
+  
+  <navigator hover-class="none" url="/pages/other/help/publish" class="edit-box">
+    <image  src="/images/icon-action.png" class="icon-action" />
+  </navigator>
 </view>

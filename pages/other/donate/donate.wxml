@@ -1,13 +1,12 @@
 <!--pages/other/donate/donate.wxml-->
 <view class="container other-bg">
   <view class="top-msg">
-    <text>感谢以下校友企业、组织以及个人对XX院校XX学院的捐赠!</text>
+    <text>感谢以下校友企业、组织以及个人对武汉理工大学能动学院的捐赠!</text>
   </view>
   <view class="list-content">
-    <view class="list-item" wx:for="{{list}}" wx:key="{{index}}">
+    <navigator hover-class='none' url="/pages/text/detail?index={{index}}" class="list-item" wx:for="{{list}}" wx:key="{{index}}">
       <view class="img-content">
-        <image wx:if="{{item.image}}" src="{{image}}" class="avatar" />
-        <image wx:else src="/images/avatar.jpg" class="avatar" />
+        <image src="{{item.image||'/images/avatar.jpg'}}" class="avatar" />
       </view>
       <view class="right-content">
         <view class="over-text">{{item.title}}</view>
@@ -15,14 +14,14 @@
         <view class="flex-box">
           <text>{{item.time}}</text>
           <text class="empty"></text>
-          <image wx:if="{{!item.alumni_or.or_name}}" data-id="{{item.id}}" bindtap="handleClickPraise" src="/images/icon-prise-default.png" class="icon-prise" />
-          <image wx:if="{{item.alumni_or.or_name}}" data-id="{{item.id}}" bindtap="handleClickPraise" src="/images/icon-prise-active.png" class="icon-prise" />
+          <image wx:if="{{!item.alumni_or.or_name}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-default.png" class="icon-prise" />
+          <image wx:if="{{item.alumni_or.or_name}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-active.png" class="icon-prise" />
           <text>{{item.praise}}人赞</text>
         </view>
       </view>
-    </view>
+    </navigator>
   </view>
-  <view class="btm-text">没有更多啦</view>
+  <view class="btm-text">{{remind}}</view>
   <view class="search-box" hidden>
     <view class="dialog-box">
       <image src="/images/icon-close-white.png" class="icon-close-white" />

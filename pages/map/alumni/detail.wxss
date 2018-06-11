@@ -1,4 +1,10 @@
 /* pages/map/alumni/unpass.wxss */
+.container{
+  padding-bottom: 140rpx;
+}
+.container1{
+  padding-bottom: 0
+}
 .card-list{
   width:100%;
   padding:30rpx 40rpx 20rpx 40rpx;
@@ -36,11 +42,9 @@
   padding-left:20rpx;
 }
 .card-list .card-list-item{
-  /* padding:25rpx 0 18rpx 0; */
   padding-bottom:18rpx;
-  /* border-bottom:1px solid #eee; */
 }
-.card-list .card-list-item > view:first-of-type{
+.card-list .card-list-item > view{
   margin-top:20rpx;
   margin-bottom:10rpx;
   color:#333;
@@ -62,7 +66,7 @@
   align-items: center;
   justify-content: space-between;
 }
-.item-title > text:last-of-type{
+.item-title > .check-text{
   display: inline-block;
   padding-left:20rpx;
   padding-right:10rpx;
@@ -81,4 +85,22 @@
   width:120rpx;
   height:120rpx;
   margin-right:20rpx;
+}
+.edit-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120rpx;
+  height: 46rpx;
+  font-size: 28rpx;
+  border: 1px solid #00998d;
+  border-radius: 4rpx;
+}
+.edit-btn image{
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 10rpx;
+}
+.edit-btn text{
+  color: #00998d;
 }

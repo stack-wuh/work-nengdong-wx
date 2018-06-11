@@ -1,0 +1,12 @@
+<!--pages/text/detail.wxml-->
+<view class="container">
+  <view class="title">{{info.title}}</view>
+  <view class="time">{{info.time}}</view>
+  <view class="content-wrapper">
+    <import src="/utils/wxParse/wxParse.wxml"/>
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+  </view>
+  <!-- <view class="praise-wrapper">
+    <text>{{info.praise}}人赞</text>
+  </view> -->
+</view>

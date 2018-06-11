@@ -1,25 +1,25 @@
 <!--pages/other/help/common.wxml-->
 <view class="container other-bg">
-  <swiper class="swiper" indicator-dots="{{false}}" autoplay="{{true}}" interval="{{5000}}" duration="{{1000}}" indicator-active-color="rgba(225,225,225,1)" indicator-color="rgba(225,225,225,.5)">
+  <swiper class="swiper" indicator-dots circular autoplay="{{true}}" interval="{{5000}}" duration="{{1000}}" indicator-active-color="rgba(225,225,225,1)" indicator-color="rgba(225,225,225,.5)">
     <block>
-      <swiper-item>
-        <image src="{{list.mutual_help_image.address}}" class="swiper-img" />
+      <swiper-item wx:for="{{list.mutual_help_image.address}}">
+        <image src="{{item}}" class="swiper-img" />
       </swiper-item>
     </block>
   </swiper>
   <view class="list-item">
     <view class="over-text">{{list.title}}
-      <text data-id="{{list.id}}" bindtap="jumpToEdit" class="btn-edit">编辑</text>
+      <text data-id="{{list.id}}" bindtap="jumpToEdit" class="btn-edit" wx:if="{{list.is_self}}">编辑</text>
     </view>
     <view>
       <text>发布人：</text>
       <text>{{list.college}}</text>
       <text>学院：</text>
-      <text>{{list.student_info.school}}</text>
+      <text>{{list.student_info.school||'未知'}}</text>
     </view>
     <view>
       <text>专业班级：</text>
-      <text>{{list.student_info.classes}}</text>
+      <text>{{list.student_info.classes||'未知'}}</text>
     </view>
     <view class="flex-box">
       <text>发布时间：</text>
@@ -32,34 +32,33 @@
     <view>{{list.content}}</view>
   </view>
   <view class="list-info">
-    <view>
+    <view wx:if="{{list.mutual_help_hide.phone_hide == 'false'}}">
       <text>手机：</text>
       <text>{{list.phone}}</text>
     </view>
-    <view>
+    <view wx:if="{{list.mutual_help_hide.email_hide == 'false'}}">
       <text>邮箱：</text>
       <text>{{list.email}}</text>
     </view>
-    <view>
+    <view wx:if="{{list.mutual_help_hide.qq_hide == 'false'}}">
       <text>QQ：</text>
       <text>{{list.qq}}</text>
     </view>
-    <view>
+    <view wx:if="{{list.mutual_help_hide.weixin_hide == 'false'}}">
       <text>微信：</text>
       <text>{{list.weixin}}</text>
     </view>            
   </view>
-  <view style="height:120rpx;"></view>
-  <view class="btn-area">
-      <!-- <view bindtap="onShareAppMessage"  class="btn bg-btn"> -->
+  <view class="btn-group-wrapper">
+    <view class="btn-group">
         <button class="btn bg-btn" open-type="share">
           <image src="/images/icon-share.png" class="icon-share" />
         分享</button>
-      <!-- </view> -->
       <view class="btn" bindtap="handleClickPraise">
-        <image wx:if="{{list.mutual_help_praise.praise_or}}" src="/images/icon-prise-active.png" class="icon-prise" />
-        <image wx:if="{{!list.mutual_help_praise.praise_or}}" src="/images/icon-prise-default.png" class="icon-prise" />
+        <image wx:if="{{list.praise_or}}" src="/images/icon-prise-active.png" class="icon-prise" />
+        <image wx:if="{{!list.praise_or}}" src="/images/icon-prise-default.png" class="icon-prise" />
         <text>点赞</text>
       </view>
+    </view>
   </view>
 </view>

@@ -108,10 +108,10 @@
 					"query": ""
 				},
 				{
-					"id": 12,
+					"id": -1,
 					"name": "校友黄页-详情",
 					"pathName": "pages/map/firend/detail",
-					"query": "id=1"
+					"query": ""
 				},
 				{
 					"id": -1,
