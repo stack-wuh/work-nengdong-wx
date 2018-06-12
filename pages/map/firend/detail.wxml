@@ -9,7 +9,8 @@
         <text>姓名：</text>
         <text>{{list.name}}</text>
         <text class="empty"></text>
-        <image src="/images/icon-collect-default.png" class="icon-collect" />
+        <image wx:if="{{!list.is_collect}}" src="/images/icon-collect-default.png" class="icon-collect" />
+        <image wx:if="{{list.is_collect}}" src="/images/icon-collect-active.png" class="icon-collect" />
       </view>
       <view>
         <text>状态：</text>
@@ -26,7 +27,7 @@
     <view class="act-card">
       <view class="card-list-item" wx:for="{{item.list}}" wx:key="{{index}}">
         <text class="item-title">{{item.name}}</text>
-        <text class="item-input">{{item.value}}</text>
+        <text class="item-input">{{item.value||''}}</text>
       </view>
     </view>
   </view>

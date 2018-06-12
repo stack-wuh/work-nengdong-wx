@@ -1,29 +1,31 @@
 <!--pages/map/school/scholl.wxml-->
 <view class="container other-bg">
   <view class="search-box other-bg">
-    <view class="input-box">
+    <view class="input-box" bindtap="changeActive">
       <image src="/images/icon-search.png" class="icon-search" />
-      <text class="search-btn">请输入关键词</text>
-      <input hidden class="my-input" />
+      <text class="search-btn" wx:if="{{!isShowInput}}">请输入关键词</text>
+      <input class="my-input" auto-focus="{{true}}" bindblur="bindblur" bindconfirm="searchInput" wx:if="{{isShowInput}}"/>
     </view>
   </view>
   <view style="height:110rpx;"></view>
   <view class="nav-box">
     <view class="nav-list">
-      <text class="nav-list-item nav-list-item-active">学校黄页</text>
-      <text class="nav-list-item">学院黄页</text>
+      <text bindtap="handleClick" data-cate="1" class="nav-list-item {{cate == 1?'nav-list-item-active':''}} ">学校黄页</text>
+      <text bindtap="handleClick" data-cate="2" class="nav-list-item {{cate == 2?'nav-list-item-active':''}}" >学院黄页</text>
     </view>
   </view>
   <view style="height:140rpx;"></view>
   <view class="list-content">
-    <view class="list-item" >
-      <text class="tips">工</text>
+    <view class="list-item" wx:for="{{list}}">
+      <text class="tips">{{item.name[0]||item.school_name[0]}}</text>
       <view class="list-name">
-        <text>学工部</text> 
+        <text>{{item.name||item.school_name}}</text> 
         <text>································</text>
-        <text>027-7010-001</text>
+        <text selectable bindtap="call" data-tel="{{item.phone}}">{{item.phone}}</text>
       </view>
-      <image src="/images/icon-collect-default.png" class="icon-collect" />
+      <image src="{{item.is_collect?'/images/icon-collect-active.png':'/images/icon-collect-default.png'}}" class="icon-collect" data-id="{{item.id}}" bindtap="collect"/>
     </view>
+    
   </view>
+  <view class="btm-remind">{{remind}}</view>
 </view>
