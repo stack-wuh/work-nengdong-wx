@@ -121,39 +121,71 @@ const optionList = [
     iconPath: '/images/icon-student.png',
     list: [
       [
-      {
-        name: '层次',
-        value: '',
-        list: [],
-        range: 'level_name',
-        require: true,
-        isInput: false,
-        prop: 'level'
-      },
-      {
-        name: '学校',
-        value: '',
-        prop: 'schools',
-        require: true,
-        isInput: true
-      },
-      {
-        name: '院系',
-        value: '',
-        prop: 'faculty',
-        require: true,
-        isInput: true
-      },
-      {
-        name: '专业',
-        value: '',
-        prop: 'line_text',
-        require: true,
-        isInput: true
-      },
-    ]
+        {
+          name: '层次',
+          value: '',
+          list: [],
+          range: 'level_name',
+          require: true,
+          isInput: false,
+          prop: 'levels'
+        },
+        {
+          name: '学校',
+          value: '',
+          prop: 'schools',
+          require: true,
+          isInput: true
+        },
+        {
+          name: '院系',
+          value: '',
+          prop: 'faculty',
+          require: true,
+          isInput: true
+        },
+        {
+          name: '专业',
+          value: '',
+          prop: 'line_text',
+          require: true,
+          isInput: true
+        },
+      ]
     ]
   }
+]
+const temp = [
+  {
+    name: '层次',
+    value: '',
+    list: [],
+    range: 'level_name',
+    require: true,
+    isInput: false,
+    prop: 'levels'
+  },
+  {
+    name: '学校',
+    value: '',
+    prop: 'schools',
+    require: true,
+    isInput: true
+  },
+  {
+    name: '院系',
+    value: '',
+    prop: 'faculty',
+    require: true,
+    isInput: true
+  },
+  {
+    name: '专业',
+    value: '',
+    prop: 'line_text',
+    require: true,
+    isInput: true
+  },
 ]
 /**
  * @params recoedType 
@@ -168,6 +200,7 @@ Page({
    */
   data: {
     optionList: optionList,
+    temp:temp,
     recoedType: 2,
     schoolList: [],
     school: '',
@@ -205,15 +238,14 @@ Page({
 
   //点击继续添加
   addNew() {
-    this.data.optionList[2].list.push[this.data.optionList[2].list[0]]
-    console.log(this.data.optionList)
-    return
+    this.getLevel()
+    var newArr = JSON.parse(JSON.stringify(this.data.temp))
+    this.data.optionList[2].list.push(newArr)
     this.setData({
       optionList: this.data.optionList
     })
-    console.log(this.data.optionList[2].list)
+    console.log(this.data.optionList)
   },
-
   showImgBtn(e) {
     let isBack = e.currentTarget.dataset.back
     this.setData({
@@ -241,13 +273,25 @@ Page({
     }
   },
   saveInput(e) {
-    let name = e.currentTarget.dataset.name
-    this.data.optionList.map(item => {
-      item.list.map(list => {
-        if (list.name === name) {
-          list.value = e.detail.value
-        }
-      })
+    let name = e.currentTarget.dataset.name , 
+        sub = e.currentTarget.dataset.sub
+    this.data.optionList.map((item,itemIndex) => {
+      if(item.title == '升学档案'){
+          item.list.map((list,listIndex)=>{
+            if(listIndex == sub)
+              list.map(subList=>{
+                if(subList.name === name){
+                  subList.value = e.detail.value
+                }
+              })
+          })
+      }else{
+        item.list.map(list => {
+          if (list.name === name) {
+            list.value = e.detail.value
+          }
+        })
+      }
     })
     this.setData({
       optionList: this.data.optionList
@@ -255,17 +299,29 @@ Page({
   },
   pickerChange(e) {
     let name = e.currentTarget.dataset.name
+    let sub = e.currentTarget.dataset.sub
     let index = e.detail.value
     this.data.optionList.map(item => {
-      item.list.map(list => {
-        if (name !== '工作/升学所在地') {
-          if (list.name === name && list.list !== undefined && list.list !== null) {
-            list.value = list.list[index][list.range]
+      if(item.title == '升学档案'){
+        item.list.map((list,listIndex)=>{
+          if(listIndex == sub)
+            list.map((subList,subIndex)=>{
+              if(subList.name == '层次'){
+                subList.value = subList.list[index][subList.range]
+              }
+            })
+        })
+      }else{
+        item.list.map(list => {
+          if (name !== '工作/升学所在地') {
+            if (list.name === name && list.list !== undefined && list.list !== null) {
+              list.value = list.list[index][list.range]
+            }
+          } else if (name === '工作/升学所在地') {
+            list.value = e.detail.value
           }
-        } else if (name === '工作/升学所在地') {
-          list.value = e.detail.value
-        }
-      })
+        })
+      }
     })
     this.setData({
       optionList: this.data.optionList
@@ -274,9 +330,11 @@ Page({
   getLevel() {
     app.apiPost('getStudent_Info_Level').then(res => {
       this.data.optionList[2].list.map(item => {
-        if (item.name === '层次') {
-          item.list = res
-        }
+        item.map(list=>{
+          if (list.name === '层次') {
+            list.list = res
+          }
+        })
       })
       this.setData({
         optionList: this.data.optionList
@@ -347,7 +405,7 @@ Page({
     app.apiPost('getSchool_Info_School').then(res => {
       this.data.optionList[0].list.map(item => {
         if (item.name === '学院') {
-          item.list = res
+          item.list = res.data
         }
       })
       this.setData({
@@ -357,14 +415,38 @@ Page({
     })
   },
   handleSubmit(e) {
-    let data = e.detail.value
-    for (var k in data) {
-      if (data[k] == '' && k !== 'address' && k !== 'post_name' && k !== 'money') {
-        app.toastMsg('error', '请提交必填项')
-        return
+    let base = {} , work = {} , levels = [] , info = {}
+    this.data.optionList[0].list.map(item=>{
+      base[item.prop] = item.value
+    })
+    this.data.optionList[1].list.map(item=>{
+      work[item.prop] = item.value
+    })
+    this.data.optionList[2].list.map(item=>{
+        let obj = {}
+        item.map(list=>{
+          obj[list.prop] = list.value
+        })
+        levels.push(obj)
+    })
+    info = Object.assign(base,work)
+    info.data = levels
+    // info = JSON.stringify(info)
+    wx.request({
+      url:app.server + 'addEmployment_Archives',
+      data:info,
+      header:{
+        'content-type':'application/json'
+      },
+      success:res=>{
+        console.log(res)
+      },
+      erorr:res=>{
+        console.log(res)
       }
-    }
-    app.apiPost('addEmployment_Archives', data).then(res => {
+    })
+    return
+    app.apiPost('addEmployment_Archives', info).then(res => {
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error, res.msg)
       if (res.error == 0) {
@@ -377,40 +459,6 @@ Page({
         wx.setStorageSync('recodeInfo', this.data.optionList)
       }
     })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
   },
 
   /**

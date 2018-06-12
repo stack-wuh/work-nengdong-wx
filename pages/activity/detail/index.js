@@ -71,24 +71,16 @@ Page({
   //点击报名--取消报名
   handleSubmit(e){
     let type = e.currentTarget.dataset.type
-    // let url = type === 'submit' ? 'addJoinActivity' : 'delJoinActivity'
     let data = {
       activity_id:this.id
     }
+    this.data.list.activity_or.or_text = !this.data.list.activity_or.or_text
+    this.setData({
+      list:this.data.list
+    })
     app.apiPost('addJoinActivity',data).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
-      if(res.error == 0){
-        this.setData({
-          isActioned:true,
-          showMsg:true
-        })
-      }else{
-        setData({
-          isActioned:false
-        })
-      }
-      return
       if(type === 'submit'){
         if(res.error == 0){
           this.setData({

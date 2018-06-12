@@ -52,18 +52,21 @@ Page({
   changeActive(e){
     this.setData({
       type:e.currentTarget.dataset.type,
-      check:e.currentTarget.dataset.title
+      check:e.currentTarget.dataset.title,
+      list:[]
     })
     this.fetchData()
   },
   fetchData(){
     app.apiPost('getMyActivity',{check:this.data.check,title:this.data.title,pageNo:this.data.pageNo}).then(res=>{
-      if(res.data)
-      res.data.map(item=>{
-        item.starttime = format.formatTime(new Date(item.starttime))
-        item.endtime = format.formatTime(new Date(item.endtime))
-      })
-      this.data.list = this.data.list.concat(res.data) 
+      if(res.data){
+        res.data.map(item=>{
+          item.starttime = format.formatTime(new Date(item.starttime))
+          item.endtime = format.formatTime(new Date(item.endtime))
+        })
+        this.data.list = this.data.list.concat(res.data)
+      } 
+      console.log(this.data.remind)
       if(res.data.length == 10){
         this.setData({
           isShowMore:true,
