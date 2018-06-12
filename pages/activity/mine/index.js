@@ -11,7 +11,10 @@ Page({
     check:'待审核',
     list:[],
     showInput:false,
-    title:''
+    title:'',
+    remind:'正在加载中',
+    pageNo:1,
+    isShowMore:false
   },
 
   /**
@@ -20,6 +23,17 @@ Page({
   onLoad: function (options) {
     this.fetchData()
   },
+
+  //上拉加载更多
+  showMore(){
+    if(this.data.isShowMore){
+      this.setData({
+        pageNo:++this.data.pageNo
+      })
+      this.fetchData()
+    }
+  },
+
   bindblur(){
     this.setData({
       showInput:false
@@ -43,57 +57,35 @@ Page({
     this.fetchData()
   },
   fetchData(){
-    app.apiPost('getMyActivity',{check:this.data.check,title:this.data.title}).then(res=>{
+    app.apiPost('getMyActivity',{check:this.data.check,title:this.data.title,pageNo:this.data.pageNo}).then(res=>{
       if(res.data)
       res.data.map(item=>{
         item.starttime = format.formatTime(new Date(item.starttime))
         item.endtime = format.formatTime(new Date(item.endtime))
-      }) 
+      })
+      this.data.list = this.data.list.concat(res.data) 
+      if(res.data.length == 10){
+        this.setData({
+          isShowMore:true,
+          remind:'上拉加载更多'
+        })
+      }else{
+        this.setData({
+          isShowMore:false,
+          remind:'没有更多啦'
+        })
+      }
       this.setData({
         list:res.data
       })
     })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    this.showMore()
   },
 
   /**

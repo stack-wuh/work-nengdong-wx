@@ -102,7 +102,7 @@ Page({
       }
       this.data.hours.push(i)
     }
-    for(var i=0;i<=60;i++){
+    for(var i=0;i<60;i++){
       if(i<10){
         i = '0'+i
       }

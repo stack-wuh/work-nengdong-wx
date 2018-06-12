@@ -17,11 +17,13 @@ Page({
     typeList:['全部','校友活动','学校活动','学院活动','专业活动','班级活动','讲座活动'],
     isShowMore:false,
     page:1,
+    remind:'正在加载更多'
   },  
   
   bindchange(e){
     this.setData({
       type:this.data.typeList[e.detail.value],
+      newList:[]
     })
     this.fetchData()
   },
@@ -50,11 +52,13 @@ Page({
       })
       if(res.data.length == 10){
         this.setData({
-          isShowMore:true
+          isShowMore:true,
+          remind:'上拉加载更多'
         })
       }else{
         this.setData({
-          isShowMore:false
+          isShowMore:false,
+          remind:'没有更多啦'
         })
       }
       wx.setStorageSync('activeDetail',res.data)
@@ -77,7 +81,8 @@ Page({
   /*input搜索框,enter事件*/
   searchData(e){
     this.setData({
-      title:e.detail.value
+      title:e.detail.value,
+      newList:[]
     })
     this.fetchData()
     this.setData({

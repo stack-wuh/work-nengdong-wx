@@ -180,3 +180,7 @@
 .act-end{
   color: #999999;
 }
+.text-list{
+  width:100rpx;
+  text-align:right;
+}

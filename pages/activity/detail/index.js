@@ -7,39 +7,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrls:[
-      '../../../images/avatar.jpg',
-      '../../../images/upload.png',
-      '../../../images/submit-pass.png'
-    ],
+    imgUrls:[],
     list:{},
     imgList:'',
-    listData:[
-      {index:'01',name:'text1',classify:'英语1301',tel:'13123234343'},
-      {index:'02',name:'text2',classify:'英语1301',tel:'13123234343'},
-      {index:'03',name:'text3',classify:'英语1301',tel:'13123234343'},
-      {index:'04',name:'text4',classify:'英语1301',tel:'13123234343'},
-      {index:'05',name:'text5',classify:'英语1301',tel:'13123234343'},
-      {index:'06',name:'text6',classify:'英语1301',tel:'13123234343'}
-    ],
+    listData:[],
     isActioned:false,
     showMsg:false,
+    remind:'没有更多啦',
+    pageNo:1,
+    isShowMoew:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let list = wx.getStorageSync('activeDetail')
-    this.id = options.id
-    let data = list.find(item=>{
-      return item.id == this.id
+    let pages = getCurrentPages() , 
+    prevPage = pages[pages.length-2] ,
+    imgList = [] ,
+    address = prevPage.data.newList[options.index].activity_image.address.split(',')
+    address.map(item=>{
+      imgList.push(item)
     })
-    let imgList = data.cover + ','+ data.activity_image.address
+    imgList.push(prevPage.data.newList[options.index].cover)
     this.setData({
-      list:data,
-      imgUrls:imgList.split(',')
+      list:prevPage.data.newList[options.index],
+      imgUrls:imgList
     })
+    this.id = options.id
     this.getList(options.id)
   },
 
@@ -49,24 +44,51 @@ Page({
       showMsg:false
     })
   },
-
-  getList(id){
-    app.apiPost('getActivity_Enroll',{activity_id:id}).then(res=>{
+  handleClickShowMore(){
+    if(this.data.isShowMoew){
       this.setData({
-        // listData:res
+        pageNo:++this.data.pageNo
       })
+      this.getList(this.id)
+    }
+  },
+  getList(id){
+    app.apiPost('getActivity_Enroll',{activity_id:id,pageNo:this.data.pageNo}).then(res=>{
+      if(res.data.length == 10){
+        this.setData({
+          listData:res.data,
+          isShowMoew:true
+        })
+      }else{
+        this.setData({
+          listData:res.data,
+          isShowMoew:false
+        })
+      }
     })
   },
+
   //点击报名--取消报名
   handleSubmit(e){
     let type = e.currentTarget.dataset.type
-    let url = type === 'submit' ? 'addJoinActivity' : 'delJoinActivity'
+    // let url = type === 'submit' ? 'addJoinActivity' : 'delJoinActivity'
     let data = {
       activity_id:this.id
     }
-    app.apiPost(url,data).then(res=>{
+    app.apiPost('addJoinActivity',data).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
+      if(res.error == 0){
+        this.setData({
+          isActioned:true,
+          showMsg:true
+        })
+      }else{
+        setData({
+          isActioned:false
+        })
+      }
+      return
       if(type === 'submit'){
         if(res.error == 0){
           this.setData({
@@ -81,41 +103,11 @@ Page({
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
   
+  //上拉加载更多
+  showMore(){
+    
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
   /**
    * 页面上拉触底事件的处理函数
    */

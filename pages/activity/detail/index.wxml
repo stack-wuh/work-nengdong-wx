@@ -10,13 +10,13 @@
   <view class="card-list">
     <view class="list-item">
       <view class="list-item-first">
-       <text>{{list.title}}</text>
+       <text class="over-text">{{list.title}}</text>
        <text class="act-top-title school">{{list.type}}</text>
-       <text class="{{list.check_text === '进行中' ? 'act-ing' : list.check_text === '待审核' ? 'act-end' : 'act-danger'}}">{{list.check_text}}</text>
+       <text class="text-list {{list.check_text === '进行中' ? 'act-ing' : list.check_text === '待审核' ? 'act-end' : 'act-danger'}}">{{list.check_text}}</text>
       </view>
       <view>
         <image src="../../../images/icon-time.png" class="icon-time" />
-        <text>{{list.starttime}} 至 {{list.endtime}}</text>
+        <text>{{list.starttime}}</text>
      </view>
      <view class="list-item-last">
        <view>
@@ -25,7 +25,7 @@
        </view>
        <view>
          <image  src="../../../images/icon-user.png" class="icon-user"/>
-         <text>{{list.organizer}}</text>
+         <text>{{list.organizer || list.official }}</text>
        </view>
        <view>
          <text class="txt-empty">{{list.number}}</text>/{{list.participants}}人
@@ -36,56 +36,56 @@
   <view class="card-list">
     <view class="card-list-item">
       <view>参与费用:</view>
-      <view>{{list.money}}</view>
+      <view>{{list.money ? list.money : '无'}}</view>
     </view>
     <view class="card-list-item">
       <view>参与要求:</view>
-      <view>{{list.require}}</view>
+      <view>{{list.require ? list.require : '无'}}</view>
     </view>
     <view class="card-list-item">
       <view>活动介绍: </view>
-      <view>{{list.activity_introduction}}</view>
+      <view>{{list.activity_introduction ? list.activity_introduction : '无'}}</view>
     </view>    
   </view>
   <view class="card-list">
     <view class="card-list-item">
       <view>负责人: </view>
-      <view>{{list.organizer}}</view>
+      <view>{{list.organizer || list.official}}</view>
     </view> 
     <view class="card-list-item">
       <view>手机号: </view>
-      <view>{{list.phone}}</view>
+      <view>{{list.phone ? list.phone : '无'}}</view>
     </view>
     <view class="card-list-item">
       <view>邮箱: </view>
-      <view>{{list.email}}</view>
+      <view>{{list.email ? list.email : '无'}}</view>
     </view>
     <view class="card-list-item">
       <view>QQ: </view>
-      <view>{{list.qq}}</view>
+      <view>{{list.qq ? list.qq : '无'}}</view>
     </view> 
     <view class="card-list-item">
       <view>微信: </view>
-      <view>{{list.weixin}}</view>
+      <view>{{list.weixin ? list.weixin : '无'}}</view>
     </view>                    
   </view>
   <view class="card-list">
     <view class="card-list-item no-border">
       <view>QQ群</view>
-      <view>{{list.group}}</view>
+      <view>{{list.group  ? list.group : '无'}}</view>
     </view>
   </view>
   <view class="card-list">
     <view class="card-list-item no-border">
       <view>备注:</view>
-      <view>{{list.remark}}
+      <view>{{list.remark ? list.remark : '无'}}
       </view>
     </view>
   </view>
   <view class="card-list no-bottom">
     <view class="card-list-item no-border">
       <view>报名详情:</view>
-      <view>
+      <view wx:if="{{listData.length > 0}}">
         <view class="table">
           <view class="tr bg-w">
             <view class="th">序号</view>
@@ -93,26 +93,27 @@
             <view class="th ">专业班级</view>
             <view class="th ">手机号</view>
           </view>
-          <block wx:for="{{listData}}" wx:key="{{code}}">
+          <block wx:for="{{listData}}" wx:key="{{index}}">
             <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-              <view class="td">{{item.index}}</view>
-              <view class="td">{{item.name}}</view>
-              <view class="td">{{item.classify}}</view>
-              <view class="td">{{item.tel}}</view>
+              <view class="td">{{index+1}}</view>
+              <view class="td">{{item.student_info.name}}</view>
+              <view class="td">{{item.student_info.line}}</view>
+              <view class="td">{{item.student_info.phone_number}}</view>
             </view>
             <view class="tr" wx:else>
-              <view class="td">{{item.index}}</view>
-              <view class="td">{{item.name}}</view>
-              <view class="td">{{item.classify}}</view>
-              <view class="td">{{item.tel}}</view>
+              <view class="td">{{index+1}}</view>
+              <view class="td">{{item.student_info.name}}</view>
+              <view class="td">{{item.student_info.line}}</view>
+              <view class="td">{{item.student_info.phone_number}}</view>
             </view>
           </block>
         </view>
-        <view class="btn-more">
-          <text>查看更多</text>
+        <view class="btn-more" wx:if="{{isShowMore}}">
+          <text bindtap="handleClickShowMore">查看更多</text>
           <!-- <image  /> -->
         </view>
       </view>
+      <view wx:else>无</view>
     </view>
   </view>
   <view class="btm-btn-list" wx:if="{{false}}">

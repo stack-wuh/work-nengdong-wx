@@ -40,8 +40,12 @@ Page({
     })
   },
   formSubmit(e){
-    let data = {}
-    data.id = wx.getStorageSync('number')
+    let data = {
+      id:wx.getStorageSync('number'),
+      email:'',
+      phone_number:'',
+      password:''
+    }
     if(e.detail.value.email){
       data.email = e.detail.value.email
     }else if(e.detail.value.phone_number){
@@ -50,15 +54,14 @@ Page({
     if(e.detail.value.code){
       if(e.detail.value.code == this.data.code){
         app.apiPost('updateStudent_Info',data).then(res=>{
+          let error = res.error == 0?'success' :'error'
+          app.toastMsg(error,res.msg)
           if(res.error == 0){
-            app.toastMsg('success',res.msg)
             setTimeout(()=>{
               wx.navigateBack({
                 delta:1
               })
             },1000)
-          }else{
-            app.toastMsg('error',res.msg)
           }
         })
       }else{
@@ -68,7 +71,13 @@ Page({
       app.apiPost('updateStudent_Info',data).then(res=>{
         let error = res.error == 0 ? 'success' : 'error'
         app.toastMsg(error,res.msg)
-        
+          if(res.error == 0){
+            setTimeout(()=>{
+              wx.navigateBack({
+                delta:1
+              })
+            },1000)
+          }        
       })
     }
   },

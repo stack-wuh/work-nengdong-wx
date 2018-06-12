@@ -17,7 +17,7 @@
   </view>
   <view style="height:87rpx;"></view>
   <view class="act-father">
-      <navigator hover-class="none" url="/pages/activity/detail/index?id={{item.id}}" class="act-list" wx:for="{{newList}}" wx:key="{{index}}">
+      <navigator hover-class="none" url="/pages/activity/detail/index?id={{item.id}}&index={{index}}" class="act-list" wx:for="{{newList}}" wx:key="{{index}}">
         <view class="act-list-img-box">
           <image class="act-list-img" src="{{item.cover ? item.cover : '../../../images/avatar.jpg'}}" />
         </view>
@@ -42,7 +42,7 @@
           </view>
         </view>
       </navigator>
-      <text bindtap="showMore" class="btm-text">{{isShowMore ? '加载更多' : '没有更多啦...'}}</text>
+      <text bindtap="showMore" class="btm-text">{{remind}}</text>
   </view>
 
   <!--搜索模态框-->
