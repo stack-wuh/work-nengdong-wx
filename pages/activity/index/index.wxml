@@ -23,15 +23,10 @@
         </view>
         <view class="act-list-content">
           <view>
-            <text wx:if="{{item.type == '校友活动'}}" class="act-top-title friend">校友活动</text>
-            <text wx:if="{{item.type == '学校活动'}}" class="act-top-title school">学校活动</text>
-            <text wx:if="{{item.type == '学院活动'}}" class="act-top-title college">学院活动</text>
-            <text wx:if="{{item.type == '讲座活动'}}" class="act-top-title college">讲座活动</text>
-            <text wx:if="{{item.type == '专业活动'}}" class="act-top-title classify">专业活动</text>
-            <text wx:if="{{item.type == '班级活动'}}" class="act-top-title classify">班级活动</text>
+            <text class="act-top-title" style="background-color:{{item.activity_type.color}}">{{item.activity_type.type_name}}</text>
             <text class="{{item.check_text === '进行中' ? 'act-ing' : item.check_text === '待审核' ? 'act-end' : 'act-danger'}}">{{item.check_text}}</text>
           </view>
-          <view>{{item.title}}</view>
+          <view class="over-text">{{item.title}}</view>
           <view class="list-item">
             <image src="../../../images/icon-time.png" class="icon-time" alt="icon-time" />
             <text>{{item.starttime}} </text>
@@ -42,12 +37,12 @@
           </view>
           <view class="list-item">
             <image src="../../../images/icon-user.png" class="icon-user" alt="icon-user" />
-            <text>{{item.organizer}}</text>
+            <text>{{item.organizer || item.official}}</text>
             <text> <text class="act-empty">{{item.number ? item.number : '0'}}</text>/{{item.participants}}人</text>
           </view>
         </view>
       </navigator>
-      <text class="btm-text">没有更多啦...</text>
+      <text bindtap="showMore" class="btm-text">{{isShowMore ? '加载更多' : '没有更多啦...'}}</text>
   </view>
 
   <!--搜索模态框-->

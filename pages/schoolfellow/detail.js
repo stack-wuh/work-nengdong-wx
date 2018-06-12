@@ -1,5 +1,6 @@
 // pages/schoolfellow/detail.js
 const app = getApp()
+const WxParse = require('../../utils/wxParse/wxParse')
 Page({
 
   /**
@@ -17,7 +18,14 @@ Page({
     this.setData({
       id: options.id
     })
-    this.fetchData()
+    let index = options.index
+    let pages = getCurrentPages()
+    let prevPages = pages[pages.length - 2]
+    this.setData({
+      info:prevPages.data.list[index]
+    })
+    var article = prevPages.data.list[index].content
+    WxParse.wxParse('article','html',article,this,10)
   },
 
   /**

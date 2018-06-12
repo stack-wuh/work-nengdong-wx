@@ -1,1 +1,18 @@
 /* pages/schoolfellow/detail.wxss */
+.article{
+  background-color: #fff;
+  padding:0 20rpx;
+}
+.nav-title{
+  font-size: 28rpx;
+  text-align: center;
+  background-color: #fff;
+}
+.title{
+  padding-top:10rpx;
+  margin-bottom:10rpx;
+  font-size: 30rpx;
+}
+.detail{
+  padding-bottom:20rpx;
+}

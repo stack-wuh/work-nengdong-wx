@@ -1,5 +1,6 @@
 // pages/schoolfellow/list.js
 const app = getApp()
+const format = require('../../utils/util')
 Page({
 
   /**
@@ -36,6 +37,9 @@ Page({
       pageNo: this.data.page
     }
     app.apiPost('getNd_Article', data).then(res=>{
+      res.data.map(item=>{
+        item.pubtime = format.formatTime(new Date(item.pubtime))
+      })
       this.setData({
         list: this.data.list.concat(res.data)
       })

@@ -1,4 +1,11 @@
 <!--pages/schoolfellow/detail.wxml-->
 <view class="container">
-  
+  <view class="nav-title">
+    <view class="title">{{info.title}}</view>
+    <view class="detail">{{info.abstracts}}</view>
+  </view>
+  <view class="article">
+    <import src='/utils/wxParse/wxParse.wxml' />
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+  </view>
 </view>

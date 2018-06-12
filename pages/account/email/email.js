@@ -47,22 +47,29 @@ Page({
     }else if(e.detail.value.phone_number){
       data.phone_number = e.detail.value.phone_number
     }
-    if(e)
-    if(e.detail.value.code == this.data.code){
-      app.apiPost('updateStudent_Info',data).then(res=>{
-        if(res.error == 0){
-          app.toastMsg('success',res.msg)
-          setTimeout(()=>{
-            wx.navigateBack({
-              delta:1
-            })
-          },1000)
-        }else{
-          app.toastMsg('error',res.msg)
-        }
-      })
+    if(e.detail.value.code){
+      if(e.detail.value.code == this.data.code){
+        app.apiPost('updateStudent_Info',data).then(res=>{
+          if(res.error == 0){
+            app.toastMsg('success',res.msg)
+            setTimeout(()=>{
+              wx.navigateBack({
+                delta:1
+              })
+            },1000)
+          }else{
+            app.toastMsg('error',res.msg)
+          }
+        })
+      }else{
+        app.toastMsg('error','验证码错误')
+      }
     }else{
-      app.toastMsg('error','验证码错误')
+      app.apiPost('updateStudent_Info',data).then(res=>{
+        let error = res.error == 0 ? 'success' : 'error'
+        app.toastMsg(error,res.msg)
+        
+      })
     }
   },
   /**

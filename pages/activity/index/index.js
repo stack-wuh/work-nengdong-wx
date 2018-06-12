@@ -15,6 +15,8 @@ Page({
     title:'',
     type:'',
     typeList:['全部','校友活动','学校活动','学院活动','专业活动','班级活动','讲座活动'],
+    isShowMore:false,
+    page:1,
   },  
   
   bindchange(e){
@@ -27,7 +29,8 @@ Page({
     let type = this.data.type === '全部' ? '' : this.data.type
     let data = {
       title:this.data.title,
-      type:type
+      type:type,
+      pageNo:this.data.page
     }
     let url = ''
     if(this.arugs == 1){
@@ -41,13 +44,30 @@ Page({
         item.starttime = formatNumber.formatTime(new Date(item.starttime))
         item.endtime = formatNumber.formatTime(new Date(item.endtime))
       })
+      this.data.newList = this.data.newList.concat(res.data)
       this.setData({
-        newList:res.data
+        newList:this.data.newList
       })
+      if(res.data.length == 10){
+        this.setData({
+          isShowMore:true
+        })
+      }else{
+        this.setData({
+          isShowMore:false
+        })
+      }
       wx.setStorageSync('activeDetail',res.data)
     })
   },
-  
+  showMore(){
+    if(this.data.isShowMore){
+      this.setData({
+        page:++this.data.page
+      })
+      this.fetchData()
+    }
+  },
   hiddenSearchBox(){
     this.setData({
       isShowSearch:false,
@@ -100,45 +120,10 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    this.showMore()
   },
 
   /**
