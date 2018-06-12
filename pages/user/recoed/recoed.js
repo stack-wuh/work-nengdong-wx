@@ -244,7 +244,6 @@ Page({
     this.setData({
       optionList: this.data.optionList
     })
-    console.log(this.data.optionList)
   },
   showImgBtn(e) {
     let isBack = e.currentTarget.dataset.back
@@ -317,7 +316,7 @@ Page({
             if (list.name === name && list.list !== undefined && list.list !== null) {
               list.value = list.list[index][list.range]
             }
-          } else if (name === '工作/升学所在地') {
+          } else if (list.name === '工作/升学所在地') {
             list.value = e.detail.value
           }
         })
@@ -430,22 +429,22 @@ Page({
         levels.push(obj)
     })
     info = Object.assign(base,work)
-    info.data = levels
+    // info.data = levels
     // info = JSON.stringify(info)
-    wx.request({
-      url:app.server + 'addEmployment_Archives',
-      data:info,
-      header:{
-        'content-type':'application/json'
-      },
-      success:res=>{
-        console.log(res)
-      },
-      erorr:res=>{
-        console.log(res)
-      }
-    })
-    return
+    // wx.request({
+    //   url:app.server + 'addEmployment_Archives',
+    //   data:info,
+    //   header:{
+    //     'content-type':'application/json'
+    //   },
+    //   success:res=>{
+    //     console.log(res)
+    //   },
+    //   erorr:res=>{
+    //     console.log(res)
+    //   }
+    // })
+    // return
     app.apiPost('addEmployment_Archives', info).then(res => {
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error, res.msg)
