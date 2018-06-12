@@ -113,7 +113,10 @@ Page({
           item.value = this.data.list[k]
         }
         if(!item.prop){
-          item.value = this.data.list['site_provinces'] +'省'+ this.data.list['site_cities'] + '市' + this.data.list['site_areas'] + '县（区）' 
+          let provinces = this.data.list['site_provinces'] ? this.data.list['site_provinces'] : ''
+          let city = this.data.list['site_cities'] ? this.data.list['site_cities'] : ''
+          let area = this.data.list['site_areas'] ? this.data.list['site_areas'] : ''
+          item.value = provinces + city + area
         }
       }
     })

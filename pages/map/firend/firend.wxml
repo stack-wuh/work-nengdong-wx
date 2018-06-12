@@ -1,13 +1,13 @@
 <!--pages/map/firend/firend.wxml-->
 <view class="container other-bg">
   <view class="act-wrapper-header">
-    <view class="act-wrapper-nav bor-default" bindtap="handleClickShowSearch">
+    <view class="act-wrapper-nav bor-default" data-index="0" bindtap="showInput">
       <image class="icon-search-g" src="../../../images/icon-search-g.png" alt="icon-search-g"/>
-      <text data-index="0" bindtap="showInput" class="txt-default">搜索</text>
+      <text  class="txt-default">搜索</text>
     </view>
-    <view class="act-wrapper-nav bor-default">
+    <view class="act-wrapper-nav bor-default" data-isRow="1" bindtap="showCheckBox">
       <image class="icon-menu-g" src="../../../images/icon-menu-g.png" alt="icon-menu-g" />
-      <text data-isRow="1" bindtap="showCheckBox" class="txt-default">筛选</text>
+      <text  class="txt-default">筛选</text>
     </view>
   </view>
   <view style="height:87rpx;"></view>
@@ -25,8 +25,8 @@
           <text wx:elif="{{index == 1}}" class="pedding-text pedding-up">升学</text>
           <text wx:else="{{index == 2}}" class="pedding-text pedding-up-school">升学就业</text>
           <text class="empty-box"></text>
-          <image data-id="{{item.id}}" catchtap="handleClickCollect" wx:if="{{!item.student_info_collect.or_name}}" src="/images/icon-collect-default.png" class="icon-collect" />
-          <image data-id="{{item.id}}" catchtap="handleClickCollect" wx:if="{{item.student_info_collect.or_name}}" src="/images/icon-collect-active.png" class="icon-collect" />
+          <image data-id="{{item.id}}" catchtap="handleClickCollect" wx:if="{{!item.is_collect}}" src="/images/icon-collect-default.png" class="icon-collect" />
+          <image data-id="{{item.id}}" catchtap="handleClickCollect" wx:if="{{item.is_collect}}" src="/images/icon-collect-active.png" class="icon-collect" />
         </view>
         <view class="flex-box">
           <text>入学年份：</text>
@@ -48,30 +48,50 @@
     <view class="btm-remind">{{remind}}</view>
   </view>
 
-  <view animation="{{animation}}" class='menu-slide'>
+  <view class='menu-slide'  wx:if="{{!isShowSlide}}">
+    
     <view class="menu-content">
+      <view style="height:100rpx;"></view>
       <view class="menu-header">
         <text data-isRow="2" bindtap="showCheckBox">取消</text>
         <text>筛选</text>
-        <text bindtap="resetInfo">重置</text>
+        <!-- <text bindtap="resetInfo">重置</text> -->
+        <text bindtap="filterData" style='color: #00998d;'>确定</text>
       </view>
       <view class="menu-list" wx:for="{{menuList}}" wx:key="{{index}}">
-        <view class="menu-name">{{item.name}}</view>
-         <picker data-index="{{index}}" data-name="{{item.name}}" value="{{item.value}}" bindchange="pickerChange" mode="{{item.name == '所在地' ? 'region' : 'selector'}}" range="{{item.list}}" range-key="{{item.prop}}">
+        <view class="menu-name-wrapper">
+          <view class="menu-name">{{item.name}}</view>
+          <image src="/images/icon-arrow-down-gray.png" bindtap="tagShow" data-index="{{index}}" class="{{item.height=='100%'?'active':''}}"></image>
+        </view>
+        
+        <view class="list-wrapper" style='max-height: {{item.height}}'>
+          <view class="item-wrapper" wx:if="{{item.name != '所在地'}}">
+            <view wx:for="{{item.list}}" wx:for-item="item1" wx:for-index="index1" class="item {{item1.choosed?'active':''}}" data-list="{{index}}" data-index="{{index1}}" bindtap="tagChoose">{{item1[item.prop]}}</view>
+          </view>
+          <view wx:else class="item-close-wrapper">
+            <picker class="item {{item.choosed?'active':''}}" data-list="{{index}}" data-name="{{item.name}}" value="{{item.value}}" bindchange="pickerChange" mode="region" style='margin-bottom: 0;'>
+              <view class="picker">
+                <text class="picker-title">{{item.value ? item.value : '选择所在地'}}</text>
+              </view>
+            </picker>
+            <image src="/images/icon-close-gray.png" wx:if="{{item.value}}" bindtap="delRegion"></image>
+          </view>
+        </view>
+         <!-- <picker data-index="{{index}}" data-name="{{item.name}}" value="{{item.value}}" bindchange="pickerChange" mode="{{item.name == '所在地' ? 'region' : 'selector'}}" range="{{item.list}}" range-key="{{item.prop}}">
            <view class="picker">
              <text class="picker-title">{{item.value ? item.value : '请选择' + item.name}}</text>
              <image src="/images/icon-arrow-right.png" class="icon-arrow-right" />
            </view>
-         </picker>
+         </picker> -->
       </view>
     </view>
   </view>
   
-  <view class="search-box" wx:if="{{isShowDialog}}">
-    <view class="input-box">
+  <view class="search-box" wx:if="{{isShowDialog}}" bindtap='bindblur'>
+    <view class="input-box" catchtap="showInput" data-index="1">
       <image wx:if="{{!isShowInput}}" src="/images/icon-search.png" class="icon-search" />
-      <text data-index="1" bindtap="showInput" wx:if="{{!isShowInput}}" class="search-btn">请输入关键字</text>
-      <input bindinput="saveInput" bindconfirm="fetchData" wx:if="{{isShowInput}}" focus  class="my-input"  />
+      <text  wx:if="{{!isShowInput}}" class="search-btn">请输入关键字</text>
+      <input bindblur='bindblur' bindconfirm="searchData" wx:if="{{isShowInput}}" auto-focus  class="my-input"  />
    </view>
   </view>
 </view>

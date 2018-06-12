@@ -9,51 +9,60 @@ Page({
     menuList:[
       {
         name:'入学年份',
-        list:['2010','2011','2012','2013','2014'],
+        list:[],
         value:'',
         prop:'age_name',
-        search:'school_age'
+        search:'school_age',
+        height: '150rpx'
       },
       {
         name:'专业',
-        list:['油气储运工程','能源与动力工程','轮机工程'],
+        list:[],
         value:'',
         prop:'line_name',
-        search:'line'
+        search:'line',
+        height: '150rpx'
       },
       {
         name:'班级',
-        list:['20100102','20100103','20100102','20100102','20100102','20100103','20100102','20100102'],
+        list:[],
         value:'',
         prop:'class_name',
-        search:'classes'
+        search:'classes',
+        height: '150rpx'
       },
       {
         name:'所在地',
-        list:['湖北省','武汉市','洪山区'],
+        list: [],
         value:'',
-        search:'site'
+        prop: 'site',
+        search:'site',
+        height: '150rpx',
+        choosed: false
       },
       {
         name:'状态',
-        list:['升学','就业','升学就业'],
+        list: [{ state: '升学' }, { state: '就业' }, { state: '升学就业' }],
         value:'',
-        prop:'',
-        search:'state'
+        prop:'state',
+        search:'state',
+        height: '150rpx'
       },
       {
         name:'单位性质',
-        list:['外资','合资','国企','民营公司','上市公司','创业公司','外企代表处','政府机关','事业单位'],
+        list:[],
         value:'',
         prop:'property_name',
-        search:'unit_property'
+        search:'unit_property',
+        height: '150rpx'
       },
       {
         name:'所在行业',
-        list:['计算机/网路/通讯/电子','会计/金融/银行/保险','贸易/消费/制造/营运','广告/媒体','广告/媒体'],
+        list:[],
         value:'',
         prop:'place_class_name',
-        search:'unit_way'
+        search:'unit_way',
+        height: '150rpx'
       }
     ],
     animation:'',
@@ -61,7 +70,6 @@ Page({
     isShowDialog:false,
     isShowInput:false,
     info:{
-      name:'',
       line:'',
       classes:'',
       unit_property:'',
@@ -72,7 +80,9 @@ Page({
     },
     page: 1,
     showMore: true,
-    remind: '正在加载中'
+    remind: '正在加载中',
+    name: '',
+    isShowSlide: true
   },
 
   /**
@@ -87,43 +97,64 @@ Page({
     this.getWorks()
   },
   resetInfo(){
-    for(var k  in this.data.info){
-      this.data.info[k] = ''
-    }
-    this.setData({
-      info:this.data.info
+    this.data.menuList.forEach(item=>{
+      if(item.name == '所在地'){
+        this.data.menuList[3].value = ''
+        this.data.menuList[3].choosed = false
+      }else{
+        item.list.forEach(item1=>{
+          item1.choosed = false
+        })
+      }
     })
-    this.fetchData()
+    this.setData({
+      menuList: this.data.menuList,
+    })
   },
   pickerChange(e){
-    let vIndex = e.detail.value , name = e.currentTarget.dataset.name , index = e.currentTarget.dataset.index
-    this.data.menuList.map((item,idx)=>{
-      if(item.name == name){
-        if(item.prop){
-          item.value = this.data.menuList[index].list[vIndex][item.prop]
-        }else if(item.name === '所在地'){
-          item.value = e.detail.value
-        }else if(item.name === '状态'){
-          item.value = this.data.menuList[index].list[vIndex]
-        }
-      }
-      for(var k in this.data.info){
-        if(item.search == k){
-          this.data.info[k] = item.value
-        }
-      }
-    })
+    this.data.menuList[3].value = e.detail.value.join('')
+    this.data.menuList[3].choosed = true
     this.setData({
-      menuList:this.data.menuList,
-      info:this.data.info
+      menuList: this.data.menuList,
     })
-    this.fetchData()
+    // let vIndex = e.detail.value , name = e.currentTarget.dataset.name , index = e.currentTarget.dataset.index
+    // this.data.menuList.map((item,idx)=>{
+    //   if(item.name == name){
+    //     if(item.prop){
+    //       item.value = this.data.menuList[index].list[vIndex][item.prop]
+    //     }else if(item.name === '所在地'){
+    //       item.value = e.detail.value
+    //     }else if(item.name === '状态'){
+    //       item.value = this.data.menuList[index].list[vIndex]
+    //     }
+    //   }
+    //   for(var k in this.data.info){
+    //     if(item.search == k){
+    //       this.data.info[k] = item.value
+    //     }
+    //   }
+    // })
+    // this.setData({
+    //   menuList:this.data.menuList,
+    //   info:this.data.info
+    // })
+    // this.fetchData()
+  },
+  delRegion: function(){
+    this.data.menuList[3].value = ''
+    this.data.menuList[3].choosed = false
+    this.setData({
+      menuList: this.data.menuList,
+    })
   },
   getYears(){
     app.apiPost('getYear').then(res=>{
       this.data.menuList.map(item=>{
         if(item.name == '入学年份'){
-          item.list = res
+          item.list = res.data
+          item.list.forEach(item1=>{
+            item1.choosed = false
+          })
         }
       })
       this.setData({
@@ -136,6 +167,9 @@ Page({
       this.data.menuList.map(item=>{
         if(item.name === '专业'){
           item.list = res
+          item.list.forEach(item1 => {
+            item1.choosed = false
+          })
         }
       })
       this.setData({
@@ -148,6 +182,9 @@ Page({
       this.data.menuList.map(item=>{
         if(item.name === '班级'){
           item.list = res
+          item.list.forEach(item1 => {
+            item1.choosed = false
+          })
         }
       })
       this.setData({
@@ -155,14 +192,14 @@ Page({
       })
     })
   },
-  getStates(){
-
-  },
   getPropety(){
     app.apiPost('getStudent_Info_Property').then(res=>{
       this.data.menuList.map(item=>{
         if(item.name === '单位性质'){
           item.list = res
+          item.list.forEach(item1 => {
+            item1.choosed = false
+          })
         }
       })
       this.setData({
@@ -175,6 +212,9 @@ Page({
       this.data.menuList.map(item=>{
         if(item.name === '所在行业'){
           item.list = res
+          item.list.forEach(item1 => {
+            item1.choosed = false
+          })
         }
       })
       this.setData({
@@ -197,6 +237,13 @@ Page({
       isShowInput:true
     })
   },
+  bindblur: function(){
+    this.setData({
+      isShowDialog: false,
+      isShowInput: false,
+      name: ''
+    })
+  },
   handleClickCollect(e){
     let id = e.currentTarget.dataset.id
     app.apiPost('addStudent_Info_Collect',{others_id:id}).then(res=>{
@@ -204,29 +251,39 @@ Page({
       if(!res.error){
         this.data.list.map(item => {
           if (item.id == id) {
-            item.student_info_collect.or_name = !item.student_info_collect.or_name
+            item.is_collect = !item.is_collect
           }
         })
         this.setData({
           list: this.data.list
         })
+        wx.setStorageSync('firendsList', this.data.list)
       }
-      
     })
   },
   showCheckBox(e){
     let isRow = e.currentTarget.dataset.isrow
-    isRow == 1 && this.setData({
-      animation:app.animation(this.data.animation,-375,0)
+    this.setData({
+      isShowSlide: isRow == 2?true:false
     })
-    isRow == 2 && this.setData({
-      animation:app.animation(this.data.animation,0,0)
-    })
+    if(isRow == 2){
+      this.resetInfo()
+    }
+    // isRow == 1 && this.setData({
+    //   animation:app.animation(this.data.animation,-375,0)
+    // })
+    // isRow == 2 && this.setData({
+    //   animation:app.animation(this.data.animation,0,0)
+    // })
   },
 
   fetchData(){
-    let data = Object.assign(this.data.info, {pageNo: this.data.page}, {aid: wx.getStorageSync('number')})
+    let data = Object.assign(this.data.info, { pageNo: this.data.page, name: this.data.name, aid: wx.getStorageSync('number')})
     app.apiPost('getStudent_Info',data, false).then(res=>{
+      res.data = res.data||[]
+      res.data.forEach(item=>{
+        item.is_collect = item.student_info_collect?true:false
+      })
       let error = res.error == 0 ? 'success' : 'error'
       res.error == 0 &&
       this.setData({
@@ -262,9 +319,57 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
+   * 搜索
    */
-  onShareAppMessage: function () {
-  
+  searchData: function(e){
+    this.setData({
+      list: [],
+      page: 1,
+      showMore: true,
+      remind: '正在加载中',
+      name: e.detail.value
+    })
+    this.fetchData()
+  },
+
+  /**
+   * 切换分类内容显示隐藏
+   */
+  tagShow: function(e){
+    let index = e.currentTarget.dataset.index
+    this.data.menuList[index].height = this.data.menuList[index].height == '100%' ? '150rpx' :'100%'
+    this.setData({
+      menuList: this.data.menuList
+    })
+  },
+
+  tagChoose: function(e){
+    this.data.menuList[e.currentTarget.dataset.list].list[e.currentTarget.dataset.index].choosed = !this.data.menuList[e.currentTarget.dataset.list].list[e.currentTarget.dataset.index].choosed
+    this.setData({
+      menuList: this.data.menuList
+    })
+  },
+
+  filterData: function(){
+    this.data.menuList.forEach(item=>{
+      if(item.name == '所在地'){
+        this.data.info.site = item.value
+      }else{
+        let list = []
+        item.list.forEach(item1=>{
+          if(item1.choosed){
+            list.push(item1[item.prop])
+          }
+        })
+        this.data.info[item.search] = list
+      }
+    })
+    this.setData({
+      info: this.data.info,
+      isShowSlide: true
+    })
+    this.fetchData()
   }
+  
+
 })

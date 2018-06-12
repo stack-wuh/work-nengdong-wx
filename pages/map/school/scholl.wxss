@@ -22,7 +22,6 @@
   width:100%;
 }
 .list-content{
-  height:100%;
   background-color: #fff;
 }
 .list-content .list-item{
