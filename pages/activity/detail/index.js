@@ -25,7 +25,8 @@ Page({
     let pages = getCurrentPages() , 
     prevPage = pages[pages.length-2] ,
     imgList = [] ,
-    address = prevPage.data.newList[options.index].activity_image.address.split(',')
+    address = prevPage.data.newList[options.index].activity_image.address
+    address = address ? address.split(',') : []
     address.map(item=>{
       imgList.push(item)
     })
@@ -34,6 +35,7 @@ Page({
       list:prevPage.data.newList[options.index],
       imgUrls:imgList
     })
+    console.log(prevPage.data.newList[options.index])
     this.id = options.id
     this.getList(options.id)
   },
@@ -54,16 +56,18 @@ Page({
   },
   getList(id){
     app.apiPost('getActivity_Enroll',{activity_id:id,pageNo:this.data.pageNo}).then(res=>{
-      if(res.data.length == 10){
-        this.setData({
-          listData:res.data,
-          isShowMoew:true
-        })
-      }else{
-        this.setData({
-          listData:res.data,
-          isShowMoew:false
-        })
+      if(res.data){
+        if(res.data.length == 10){
+          this.setData({
+            listData:res.data,
+            isShowMoew:true
+          })
+        }else{
+          this.setData({
+            listData:res.data,
+            isShowMoew:false
+          })
+        }
       }
     })
   },
