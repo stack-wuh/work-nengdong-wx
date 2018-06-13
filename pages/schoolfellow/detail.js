@@ -25,6 +25,8 @@ Page({
       info:prevPages.data.list[index]
     })
     var article = prevPages.data.list[index].content
+    var subStr = new RegExp('/Public', 'g');
+    article = article.replace(subStr, app.globalData.site+'/Public');
     WxParse.wxParse('article','html',article,this,10)
   },
 

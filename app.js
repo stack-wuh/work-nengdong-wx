@@ -37,7 +37,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    site: 'http://nengdong.xiaoyuandake.com'
   },
    /**
    * 网络请求，post

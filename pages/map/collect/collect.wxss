@@ -1,7 +1,16 @@
 /* pages/map/collect/collect.wxss */
+.container{
+  padding-top: 124rpx;
+}
 .avatar{
   width:200rpx;
   height:160rpx;
+}
+.nav-box{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 .nav-list{
   width:690rpx;
@@ -47,7 +56,7 @@
   border-radius:50%;
   overflow: hidden;
 }
-.list-item .img-box image{
+.list-item .img-box .avatar-radius{
   width:120rpx;
   height:120rpx;
   border-radius: 50%;

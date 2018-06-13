@@ -39,6 +39,20 @@ Page({
     app.apiPost('getNd_Article', data).then(res=>{
       res.data.map(item=>{
         item.pubtime = format.formatTime(new Date(item.pubtime))
+        let imgReg = /<img.*?(?:>|\/>)/gi;
+        let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+        let arr = item.content.match(imgReg);
+        if(arr[0]){
+          let img = arr[0].match(srcReg)
+          if(img[1]){
+            if(img[1][0] == '/'){
+              item.image = app.globalData.site + img[1]
+            }else{
+              item.image = img[1]
+            }
+          }
+        }
+        
       })
       this.setData({
         list: this.data.list.concat(res.data)

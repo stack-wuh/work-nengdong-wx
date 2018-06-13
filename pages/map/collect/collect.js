@@ -7,7 +7,11 @@ Page({
    */
   data: {
     list:[],
-    type:1
+    type:2,
+    page: 1,
+    listRow: 10,
+    showMore: true,
+    remind: '正在加载中'
   },
 
   /**
@@ -63,7 +67,8 @@ Page({
   handleClickChange(e){
     let type = e.currentTarget.dataset.type
     this.setData({
-      type:type
+      type:type,
+      listRow: type<3?10:20
     })
     this.fetchData()
   },
@@ -73,59 +78,31 @@ Page({
       url = 'getStudent_Info_Collect'
     }else if(this.data.type == 1){
       url = 'getAlumni_Pages_Collect'
+    }else{
+      url = 'ShowSchool_Info_School'
     }
     app.apiPost(url).then(res=>{
       this.setData({
-        list:res.data
+        list: this.data.list.concat(res.data)
       })
+      if(res.length == this.data.listRow){
+        this.setData({
+          showMore: true,
+          remind: '上拉加载更多'
+        })
+      }else{
+        this.setData({
+          showMore: false,
+          remind: '没有更多啦'
+        })
+      }
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
   
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
   
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

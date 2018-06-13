@@ -2,15 +2,14 @@
 <view class="container other-bg">
   <view class="nav-box">
     <view class="nav-list">
-      <text data-type="1" bindtap="handleClickChange" class="{{type == 1 ? 'nav-list-item nav-list-item-active' : 'nav-list-item' }}">校友会黄页</text>
       <text data-type="2" bindtap="handleClickChange" class="{{type == 2 ? 'nav-list-item nav-list-item-active' : 'nav-list-item' }}">校友黄页</text>
+      <text data-type="1" bindtap="handleClickChange" class="{{type == 1 ? 'nav-list-item nav-list-item-active' : 'nav-list-item' }}">校友会黄页</text>
       <text data-type="3" bindtap="handleClickChange" class="{{type == 3 ? 'nav-list-item nav-list-item-active' : 'nav-list-item' }}">院校黄页</text>
     </view>
   </view>
   <view class="list-item" wx:if="{{type == 1}}" wx:for="{{list}}" wx:key="{{index}}" >
     <view class="img-box">
-      <image wx:if="{{image}}" src="{{item.image}}" class="avatar" />
-      <image wx:else src="/images/avatar.png" class="avatar" />
+      <image src="{{item.image||'/images/avatar.png'}}" class="avatar" />
     </view>
     <view class="right-content">
       <view class="flex-box">
@@ -18,7 +17,7 @@
         <image wx:if="{{!item.alumni_pages_collect.or_name}}" bindtap="handleClickCollage" data-id="{{item.id}}" src="/images/icon-collect-default.png" class="icon-collect" />
         <image wx:if="{{item.alumni_pages_collect.or_name}}" bindtap="handleClickCollage" data-id="{{item.id}}" src="/images/icon-collect-active.png" class="icon-collect" />
       </view>
-      <view class="over-text">{{item.class_text}}</view>
+      <view class="over-text">{{item.title}}</view>
       <view>创建时间：{{item.time}}</view>
       <view class="flex-box">
         <text>{{item.praise}}人觉得赞</text>
@@ -30,8 +29,7 @@
   </view>
   <view class="list-item1 list-item" wx:if="{{type == 2}}" wx:for="{{list}}" wx:key="{{index}}">
     <view class="img-box">
-      <image wx:if="{{image}}" src="{{item.image}}" class="avatar" />
-      <image wx:else src="/images/avatar.png" class="avatar" />
+      <image src="{{item.image||'/images/avatar.png'}}" class="avatar avatar-radius" />
     </view>
     <view class="right-content">
       <view class="flex-box">
@@ -54,7 +52,7 @@
       </view>
       <view class="flex-box">
         <text>工作/升学所在地：</text>
-        <text class="over-text">{{item.site_provinces}}省{{item.site_cities}}市{{item.site_areas}}区</text>
+        <text class="over-text">{{item.site_provinces}}{{item.site_cities}}{{item.site_areas}}</text>
       </view>      
     </view>
   </view>
@@ -69,4 +67,5 @@
       <image src="/images/icon-collect-default.png" class="icon-collect" />
     </view>
   </view>
+  <view class="btm-remind">{{remind}}</view>
 </view>

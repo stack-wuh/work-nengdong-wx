@@ -9,7 +9,7 @@
   </view>
   <view class="search-content">
     <navigator url="/pages/schoolfellow/detail?id={{item.id}}&index={{index}}" hover-class='none' class="item-wrapper" wx:for="{{list}}" wx:key="{{index}}">
-      <image src="http://sep.whut.edu.cn/xydt/201805/W020180502579071643688.jpg"></image>
+      <image src="{{item.image||'/images/avatar.png'}}"></image>
       <view class="item-info">
         <view class="title">{{item.title}}</view>
         <view class="content">{{item.abstracts}}</view>

@@ -63,7 +63,7 @@ Page({
           item.is_collect = item.xuexiao_collect?true:false
         }
         if (this.data.cate == 2) {
-          // item.is_collect = item.xuexiao_collect ? true : false
+          item.is_collect = item.student_collect ? true : false
         }
       })
       this.setData({
