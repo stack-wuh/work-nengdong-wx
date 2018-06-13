@@ -24,18 +24,21 @@ Page({
   onLoad: function (options) {
     let pages = getCurrentPages() , 
     prevPage = pages[pages.length-2] ,
-    imgList = [] ,
-    address = prevPage.data.newList[options.index].activity_image.address
+    imgList = [], 
+    dataList = wx.getStorageSync('activeDetail')
+    prevPage = dataList.find(item=>{
+      return item.id == options.id
+    })
+    let address = prevPage.activity_image.address
     address = address ? address.split(',') : []
     address.map(item=>{
       imgList.push(item)
     })
-    imgList.push(prevPage.data.newList[options.index].cover)
+    imgList.push(prevPage.cover)
     this.setData({
-      list:prevPage.data.newList[options.index],
+      list:prevPage,
       imgUrls:imgList
     })
-    console.log(prevPage.data.newList[options.index])
     this.id = options.id
     this.getList(options.id)
   },

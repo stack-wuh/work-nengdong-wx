@@ -7,27 +7,31 @@
       <text data-type="3" bindtap="handleClickChange" class="{{type == 3 ? 'nav-list-item nav-list-item-active' : 'nav-list-item' }}">院校黄页</text>
     </view>
   </view>
-  <view class="list-item" wx:if="{{type == 1}}" wx:for="{{list}}" wx:key="{{index}}" >
+
+  <!-- 校友会黄页 -->
+  <navigator url="/pages/map/alumni/detail?id={{item.id}}" hover-class="none" class="list-item" wx:if="{{type == 1 && list.length>0}}" wx:for="{{list}}" wx:key="{{index}}" >
     <view class="img-box">
       <image src="{{item.image||'/images/avatar.png'}}" class="avatar" />
     </view>
     <view class="right-content">
       <view class="flex-box">
         <text>类型：{{item.type}}</text>
-        <image wx:if="{{!item.alumni_pages_collect.or_name}}" bindtap="handleClickCollage" data-id="{{item.id}}" src="/images/icon-collect-default.png" class="icon-collect" />
-        <image wx:if="{{item.alumni_pages_collect.or_name}}" bindtap="handleClickCollage" data-id="{{item.id}}" src="/images/icon-collect-active.png" class="icon-collect" />
+        <image wx:if="{{!item.isCollect}}" data-type="3" catchtap="handleClickCollage" data-id="{{item.id}}" src="/images/icon-collect-default.png" class="icon-collect" />
+        <image wx:if="{{item.isCollect}}" data-type="3" catchtap="handleClickCollage" data-id="{{item.id}}" src="/images/icon-collect-active.png" class="icon-collect" />
       </view>
       <view class="over-text">{{item.title}}</view>
       <view>创建时间：{{item.time}}</view>
       <view class="flex-box">
         <text>{{item.praise}}人觉得赞</text>
-        <image wx:if="{{!item.alumni_praise.praise_or}}" data-id="{{item.id}}" bindtap="handleClickPraise" src="/images/icon-prise-default.png" class="icon-prise" />
-        <image wx:if="{{item.alumni_praise.praise_or}}" data-id="{{item.id}}" bindtap="handleClickPraise" src="/images/icon-prise-active.png" class="icon-prise" />
+        <image wx:if="{{!item.isPraise}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-default.png" class="icon-prise" />
+        <image wx:if="{{item.isPraise}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-active.png" class="icon-prise" />
         <text class="empty"></text>
       </view>
     </view>
-  </view>
-  <view class="list-item1 list-item" wx:if="{{type == 2}}" wx:for="{{list}}" wx:key="{{index}}">
+  </navigator>
+
+  <!-- 校友黄页 -->
+  <navigator url="/pages/map/firend/detail?id={{item.id}}" hover-class="none" class="list-item1 list-item" wx:if="{{type == 2 && list.length>0}}" wx:for="{{list}}" wx:key="{{index}}">
     <view class="img-box">
       <image src="{{item.image||'/images/avatar.png'}}" class="avatar avatar-radius" />
     </view>
@@ -37,14 +41,14 @@
         <text>{{item.name}}</text>
         <text class="{{item.state === '就业' ? 'pedding-text' : item.state === '升学' ? 'pedding-text pedding-up' : 'pedding-text pedding-up-school'}}">{{item.state}}</text>
         <text class="empty"></text>
-        <image wx:if="{{!item.student_info_collect.or_name}}" data-id="{{item.id}}" data-type="1" bindtap="handleClickCollage" src="/images/icon-collect-default.png" class="icon-collect" />
-        <image wx:if="{{item.student_info_collect.or_name}}" data-id="{{item.id}}" data-type="1" bindtap="handleClickCollage" src="/images/icon-collect-active.png" class="icon-collect" />
+        <image wx:if="{{!item.isCollect}}" data-id="{{item.id}}" data-type="1" catchtap="handleClickCollage" src="/images/icon-collect-default.png" class="icon-collect" />
+        <image wx:if="{{item.isCollect}}" data-id="{{item.id}}" data-type="1" catchtap="handleClickCollage" src="/images/icon-collect-active.png" class="icon-collect" />
       </view>
       <view>
         <text>入学年份：</text>
         <text>{{item.school_age}}级</text>
         <text>学院：</text>
-        <text>{{item.school}}</text>
+        <text>{{item.school || ''}}</text>
       </view>
       <view >
         <text>专业班级：</text>
@@ -52,19 +56,21 @@
       </view>
       <view class="flex-box">
         <text>工作/升学所在地：</text>
-        <text class="over-text">{{item.site_provinces}}{{item.site_cities}}{{item.site_areas}}</text>
+        <text class="over-text">{{item.site_provinces || ''}}{{item.site_cities || ''}}{{item.site_areas || ''}}</text>
       </view>      
     </view>
-  </view>
+  </navigator>
+
+  <!-- 院校黄页 -->
   <view class="list-content" wx:if="{{type == 3}}">
-    <view class="list-item" wx:for="{{5}}">
+    <view class="list-item" wx:for="{{list}}" wx:key="{{index}}">
       <text class="tips">工</text>
       <view class="list-name">
-        <text>学工部</text> 
+        <text>{{item.school_name}}</text> 
         <text>································</text>
-        <text>027-7010-001</text>
+        <text>{{item.phone}}</text>
       </view>
-      <image src="/images/icon-collect-default.png" class="icon-collect" />
+      <image data-id="{{item.id}}" data-type="2" bindtap="handleClickCollage" src="/images/icon-collect-default.png" class="icon-collect" />
     </view>
   </view>
   <view class="btm-remind">{{remind}}</view>

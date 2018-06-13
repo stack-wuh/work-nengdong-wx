@@ -26,7 +26,8 @@ Page({
     this.setData({
       list: data
     })
-    let imgList = this.data.list.alumni_pages_album.address.split(',')
+    let imgList = this.data.list.alumni_pages_album ? this.data.list.alumni_pages_album : []
+    imgList = imgList.address ? imgList.address.split(',') : []
     this.setData({
       imgList:imgList
     })
@@ -69,19 +70,6 @@ Page({
       } else {
         this.data.list.praise -= 1
       }
-
-
-
-      // this.data.list.map(item => {
-      //   if (item.id === id) {
-      //     item.is_praise = !item.is_praise
-      //     if (item.is_praise) {
-      //       item.praise += 1
-      //     } else {
-      //       item.praise -= 1
-      //     }
-      //   }
-      // })
       this.setData({
         list: this.data.list
       })
@@ -99,6 +87,4 @@ Page({
       })
     })
   }
-
-  
 })

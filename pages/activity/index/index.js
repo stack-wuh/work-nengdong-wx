@@ -61,7 +61,7 @@ Page({
           remind:'没有更多啦'
         })
       }
-      wx.setStorageSync('activeDetail',res.data)
+      wx.setStorageSync('activeDetail',this.data.newList)
     })
   },
   showMore(){

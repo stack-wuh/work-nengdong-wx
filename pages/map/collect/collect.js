@@ -1,5 +1,6 @@
 // pages/map/collect/collect.js
 let app = getApp()
+let format = require('../../../utils/util')
 Page({
 
   /**
@@ -11,7 +12,8 @@ Page({
     page: 1,
     listRow: 10,
     showMore: true,
-    remind: '正在加载中'
+    remind: '正在加载中',
+    isPraise:false
   },
 
   /**
@@ -24,23 +26,32 @@ Page({
     let id = e.currentTarget.dataset.id
     let type = e.currentTarget.dataset.type
     let url = '' , data = {}
-    if(type){
+    if(type == 1){
       url = 'addStudent_Info_Collect'
       data = {
         others_id:id
       }
-    }else{
+    }else if(type == 3){
       url = 'addAlumni_Pages_Collect'
       data = {
         alumni_pages_id:id
       }
+    }else if(type == 2){
+      url = 'SCSchool_Info_School'
+      data = {
+        id:id
+      }
     }
     app.apiPost(url,data).then(res=>{
+      let error = res.error == 0 ? 'success' : 'error'
+      app.toastMsg(error,res.msg)
       this.data.list.map(item=>{
-        if(type){
-          item.student_info_collect.or_name = !item.student_info_collect.or_name
-        }else{
-          item.alumni_pages_collect.or_name = !item.alumni_pages_collect.or_name
+        if(type == 1 && item.id == id){
+          item.isCollect = !item.isCollect
+        }else if(type == 3 && item.id == id){
+          item.isCollect = !item.isCollect
+        }else if(type == 2 && item.id == id){
+          item.isCollect = !item.isCollect
         }
       })
       this.setData({
@@ -49,14 +60,13 @@ Page({
     })
   },
   handleClickPraise(e){
-    let id = e.currentTarget.dataset.id
+    let id = e.currentTarget.dataset.id 
     app.apiPost('UpdateAlumni_praise',{id:id}).then(res=>{
+      let error = res.error == 0 ? 'success' :'error'
+      app.toastMsg(error,res.msg)
       this.data.list.map(item=>{
-        item.alumni_praise.praise_or = !item.alumni_praise.praise_or
-        if(item.alumni_praise.praise_or){
-          item.praise ++
-        }else{
-          item.praise -- 
+        if(item.id == id){
+          item.isPraise = !item.isPraise
         }
       })
       this.setData({
@@ -68,7 +78,8 @@ Page({
     let type = e.currentTarget.dataset.type
     this.setData({
       type:type,
-      listRow: type<3?10:20
+      listRow: type<3?10:20,
+      list:[]
     })
     this.fetchData()
   },
@@ -82,9 +93,29 @@ Page({
       url = 'ShowSchool_Info_School'
     }
     app.apiPost(url).then(res=>{
-      this.setData({
-        list: this.data.list.concat(res.data)
-      })
+      if(res.data){
+        res.data.map(item=>{
+          item.time = format.formatTime(new Date(item.time))
+          if(item.alumni_praise && this.data.type == 1){
+            item.isPraise = true
+          }else{
+            item.isPraise = false
+          }
+          if(item.alumni_pages_collect && this.data.type == 1){
+            item.isCollect = true
+          }else{
+            item.isCollect = false
+          }
+          if(item.student_info_collect && this.data.type == 2){
+            item.isCollect = true
+          }else{
+            item.isCollect = false
+          }
+        })
+        this.setData({
+          list: this.data.list.concat(res.data)
+        })
+      }
       if(res.length == this.data.listRow){
         this.setData({
           showMore: true,

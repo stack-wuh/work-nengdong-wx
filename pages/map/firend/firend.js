@@ -302,7 +302,7 @@ Page({
           remind: '没有更多啦'
         })
       }
-      wx.setStorageSync('firendsList',res.data)
+      wx.setStorageSync('firendsList',this.data.list)
     })
   },
   
