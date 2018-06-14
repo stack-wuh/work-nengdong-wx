@@ -22,25 +22,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let pages = getCurrentPages() , 
-    prevPage = pages[pages.length-2] ,
-    imgList = [], 
-    dataList = wx.getStorageSync('activeDetail')
-    prevPage = dataList.find(item=>{
-      return item.id == options.id
-    })
-    let address = prevPage.activity_image.address
-    address = address ? address.split(',') : []
-    address.map(item=>{
-      imgList.push(item)
-    })
-    imgList.push(prevPage.cover)
-    this.setData({
-      list:prevPage,
-      imgUrls:imgList
-    })
     this.id = options.id
     this.getList(options.id)
+    this.fetchData(options.id)
   },
 
   //隐藏模态框
@@ -103,9 +87,24 @@ Page({
     })
   },
   
-  //上拉加载更多
-  showMore(){
-    
+  fetchData(id){
+    app.apiPost('GWActivity',{id:id}).then(res=>{
+      let imgList = [] , address = []
+      if(res.data[0].activity_image){
+        if(res.data[0].activity_image.address){
+          address = res.data[0].activity_image.address
+          address = address ? address.split(',') : []
+          address.map(item=>{
+            imgList.push(item)
+          })
+        }
+      }
+      imgList.push(res.data[0].cover)
+      this.setData({
+        list:res.data[0],
+        imgUrls:imgList
+      })     
+    })
   },
   /**
    * 页面上拉触底事件的处理函数

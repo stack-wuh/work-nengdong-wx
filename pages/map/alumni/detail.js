@@ -16,24 +16,7 @@ Page({
    */
   onLoad: function (options) {
     id = options.id
-    let pages = getCurrentPages()
-    let prevPage = pages[pages.length - 2]
-    let list = prevPage.data.list
-    let data = list.find(item=>{ 
-      return item.id == options.id
-    })
-    data.is_self = wx.getStorageSync('number') == data.student_info_id
-    this.setData({
-      list: data
-    })
-    let imgList = this.data.list.alumni_pages_album ? this.data.list.alumni_pages_album : []
-    imgList = imgList.address ? imgList.address.split(',') : []
-    this.setData({
-      imgList:imgList
-    })
-    wx.setNavigationBarTitle({
-      title: this.data.list.title
-    })
+    this.fetchData(options.id)
   },
 
   collected: function(){
@@ -84,6 +67,30 @@ Page({
       })
       prevPage.setData({
         list: prevPage.data.list
+      })
+    })
+  },
+
+  fetchData(){
+    app.apiPost('GWAlumni_Pages',{id:id}).then(res=>{
+      let data = res.data[0] , imgList = [] , address = []
+      wx.setNavigationBarTitle({
+        title: data.title
+      })
+      if(data.alumni_pages_album){
+        if(data.alumni_pages_album.address){
+          address = data.alumni_pages_album.address.split(',')
+          address.map(item=>{
+            imgList.push(item)
+          })
+        }
+      }
+      if(data.cover){
+        imgList.push(data.cover)
+      }
+      this.setData({
+        list:data,
+        imgList:imgList
       })
     })
   }

@@ -96,17 +96,24 @@ Page({
       if(res.data){
         res.data.map(item=>{
           item.time = format.formatTime(new Date(item.time))
-          if(item.alumni_praise && this.data.type == 1){
+          if(item.alumni_praise ){ //校友会黄页点赞
             item.isPraise = true
           }else{
             item.isPraise = false
           }
-          if(item.alumni_pages_collect && this.data.type == 1){
+          if(item.alumni_pages_collect ){ //校友会黄页收藏
             item.isCollect = true
           }else{
             item.isCollect = false
           }
-          if(item.student_info_collect && this.data.type == 2){
+          if(item.student_info_collect){  //校友黄页收藏
+            item.isCollect = true
+            console.log(item.isCollect)
+          }else{
+            item.isCollect = false
+            console.log(item.isCollect)
+          }
+          if(item.student_collect){ // 院校收藏
             item.isCollect = true
           }else{
             item.isCollect = false

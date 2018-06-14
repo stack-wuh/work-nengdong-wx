@@ -414,7 +414,7 @@ Page({
     })
   },
   handleSubmit(e) {
-    let base = {} , work = {} , levels = [] , info = {}
+    let base = {} , work = {} , levels = [] , info = {} ,all = {}
     this.data.optionList[0].list.map(item=>{
       base[item.prop] = item.value
     })
@@ -428,24 +428,24 @@ Page({
         })
         levels.push(obj)
     })
-    info = Object.assign(base,work)
-    // info.data = levels
-    // info = JSON.stringify(info)
-    // wx.request({
-    //   url:app.server + 'addEmployment_Archives',
-    //   data:info,
-    //   header:{
-    //     'content-type':'application/json'
-    //   },
-    //   success:res=>{
-    //     console.log(res)
-    //   },
-    //   erorr:res=>{
-    //     console.log(res)
-    //   }
-    // })
-    // return
-    app.apiPost('addEmployment_Archives', info).then(res => {
+    let number = wx.getStorageSync('number').toString()
+    levels = JSON.stringify(levels)
+    info = Object.assign(base,work,{data:levels,student_info_id:number})
+    // all = JSON.stringify(info)
+    // console.log(all)
+    wx.request({
+      url:app.server + 'addEmployment_Archives',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: info,
+      success:function(res){
+        console.log(res)
+      }
+    })
+    return
+    app.apiPost('addEmployment_Archives', data).then(res => {
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error, res.msg)
       if (res.error == 0) {
