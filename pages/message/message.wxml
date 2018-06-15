@@ -8,7 +8,7 @@
     </view>
     <view style="height:100rpx;"></view>
     <view class="nav-list">
-      <text class="nav-title {{index == current ? 'active' : ''}}" wx:for="{{navList}}" wx:key="{{index}}">{{item.name}}</text>
+      <text data-index="{{index}}" data-name="{{item.name}}" bindtap="handleClickChange" class="nav-title {{index == current ? 'active' : ''}}" wx:for="{{navList}}" wx:key="{{index}}">{{item.name}}</text>
     </view>   
     <view class="list">
       <navigator hover-class="none" url="/pages/message/detail" class="list-item"> 
@@ -23,4 +23,5 @@
           </view>
       </navigator>
     </view> 
+    <view class="form-msg">{{remind}}</view>
 </view>

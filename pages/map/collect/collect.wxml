@@ -41,7 +41,6 @@
         <text>{{item.name}}</text>
         <text class="{{item.state === '就业' ? 'pedding-text' : item.state === '升学' ? 'pedding-text pedding-up' : 'pedding-text pedding-up-school'}}">{{item.state}}</text>
         <text class="empty"></text>
-        {{item.isCollect}}
         <image wx:if="{{item.isCollect}}" data-id="{{item.id}}" data-type="1" catchtap="handleClickCollage" src="/images/icon-collect-default.png" class="icon-collect" />
         <image wx:if="{{!item.isCollect}}" data-id="{{item.id}}" data-type="1" catchtap="handleClickCollage" src="/images/icon-collect-active.png" class="icon-collect" />
       </view>

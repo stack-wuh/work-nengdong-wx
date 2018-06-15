@@ -1,5 +1,26 @@
 // pages/map/firend/detail.js
 var app = getApp()
+const temp = [
+  {
+    name: '层次',
+    value: '',
+    prop:'levels'
+  },
+  {
+    name: '学校',
+    value: '',
+    prop:'schools'
+  },
+  {
+    name: '院系',
+    value: '',
+    prop:'faculty'
+  },
+  {
+    name: '专业',
+    value: '',
+    prop:'line_text'
+  }]
 Page({
 
   /**
@@ -73,7 +94,9 @@ Page({
       {
         title: '升学档案',
         iconPath: '/images/icon-student.png',
-        list: [{
+        list: [
+          [
+          {
             name: '层次',
             value: '',
             prop:'levels'
@@ -92,11 +115,12 @@ Page({
             name: '专业',
             value: '',
             prop:'line_text'
-          }
+          }]
         ]
       }
     ],
     list: [],
+    temp:temp
   },
 
   /**
@@ -127,14 +151,20 @@ Page({
         }
       }
     })
-    this.data.optionList[2].list.map(item=>{
-      for(var k in this.data.list.advance_archives){
-        if(item.prop == k){
-          item.value = this.data.list.advance_archives[k]
-        }
+    let newData = this.data.list.advance_ArchivesList , 
+    newArr = []
+    newData.map(item=>{
+      var newList = JSON.parse(JSON.stringify(this.data.temp))
+      for(var k in item){ 
+        newList.map(list=>{
+          if(list.prop == k){
+            list.value = item[k]
+          }
+        })
       }
-    })
-
+      newArr.push(newList)
+    }) 
+    this.data.optionList[2].list = newArr
     this.setData({
       optionList:this.data.optionList
     })
@@ -144,7 +174,6 @@ Page({
     let obj = data.find(item => {
       return item.id == id
     })
-    console.log(obj)
     this.setData({
       list: obj
     })

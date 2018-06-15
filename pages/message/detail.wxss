@@ -5,7 +5,7 @@
 }
 
 .top{
-  min-height:180rpx;
+  min-height:320rpx;
   padding:10rpx 20rpx;
   background-color: #fff;
   font-size: 30rpx;
@@ -34,3 +34,40 @@
   overflow: hidden;
 }
 
+.btn-list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:50rpx;
+}
+.btn-list > text{
+  width:30%;
+  height:80rpx;
+  margin-right:20rpx;
+  display: inline-block;
+  background-color: #00998d;
+  color: #fff;
+  line-height:80rpx;
+  text-align:center;
+}
+.form-area{
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color: rgba(0,0,0,.5);
+}
+.form-box{
+  width:80%;
+  height:80%;
+  margin:0 auto;
+  margin-top:10%;
+  background-color: #fff;
+}
+
+.form-box .title{
+  padding-top:20rpx;
+  font-size: 30rpx;
+  text-align: center;
+}

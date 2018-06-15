@@ -7,7 +7,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    info:{}
+    info:{},
+    imgUrls:[
+      '/images/logo.png',
+      '/images/logo.png',
+      '/images/logo.png'
+    ]
   },
 
   /**

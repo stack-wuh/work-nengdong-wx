@@ -20,18 +20,41 @@ Page({
         value:'我收到的'
       }
     ],
-    data:{
+    search:{
       pageNo:1,
-      // i:0,
-      // collect_name:1
-    }
+      name:''
+    },
+    isShowMore:false,
+    remind:'正在加载中'
   },
   onLoad:function(e){
     this.fetchData()
   },
+  handleClickChange(e){
+    let name = e.currentTarget.dataset.name
+    let index = e.currentTarget.dataset.index
+    this.data.search.name = name
+    this.setData({
+      current:index,
+      search:this.data.search
+    })
+    this.fetchData()
+  },
   fetchData(){
-    app.apiPost('getTidings',this.data.data).then(res=>{
-    
+    app.apiPost('shwoTidings',this.data.search).then(res=>{
+        if(res.data){
+          if(res.data.length == 10){
+            this.setData({
+              isShowMore:true,
+              remind:'上拉加载更多'
+            })
+          }else{
+            this.setData({
+              isShowMore:false,
+              remind:'没有更多啦'
+            })
+          }
+        }
     })
   }
 })
