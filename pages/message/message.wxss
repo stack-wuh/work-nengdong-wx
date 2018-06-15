@@ -1,3 +1,7 @@
+.avatar{
+  width:150rpx;
+  height:150rpx;
+}
 .search-box{
   height:120rpx;
   color: #666;
@@ -37,4 +41,21 @@
 }
 .active{
   border-color: #00998d !important;
+}
+
+.list{
+  margin-top:10rpx;
+}
+.list-item{
+  display: flex;
+  align-items: center;
+  min-height:220rpx;
+  padding:0 20rpx;
+  background-color: #fff;
+}
+.list-item .img-box{
+  margin-right:15rpx;
+}
+.list-item .item-right{
+  font-size: 30rpx;
 }

@@ -11,6 +11,16 @@
       <text class="nav-title {{index == current ? 'active' : ''}}" wx:for="{{navList}}" wx:key="{{index}}">{{item.name}}</text>
     </view>   
     <view class="list">
-      <view></view>
+      <navigator hover-class="none" url="/pages/message/detail" class="list-item"> 
+          <view class="img-box">
+            <image src="/images/logo.png" class="avatar" />
+          </view>
+          <view class="item-right">
+            <view>类型: </view>
+            <view>内容: </view>
+            <view>提醒时间: </view>
+            <view>时间段: </view>
+          </view>
+      </navigator>
     </view> 
 </view>

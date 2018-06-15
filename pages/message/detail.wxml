@@ -1,0 +1,22 @@
+<!--pages/message/detail.wxml-->
+<view class="container other-bg">
+  <view class="top">
+    <view class="one">
+      <text>标题: {{info.title}}</text>
+      <image wx:if="{{!info.isCollect}}" data-id="{{info.id}}" bindtap="handleCollect" src="/images/icon-collect-default.png" class="avatar" />
+      <image wx:if="{{info.isCollect}}" data-id="{{info.id}}" bindtap="handleCollect" src="/images/icon-collect-active.png" class="avatar" />
+    </view>
+    <view class="two">
+      <text>内容：</text><text class="over-text">{{info.content}}</text>
+    </view>
+    <view class="two">
+      <text>提醒: </text><text>{{info.time_or == 0 ? '开始前' : '截止前'}} {{info.remind || 0}}小时</text>
+    </view>
+    <view class="two">
+      <text>时间: </text><text>{{info.starttime}} 至 {{info.endtime}}</text>
+    </view>
+  </view>
+  <view class="form-area">
+    
+  </view>
+</view>

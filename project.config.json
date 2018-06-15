@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 23,
+			"current": 32,
 			"list": [
 				{
 					"id": -1,
@@ -228,9 +228,15 @@
 					"query": "name=行业动态"
 				},
 				{
-					"id": -1,
+					"id": 32,
 					"name": "消息中心",
 					"pathName": "pages/message/message",
+					"query": "id=1"
+				},
+				{
+					"id": -1,
+					"name": "消息详情",
+					"pathName": "pages/message/detail",
 					"query": ""
 				}
 			]

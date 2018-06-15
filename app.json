@@ -32,6 +32,7 @@
 
     "pages/404/index",
     "pages/message/message",
+    "pages/message/detail",
 
     "pages/schoolfellow/list",
     "pages/schoolfellow/detail",

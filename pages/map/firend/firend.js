@@ -279,6 +279,9 @@ Page({
 
   fetchData(){
     let data = Object.assign(this.data.info, { pageNo: this.data.page, name: this.data.name, aid: wx.getStorageSync('number')})
+    this.setData({
+      list : []
+    })
     app.apiPost('getStudent_Info',data, false).then(res=>{
       res.data = res.data||[]
       res.data.forEach(item=>{

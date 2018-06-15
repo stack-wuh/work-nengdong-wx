@@ -218,7 +218,7 @@ Page({
       type: options.type
     })
     if (options.type == 2) {
-      let data = wx.getStorageSync('myinfo')
+      let data = wx.getStorageSync('myInfo')
       this.setData({
         optionList: data
       })
@@ -414,7 +414,7 @@ Page({
     })
   },
   handleSubmit(e) {
-    let base = {} , work = {} , levels = [] , info = {} ,all = {}
+    let base = {} , work = {} , levels = [] , info = {} ,all = {} , self = this
     this.data.optionList[0].list.map(item=>{
       base[item.prop] = item.value
     })
@@ -431,8 +431,6 @@ Page({
     let number = wx.getStorageSync('number').toString()
     levels = JSON.stringify(levels)
     info = Object.assign(base,work,{data:levels,student_info_id:number})
-    // all = JSON.stringify(info)
-    // console.log(all)
     wx.request({
       url:app.server + 'addEmployment_Archives',
       method: 'POST',
@@ -441,36 +439,18 @@ Page({
       },
       data: info,
       success:function(res){
-        console.log(res)
-      }
-    })
-    return
-    app.apiPost('addEmployment_Archives', data).then(res => {
-      let error = res.error == 0 ? 'success' : 'error'
-      app.toastMsg(error, res.msg)
-      if (res.error == 0) {
-        setTimeout(() => {
-          wx.setStorageSync('myinfo', this.data.optionList)
-          wx.switchTab({
-            url: '/pages/user/index/index'
+        let error = res.data.error == 0 ? 'success' : 'error'
+        app.toastMsg(error,res.data.msg)
+        if(res.data.error == 0){
+         setTimeout(()=>{
+          wx.navigateBack({
+            delta:1
           })
-        }, 1000)
-        wx.setStorageSync('recodeInfo', this.data.optionList)
+         },1000)
+        }
+        wx.setStorageSync('myInfo',self.data.optionList)
+        wx.setStorageSync('recodeInfo',info)
       }
     })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

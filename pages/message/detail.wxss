@@ -1,0 +1,36 @@
+/* pages/message/detail.wxss */
+.avatar{
+  width:40rpx;
+  height:37rpx;
+}
+
+.top{
+  min-height:180rpx;
+  padding:10rpx 20rpx;
+  background-color: #fff;
+  font-size: 30rpx;
+}
+.top .one{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top .one > text:nth-child(1){
+  color: #999;
+}
+.top .two{
+  display: flex;
+}
+.top .two > text:nth-child(1){
+  display: inline-block;
+  width:90rpx;
+  color: #999;
+}
+.top .two >text:nth-child(2){
+  font-size: 28rpx;
+}
+.top .over-text{
+  flex:1;
+  overflow: hidden;
+}
+

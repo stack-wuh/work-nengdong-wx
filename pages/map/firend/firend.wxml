@@ -55,7 +55,6 @@
       <view class="menu-header">
         <text data-isRow="2" bindtap="showCheckBox">取消</text>
         <text>筛选</text>
-        <!-- <text bindtap="resetInfo">重置</text> -->
         <text bindtap="filterData" style='color: #00998d;'>确定</text>
       </view>
       <view class="menu-list" wx:for="{{menuList}}" wx:key="{{index}}">

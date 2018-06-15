@@ -1,50 +1,58 @@
 // pages/user/private/private.js
 var app = getApp()
-const optionList =[
-  {
+const optionList = [{
     title: '基础信息',
     iconPath: '/images/icon-info.png',
     list: [{
       name: '学院',
       value: '',
-      default:true,
+      default: true,
+      rename:'school'
     }, {
       name: '专业',
       value: '',
-      default:true,
+      default: true,
+      rename:'line'
     }, {
       name: '班级',
       value: '',
-      default:true,
+      default: true,
+      rename:'classes'
     }, {
       name: '手机号',
       value: '',
-      ischecked:false,
-      prop:'phone_hide'
+      ischecked: false,
+      prop: 'phone_hide',
+      rename:'phone_number'
     }, {
       name: '邮箱',
       value: '',
-      ischecked:false,
-      prop:'email_hide'
+      ischecked: false,
+      prop: 'email_hide',
+      rename:'email'
     }, {
       name: 'QQ',
       value: '',
-      ischecked:false,
-      prop:'qq_hide'
+      ischecked: false,
+      prop: 'qq_hide',
+      rename:'qq'
     }, {
       name: '微信',
       value: '',
-      ischecked:false,
-      prop:'weixin_hide'
+      ischecked: false,
+      prop: 'weixin_hide',
+      rename:'weixin'
     }, {
       name: '工作/升学所在地',
       value: '',
-      default:true,
+      default: true,
+      rename:'site'
     }, {
       name: '详细地址（选填）',
-      value:'',
-      ischecked:false,
-      prop:'address_hide'
+      value: '',
+      ischecked: false,
+      prop: 'address_hide',
+      rename:'address'
     }]
   },
   {
@@ -53,95 +61,168 @@ const optionList =[
     list: [{
       name: '用人单位名称',
       value: '',
-      ischecked:false,
-      prop:'unit_name_hide'
+      ischecked: false,
+      prop: 'unit_name_hide',
+      rename:'unit_name'
     }, {
       name: '单位性质',
       value: '',
-      default:true,
+      default: true,
+      rename:'unit_property'
     }, {
       name: '单位所在行业',
       value: '',
-      default:true,
+      default: true,
+      rename:'unit_way'
     }, {
       name: '工作职位类别',
       value: '',
-      default:true,
+      default: true,
+      rename:'place_class'
     }, {
       name: '岗位名称（选填）',
       value: '',
-      ischecked:false,
-      prop:'post_name_hide'
+      ischecked: false,
+      prop: 'post_name_hide',
+      rename:'post_name'
     }, {
       name: '起薪（选填）',
       value: '',
-      ischecked:false,
-      prop:'money_hide'
+      ischecked: false,
+      prop: 'money_hide',
+      rename:'money'
     }]
   },
   {
     title: '升学档案',
     iconPath: '/images/icon-student.png',
-    list: [{
+    list: [
+     [
+      {
         name: '层次',
         value: '',
-        default:true,
+        default: true,
+        rename:'levels'
       },
       {
         name: '学校',
         value: '',
-        default:true,
+        default: true,
+        rename:'schools'
       },
       {
         name: '院系',
         value: '',
-        ischecked:false,
-        prop:'faculty_hide'
+        ischecked: false,
+        prop: 'faculty_hide',
+        rename:'faculty'
       },
       {
         name: '专业',
         value: '',
-        ischecked:false,
-        prop:'line_text_hide'
-      },
-    ]
+        ischecked: false,
+        prop: 'line_text_hide',
+        rename:'line_text'
+      }
+     ],
+    ],
   }
 ]
+const temp = [
+  {
+    name: '层次',
+    value: '',
+    default: true,
+    rename:'levels'
+  },
+  {
+    name: '学校',
+    value: '',
+    default: true,
+    rename:'schools'
+  },
+  {
+    name: '院系',
+    value: '',
+    ischecked: false,
+    prop: 'faculty_hide',
+    rename:'faculty'
+  },
+  {
+    name: '专业',
+    value: '',
+    ischecked: false,
+    prop: 'line_text_hide',
+    rename:'line_text'
+  }
+ ]
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    optionList:optionList
+    optionList: optionList,
+    temp:temp
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let data = wx.getStorageSync('recodeInfo')
-    let privateinfo = wx.getStorageSync('privateInfo')
+    let data = wx.getStorageSync('recodeInfo') , privateinfo = wx.getStorageSync('privateInfo') //获取--毕业档案提交表单 循环列表--optionList
     this.data.optionList.map(item=>{
-      data.map(ditem=>{
-          item.list.map(subitem=>{
-            ditem.list.map(dsub=>{
-              if(subitem.name === dsub.name){
-                subitem.value = dsub.value
-              }
-            })
+      item.list.map(list=>{
+        for(var k in data){
+          if(k == list.rename){
+            list.value = data[k]
+          }
+        }
+      })
+      if(item.title == '升学档案'){
+        let newList = JSON.parse(data.data) , temp = JSON.parse(JSON.stringify(this.data.temp))
+        let newArr = []
+        for(var i=0;i<newList.length;i++){
+          newArr[i] = []
+        }
+        newList.map((list,index)=>{
+          let temp = JSON.parse(JSON.stringify(this.data.temp))
+            for(var k in list){
+              temp.map((n,i)=>{
+                if(n.rename == k){
+                  n.value = list[k]
+                }
+              })
+            }
+          newArr[index] = temp
+        })
+        item.list = newArr
+      }
+    })
+    this.setData({optionList:this.data.optionList})
+    console.log(this.data.optionList)
+    return
+    // let privateinfo = wx.getStorageSync('privateInfo')
+    this.data.optionList.map(item => {
+      data.map(ditem => {
+        item.list.map(subitem => {
+          ditem.list.map(dsub => {
+            if (subitem.name === dsub.name) {
+              subitem.value = dsub.value
+            }
           })
+        })
       })
     })
     this.setData({
-      optionList:this.data.optionList
+      optionList: this.data.optionList
     })
-    if(privateinfo){
-      this.data.optionList.map(item=>{
-        privateinfo.map(pdata=>{
-          item.list.map(sublist=>{
-            pdata.list.map(subp=>{
-              if(sublist.name === subp.name){
+    if (privateinfo) {
+      this.data.optionList.map(item => {
+        privateinfo.map(pdata => {
+          item.list.map(sublist => {
+            pdata.list.map(subp => {
+              if (sublist.name === subp.name) {
                 sublist.ischecked = subp.ischecked
               }
             })
@@ -149,89 +230,41 @@ Page({
         })
       })
       this.setData({
-        optionList:this.data.optionList
+        optionList: this.data.optionList
       })
     }
   },
 
-  handleClickChange(e){
+  handleClickChange(e) {
     let name = e.currentTarget.dataset.name
-    this.data.optionList.map(item=>{
-      item.list.map(list=>{
-        if(list.name === name){
+    this.data.optionList.map(item => {
+      item.list.map(list => {
+        if (list.name === name) {
           list.ischecked = !list.ischecked
         }
       })
     })
     this.setData({
-      optionList:this.data.optionList
+      optionList: this.data.optionList
     })
   },
 
-  handleClickSubmit(){
+  handleClickSubmit() {
     let data = this.data.optionList
     let arr = {}
-    data.map(item=>{
-      item.list.map(list=>{
-        if(list.prop){
+    data.map(item => {
+      item.list.map(list => {
+        if (list.prop) {
           arr[list.prop] = list.ischecked
         }
       })
     })
-    app.apiPost('addStudent_Info_HideService',arr).then(res=>{
+    app.apiPost('addStudent_Info_HideService', arr).then(res => {
       let error = res.error == 0 ? 'success' : 'error'
-      app.toastMsg(error,res.msg)
-      if(res.error == 0){
-        wx.setStorageSync('privateInfo',data)
+      app.toastMsg(error, res.msg)
+      if (res.error == 0) {
+        wx.setStorageSync('privateInfo', data)
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })
