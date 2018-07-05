@@ -22,10 +22,11 @@ Page({
     ],
     search:{
       pageNo:1,
-      name:''
+      name:'全部'
     },
     isShowMore:false,
-    remind:'正在加载中'
+    remind:'正在加载中',
+    list:[]
   },
   onLoad:function(e){
     this.fetchData()
@@ -43,6 +44,10 @@ Page({
   fetchData(){
     app.apiPost('shwoTidings',this.data.search).then(res=>{
         if(res.data){
+          this.data.list = this.data.list.concat(res.data)
+          this.setData({
+            list:this.data.list
+          })
           if(res.data.length == 10){
             this.setData({
               isShowMore:true,

@@ -11,7 +11,7 @@
       <text data-index="{{index}}" data-name="{{item.name}}" bindtap="handleClickChange" class="nav-title {{index == current ? 'active' : ''}}" wx:for="{{navList}}" wx:key="{{index}}">{{item.name}}</text>
     </view>   
     <view class="list">
-      <navigator hover-class="none" url="/pages/message/detail" class="list-item"> 
+      <navigator hover-class="none" wx:for="item in list" url="/pages/message/detail" class="list-item"> 
           <view class="img-box">
             <image src="/images/logo.png" class="avatar" />
           </view>

@@ -120,18 +120,4 @@ Page({
       path:`/pages/activity/detail/index?id=${self.id}&index=0`
     }
   },
-  /**
-   * 单击分享
-  */
-  handleClickShare(){
-    wx.showShareMenu({
-      withShareTicket:true,
-      success:function(res){
-        console.log(res)
-      },
-      fail:function(res){
-        console.log(res)
-      }
-    })
-  },
 })

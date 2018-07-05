@@ -54,7 +54,7 @@ Page({
           remind: '没有更多啦'
         })
       }
-      wx.setStorageSync('alumniList',res)
+      // wx.setStorageSync('alumniList',res)
     })
   },
 

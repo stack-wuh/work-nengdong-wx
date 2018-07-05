@@ -373,6 +373,4 @@ Page({
     })
     this.fetchData()
   }
-  
-
 })

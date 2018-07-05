@@ -10,7 +10,7 @@
       </view>
       <view class="right-content">
         <view class="over-text">{{item.title}}</view>
-        <view class="over-text">{{item.proclaim_dispose}}</view>
+        <view class="over-text">{{item.proclaim_dispose || ''}}</view>
         <view class="flex-box">
           <text>{{item.time}}</text>
           <text class="empty"></text>

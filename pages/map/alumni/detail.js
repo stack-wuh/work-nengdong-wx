@@ -93,5 +93,18 @@ Page({
         imgList:imgList
       })
     })
+  },
+  /**
+   * 自定义分享内容
+   */
+  onShareAppMessage:function(res){
+    let self = this
+    if(res.from === 'button'){
+      console.log(res.target)
+    }
+    return{
+      title:self.data.list.title,
+      path:`/pages/map/alumni/detail?id=${self.id}`
+    }
   }
 })
