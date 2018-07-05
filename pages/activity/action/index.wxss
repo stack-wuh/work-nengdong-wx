@@ -35,7 +35,7 @@
 .item-img-list .item-img-box .icon-delete{
   position: absolute;
   right:-10rpx;
-  top:10rpx;
+  top:-10rpx;
 }
 .my-picker-view{
   position: fixed;

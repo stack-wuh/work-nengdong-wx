@@ -64,7 +64,7 @@ Page({
       wx.setStorageSync('activeDetail',this.data.newList)
     })
   },
-  showMore(){
+  showMore(){  // 加载更多
     if(this.data.isShowMore){
       this.setData({
         page:++this.data.page
@@ -72,7 +72,7 @@ Page({
       this.fetchData()
     }
   },
-  hiddenSearchBox(){
+  hiddenSearchBox(){ // 隐藏搜索栏
     this.setData({
       isShowSearch:false,
       isShowInput:false
@@ -82,7 +82,8 @@ Page({
   searchData(e){
     this.setData({
       title:e.detail.value,
-      newList:[]
+      newList:[],
+      page:1,
     })
     this.fetchData()
     this.setData({
@@ -135,6 +136,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
+  
 })

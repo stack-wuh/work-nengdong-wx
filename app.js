@@ -44,6 +44,8 @@ App({
    * 网络请求，post
    */
   apiPost: function (url, data={}, title ='加载中') {
+    url = url.replace('/SchoolFellow','')
+    console.log(url)
     wx.showLoading({
       title: title,
     })
@@ -181,7 +183,7 @@ App({
   },
 
 
-  server:'http://192.168.10.122:8686/SchoolFellow/'
+  server:'http://192.168.10.122:8080/SchoolFellow/'
 
 })
 

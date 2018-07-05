@@ -184,3 +184,6 @@
   width:100rpx;
   text-align:right;
 }
+.my-btn{
+  background-color:#fff;
+}

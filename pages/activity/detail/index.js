@@ -65,10 +65,10 @@ Page({
     let data = {
       activity_id:this.id
     }
-    this.data.list.activity_or.or_text = !this.data.list.activity_or.or_text
-    this.setData({
-      list:this.data.list
-    })
+    // this.data.list.activity_or.or_text = !this.data.list.activity_or.or_text
+    // this.setData({
+    //   list:this.data.list
+    // })
     app.apiPost('addJoinActivity',data).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
@@ -106,17 +106,32 @@ Page({
       })     
     })
   },
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
-  }
+  onShareAppMessage: function (res) {
+    let self = this
+    if(res.from === 'button'){
+      console.log(res.target)
+    }
+    return {
+      title:self.data.list.title,
+      path:`/pages/activity/detail/index?id=${self.id}&index=0`
+    }
+  },
+  /**
+   * 单击分享
+  */
+  handleClickShare(){
+    wx.showShareMenu({
+      withShareTicket:true,
+      success:function(res){
+        console.log(res)
+      },
+      fail:function(res){
+        console.log(res)
+      }
+    })
+  },
 })

@@ -34,12 +34,12 @@ Page({
     }
   },
 
-  bindblur(){
+  bindblur(){  // 失去焦点隐藏输入框
     this.setData({
       showInput:false
     })
   },
-  saveInput(e){
+  saveInput(e){ // 保存input框值
     this.setData({
       title:e.detail.value
     })
@@ -49,11 +49,12 @@ Page({
       showInput:true
     })
   },
-  changeActive(e){
+  changeActive(e){ // 切换导航栏
     this.setData({
       type:e.currentTarget.dataset.type,
       check:e.currentTarget.dataset.title,
-      list:[]
+      list:[],
+      title:''
     })
     this.fetchData()
   },
@@ -65,8 +66,10 @@ Page({
           item.endtime = format.formatTime(new Date(item.endtime))
         })
         this.data.list = this.data.list.concat(res.data)
+        this.setData({
+          list:this.data.list
+        })
       } 
-      console.log(this.data.remind)
       if(res.data.length == 10){
         this.setData({
           isShowMore:true,
@@ -78,9 +81,6 @@ Page({
           remind:'没有更多啦'
         })
       }
-      this.setData({
-        list:res.data
-      })
     })
   },
 
