@@ -170,12 +170,11 @@ Page({
     })
   },
   fetchData(id) {
-    let data = wx.getStorageSync('firendsList')
-    let obj = data.find(item => {
-      return item.id == id
-    })
+    var pages =  getCurrentPages()
+    var page = pages[pages.length - 2]
+    let data = page.data.list
     this.setData({
-      list: obj
+      list:data[id]
     })
   },
 })

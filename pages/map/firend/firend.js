@@ -303,7 +303,7 @@ Page({
           remind: '没有更多啦'
         })
       }
-      // wx.setStorageSync('firendsList',this.data.list)
+      wx.setStorageSync('firendsList',this.data.list)
     })
   },
   

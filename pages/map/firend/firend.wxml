@@ -12,7 +12,7 @@
   </view>
   <view style="height:87rpx;"></view>
   <view class="father other-bg">
-    <navigator hover-class="none" url="/pages/map/firend/detail?id={{item.id}}" class="item-content" wx:for="{{list}}" wx:key="{{index}}">
+    <navigator hover-class="none" url="/pages/map/firend/detail?id={{index}}" class="item-content" wx:for="{{list}}" wx:key="{{index}}">
       <view class="img-box">
         <image wx:if="{{!item.image}}" src="/images/avatar.png" class="avatar" />
         <image  wx:else src="{{item.image}}" class="avatar" />
@@ -62,7 +62,6 @@
           <view class="menu-name">{{item.name}}</view>
           <image src="/images/icon-arrow-down-gray.png" bindtap="tagShow" data-index="{{index}}" class="{{item.height=='100%'?'active':''}}"></image>
         </view>
-        
         <view class="list-wrapper" style='max-height: {{item.height}}'>
           <view class="item-wrapper" wx:if="{{item.name != '所在地'}}">
             <view wx:for="{{item.list}}" wx:for-item="item1" wx:for-index="index1" class="item {{item1.choosed?'active':''}}" data-list="{{index}}" data-index="{{index1}}" bindtap="tagChoose">{{item1[item.prop]}}</view>
