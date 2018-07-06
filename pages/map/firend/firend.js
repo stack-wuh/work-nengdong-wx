@@ -279,20 +279,18 @@ Page({
 
   fetchData(){
     let data = Object.assign(this.data.info, { pageNo: this.data.page, name: this.data.name, aid: wx.getStorageSync('number')})
-    this.setData({
-      list : []
-    })
     app.apiPost('getStudent_Info',data, false).then(res=>{
-      res.data = res.data||[]
+      res.data = res.data || []
       res.data.forEach(item=>{
         item.is_collect = item.student_info_collect?true:false
       })
+      this.data.list = this.data.list.concat(res.data)
       let error = res.error == 0 ? 'success' : 'error'
       res.error == 0 &&
       this.setData({
-        list: this.data.list.concat(res.data),
+        list: this.data.list,
         isShowDialog:false,
-        animation:app.animation(this.data.animation,0,0)
+        // animation:app.animation(this.data.animation,0,0)
       })
       if(res.data.length==10){
         this.setData({
@@ -305,7 +303,7 @@ Page({
           remind: '没有更多啦'
         })
       }
-      wx.setStorageSync('firendsList',this.data.list)
+      // wx.setStorageSync('firendsList',this.data.list)
     })
   },
   
