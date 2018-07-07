@@ -123,8 +123,8 @@
   </view>
   <view class="btm-btn-list actioned">
     <button class="my-btn" bindtap="handleClickShare" open-type="share" >分享</button>
-    <text data-type="cancel" wx:if="{{list.activity_or.or_text == '1'}}" bindtap="handleSubmit">取消报名</text>
-    <text data-type="submit" bindtap="handleSubmit" wx:else>我要报名</text>
+    <text data-type="cancel" wx:if="{{list.isActivited}}" bindtap="handleSubmit">取消报名</text>
+    <text data-type="submit" bindtap="handleSubmit" wx:if="{{!list.isActivited}}" >我要报名</text>
   </view>  
 
   <!--报名成功-->

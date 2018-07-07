@@ -66,12 +66,12 @@
     <view class="list-item" wx:for="{{list}}" wx:key="{{index}}">
       <text class="tips">工</text>
       <view class="list-name">
-        <text>{{item.school_name}}</text> 
+        <text>{{item.school_name || item.name}}</text> 
         <text>································</text>
         <text>{{item.phone}}</text>
       </view>
-      <image wx:if="{{item.isCollect}}" data-id="{{item.id}}" data-type="2" bindtap="handleClickCollage" src="/images/icon-collect-active.png" class="icon-collect" />
-      <image wx:if="{{!item.isCollect}}" data-id="{{item.id}}" data-type="2" bindtap="handleClickCollage" src="/images/icon-collect-default.png" class="icon-collect" />
+      <image wx:if="{{item.isCollect}}" data-item="{{item}}" data-id="{{item.id}}" data-type="2" bindtap="handleClickCollage" src="/images/icon-collect-active.png" class="icon-collect" />
+      <image wx:if="{{!item.isCollect}}" data-item="{{item}}" data-id="{{item.id}}" data-type="2" bindtap="handleClickCollage" src="/images/icon-collect-default.png" class="icon-collect" />
     </view>
   </view>
   <view class="btm-remind">{{remind}}</view>

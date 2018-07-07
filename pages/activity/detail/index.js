@@ -43,6 +43,9 @@ Page({
   },
   getList(id){
     app.apiPost('getActivity_Enroll',{activity_id:id,pageNo:this.data.pageNo}).then(res=>{
+      this.setData({
+        listData:[]
+      })
       if(res.data){
         if(res.data.length == 10){
           this.setData({
@@ -65,22 +68,23 @@ Page({
     let data = {
       activity_id:this.id
     }
-    // this.data.list.activity_or.or_text = !this.data.list.activity_or.or_text
-    // this.setData({
-    //   list:this.data.list
-    // })
     app.apiPost('addJoinActivity',data).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
+      this.data.list.isActivited = !this.data.list.isActivited
+      this.setData({
+        list:this.data.list
+      })
+      this.getList(this.id)
       if(type === 'submit'){
         if(res.error == 0){
           this.setData({
             isActioned:true,
-            showMsg:true
+            showMsg:true,
           })
         }else{
           setData({
-            isActioned:false
+            isActioned:false,
           })
         }
       }
@@ -98,6 +102,11 @@ Page({
             imgList.push(item)
           })
         }
+      }
+      if(res.data[0].activity_or){
+        res.data[0].isActivited = true
+      }else{
+        res.data[0].isActivited = false
       }
       imgList.push(res.data[0].cover)
       this.setData({

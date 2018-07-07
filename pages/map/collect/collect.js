@@ -22,9 +22,10 @@ Page({
   onLoad: function (options) {
     this.fetchData()
   },
-  handleClickCollage(e){
+  handleClickCollage(e){  // 添加到收藏
     let id = e.currentTarget.dataset.id
     let type = e.currentTarget.dataset.type
+    let item = e.currentTarget.dataset.item
     let url = '' , data = {}
     if(type == 1){
       url = 'addStudent_Info_Collect'
@@ -37,9 +38,10 @@ Page({
         alumni_pages_id:id
       }
     }else if(type == 2){
-      url = 'SCSchool_Info_School'
+      url = 'CollectionCancel'
       data = {
-        id:id
+        id:id,
+        type:item.school_name ? 'school' : 'xuexiao'
       }
     }
     app.apiPost(url,data).then(res=>{
@@ -90,7 +92,7 @@ Page({
     }else if(this.data.type == 1){
       url = 'getAlumni_Pages_Collect'
     }else{
-      url = 'ShowSchool_Info_School'
+      url = 'SchoolColege_Collect'
     }
     app.apiPost(url).then(res=>{
       if(res.data){
@@ -117,8 +119,22 @@ Page({
             item.isCollect = false
           }
         })
+      }
+      if(url != 'SchoolColege_Collect'){
         this.setData({
           list: this.data.list.concat(res.data)
+        })
+      }else{
+        var data = res.school.concat(res.xuexiao)
+        data.map(item => {
+          if(item.student_collect || item.xuexiao_collect){
+            item.isCollect = true
+          }else{
+            item.isCollect = false
+          }
+        })
+        this.setData({
+          list:data
         })
       }
       if(res.length == this.data.listRow){
