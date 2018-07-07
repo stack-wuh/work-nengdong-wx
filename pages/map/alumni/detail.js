@@ -77,6 +77,11 @@ Page({
       wx.setNavigationBarTitle({
         title: data.title
       })
+      if(data.alumni_pages_collect){
+        data.is_collect = true
+      }else{
+        data.is_collect = false
+      }
       if(data.alumni_pages_album){
         if(data.alumni_pages_album.address){
           address = data.alumni_pages_album.address.split(',')

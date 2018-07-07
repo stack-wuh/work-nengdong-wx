@@ -108,10 +108,8 @@ Page({
           }
           if(item.student_info_collect){  //校友黄页收藏
             item.isCollect = true
-            console.log(item.isCollect)
           }else{
             item.isCollect = false
-            console.log(item.isCollect)
           }
           if(item.student_collect){ // 院校收藏
             item.isCollect = true
