@@ -200,39 +200,6 @@ Page({
       }
     })
     this.setData({optionList:this.data.optionList})
-    console.log(this.data.optionList)
-    return
-    // let privateinfo = wx.getStorageSync('privateInfo')
-    this.data.optionList.map(item => {
-      data.map(ditem => {
-        item.list.map(subitem => {
-          ditem.list.map(dsub => {
-            if (subitem.name === dsub.name) {
-              subitem.value = dsub.value
-            }
-          })
-        })
-      })
-    })
-    this.setData({
-      optionList: this.data.optionList
-    })
-    if (privateinfo) {
-      this.data.optionList.map(item => {
-        privateinfo.map(pdata => {
-          item.list.map(sublist => {
-            pdata.list.map(subp => {
-              if (sublist.name === subp.name) {
-                sublist.ischecked = subp.ischecked
-              }
-            })
-          })
-        })
-      })
-      this.setData({
-        optionList: this.data.optionList
-      })
-    }
   },
 
   handleClickChange(e) {
@@ -267,4 +234,11 @@ Page({
       }
     })
   },
+
+  fetchData(){
+    app.apiPost('showStudent_Info',{id:wx.getStorageSync('number')}).then(res=>{
+      var hideList = res.data[0].student_info_hide
+      console.log(hideList)
+    })
+  }
 })

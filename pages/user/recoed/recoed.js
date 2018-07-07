@@ -120,38 +120,38 @@ const optionList = [
     title: '升学档案',
     iconPath: '/images/icon-student.png',
     list: [
-      [
-        {
-          name: '层次',
-          value: '',
-          list: [],
-          range: 'level_name',
-          require: true,
-          isInput: false,
-          prop: 'levels'
-        },
-        {
-          name: '学校',
-          value: '',
-          prop: 'schools',
-          require: true,
-          isInput: true
-        },
-        {
-          name: '院系',
-          value: '',
-          prop: 'faculty',
-          require: true,
-          isInput: true
-        },
-        {
-          name: '专业',
-          value: '',
-          prop: 'line_text',
-          require: true,
-          isInput: true
-        },
-      ]
+    //   [
+    //     {
+    //       name: '层次',
+    //       value: '',
+    //       list: [],
+    //       range: 'level_name',
+    //       require: true,
+    //       isInput: false,
+    //       prop: 'levels'
+    //     },
+    //     {
+    //       name: '学校',
+    //       value: '',
+    //       prop: 'schools',
+    //       require: true,
+    //       isInput: true
+    //     },
+    //     {
+    //       name: '院系',
+    //       value: '',
+    //       prop: 'faculty',
+    //       require: true,
+    //       isInput: true
+    //     },
+    //     {
+    //       name: '专业',
+    //       value: '',
+    //       prop: 'line_text',
+    //       require: true,
+    //       isInput: true
+    //     },
+    //   ]
     ]
   }
 ]
@@ -207,7 +207,8 @@ Page({
     type: 1,
     animation: '',
     isBack: false,
-    isbtn: false
+    isbtn: false,
+    data:[]
   },
 
   /**
@@ -218,10 +219,6 @@ Page({
       type: options.type
     })
     if (options.type == 2) {
-      let data = wx.getStorageSync('myInfo')
-      this.setData({
-        optionList: data
-      })
       wx.setNavigationBarTitle({
         title: '编辑档案'
       })
@@ -233,7 +230,7 @@ Page({
     this.getTrade()
     this.getClassify()
     this.getLevel()
-
+    this.fetchData()
   },
 
   //点击继续添加
@@ -453,4 +450,37 @@ Page({
       }
     })
   },
+  fetchData(){
+    app.apiPost('showStudent_Info',{id:wx.getStorageSync('number')}).then(res=>{
+      var info = res.data[0]
+      this.data.optionList[0].list.map(item => {  // 基础信息
+        for(var k in info){
+          if(item.prop == k){
+            item.value = info[k]
+          }
+        }
+      })  
+      this.data.optionList[1].list.map(item => {  // 就业档案
+          for(var k in info.employment_archives){
+            if(item.prop == k){
+              item.value = info.employment_archives[k]
+            }
+          }
+      })  
+      info.advance_ArchivesList.map((item,index) => { // 升学档案
+        var obj = JSON.parse(JSON.stringify(this.data.temp))
+        obj.map(oo => {
+          for(var k in item){
+            if(oo.prop == k){
+              oo.value = item[k]
+            }
+          }
+        })
+        this.data.optionList[2].list[index] = obj
+      })
+      this.setData({
+        optionList:this.data.optionList
+      })
+    })  
+  }
 })
