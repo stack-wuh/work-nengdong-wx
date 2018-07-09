@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 33,
+			"current": 32,
 			"list": [
 				{
 					"id": -1,
@@ -231,7 +231,7 @@
 					"id": 32,
 					"name": "消息中心",
 					"pathName": "pages/message/message",
-					"query": "id=1"
+					"query": "id=33"
 				},
 				{
 					"id": -1,

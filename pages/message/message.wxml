@@ -1,25 +1,25 @@
 <view class="container other-bg">
     <view class="search-box">
       <view class="input-box">
-        <text>搜索</text>
-        <image src="/images/icon-search.png" class="icon-search" />
-        <input hidden auto-focus="{{true}}" />
+        <text bindtap="handleClickShowInput" wx:if="{{!showInput}}">搜索</text>
+        <image bindtap="handleClickShowInput" wx:if="{{!showInput}}" src="/images/icon-search.png" class="icon-search" />
+        <input bindinput="saveInputValue" wx:if="{{showInput}}" bindblur="inputBlur" auto-focus="{{true}}" />
       </view>
     </view>
     <view style="height:100rpx;"></view>
     <view class="nav-list">
-      <text data-index="{{index}}" data-name="{{item.name}}" bindtap="handleClickChange" class="nav-title {{index == current ? 'active' : ''}}" wx:for="{{navList}}" wx:key="{{index}}">{{item.name}}</text>
+      <text data-index="{{index}}" data-name="{{item.value}}" bindtap="handleClickChange" class="nav-title {{index == current ? 'active' : ''}}" wx:for="{{navList}}" wx:key="{{index}}">{{item.name}}</text>
     </view>   
     <view class="list">
-      <navigator hover-class="none" wx:for="item in list" url="/pages/message/detail" class="list-item"> 
+      <navigator data-id="{{list.id}}" bindtap="jumptoOther" hover-class="none" wx:for="{{list}}" wx:key="{{index}}" url="{{'/pages/message/detail?id=' + item.id}}" class="list-item"> 
           <view class="img-box">
             <image src="/images/logo.png" class="avatar" />
           </view>
           <view class="item-right">
-            <view>类型: </view>
-            <view>内容: </view>
-            <view>提醒时间: </view>
-            <view>时间段: </view>
+            <view><text>标题：</text> {{item.title}}</view>
+            <!-- <view><text>内容:</text> {{item.content}}</view> -->
+            <view><text>提醒时间:</text> {{item.time_or == 0 ? '开始前' : '截止前'}}</view>
+            <view><text>时间段:</text> {{item.starttime}} - {{item.endtime}}</view>
           </view>
       </navigator>
     </view> 

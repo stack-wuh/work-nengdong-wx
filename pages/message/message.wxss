@@ -51,14 +51,23 @@
   align-items: center;
   min-height:220rpx;
   padding:0 20rpx;
+  border-bottom:1px solid #eee;
   background-color: #fff;
 }
 .list-item .img-box{
   margin-right:15rpx;
 }
 .list-item .item-right{
-  font-size: 30rpx;
+  font-size: 28rpx;
+}
+.list-item .item-right text{
+  color: #999;
+}
+.list-item .item-right view{
+  
 }
 .form-msg{
   text-align:center;
+  margin-bottom:0px !important;
+  padding-bottom:20rpx;
 }

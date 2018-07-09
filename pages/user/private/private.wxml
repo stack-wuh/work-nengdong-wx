@@ -17,12 +17,12 @@
         <text class="item-title">{{sitem.name}}</text>
         <text class="item-input">{{sitem.value}}</text>
       </view>
-      <block wx:if="{{items.title == '升学档案'}}" wx:for="{{items.list}}" wx:key="{{index}}" wx:for-item="subitem" >
-        <view class="card-list-item" wx:for="{{subitem}}" wx:for-item="sitem" wx:key="{{index}}">
+      <block wx:if="{{items.title == '升学档案'}}" wx:for="{{items.list}}" wx:key="{{index}}" wx:for-item="subitem" wx:for-index="sIndex" >
+        <view class="card-list-item" wx:for="{{subitem}}" wx:for-item="sitem"  wx:key="{{index}}">
           <view>
               <image wx:if="{{sitem.default}}" src="/images/icon-checked-default.png" class="icon-checked-default" />
-              <image data-name="{{sitem.name}}" bindtap="handleClickChange" wx:if="{{!sitem.ischecked && !sitem.default}}" src="/images/icon-check-default.png" class="icon-check" />
-              <image data-name="{{sitem.name}}" bindtap="handleClickChange" wx:if="{{sitem.ischecked}}" src="/images/icon-check-action.png" class="icon-check" />
+              <image data-index="{{sIndex}}" data-name="{{sitem.name}}" bindtap="handleClickChange" wx:if="{{!sitem.ischecked && !sitem.default}}" src="/images/icon-check-default.png" class="icon-check" />
+              <image data-index="{{sIndex}}" data-name="{{sitem.name}}" bindtap="handleClickChange" wx:if="{{sitem.ischecked}}" src="/images/icon-check-action.png" class="icon-check" />
           </view>
           <text class="item-title">{{sitem.name}}</text>
           <text class="item-input">{{sitem.value}}</text>

@@ -1,7 +1,7 @@
 <!--pages/message/detail.wxml-->
 <view class="container other-bg">
   <swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{1000}}">
-    <block wx:for="{{imgUrls}}">
+    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
       <swiper-item>
         <image src="{{item}}" width="350" height="170" />
       </swiper-item>
@@ -22,16 +22,31 @@
     <view class="two">
       <text>时间: </text><text>{{info.starttime}} 至 {{info.endtime}}</text>
     </view>
+    <view class="empty"></view>
     <view class="btn-list">
-      <text>预览附件</text>
-      <text>填写表单</text>
+      <text bindtap="openDocument">预览附件</text>
+      <text bindtap="handleClickShowForm">填写表单</text>
     </view>
   </view>
-  <view class="form-area">
+  <view class="form-area" wx:if="{{isShowForm}}">
       <view class="form-box">
         <view class="title">提交表单</view>
+          <view class="form-group form-title">
+            <view>{{info.form_title}}</view>
+          </view>
+          <form bindsubmit="handleSubmit">
+          <view class="form-group" wx:for="{{info.form_content}}" wx:key="{{index}}">
+            <view class="form-item">
+              <text class="item-title">{{item}}</text>
+              <input name="{{item}}" placeholder="请编辑内容" />
+            </view>
+          </view>
+          <view class="form-btn-area">
+            <button bindtap="handleCancel" class="my-form-btn">取消</button>
+            <button form-type="submit" class="my-form-btn submit">提交</button>
+          </view>
+          </form>
         <view>
-          
         </view>
       </view>
   </view>

@@ -133,26 +133,29 @@ const temp = [
     name: '层次',
     value: '',
     default: true,
-    rename:'levels'
+    rename:'levels',
+    // prop:'levelsHide'
   },
   {
     name: '学校',
     value: '',
     default: true,
-    rename:'schools'
+    rename:'schools',
+    // prop:'schoolsHide'
   },
   {
     name: '院系',
     value: '',
     ischecked: false,
     prop: 'faculty_hide',
-    rename:'faculty'
+    rename:'faculty',
+    prop:'facultyHide'
   },
   {
     name: '专业',
     value: '',
     ischecked: false,
-    prop: 'line_text_hide',
+    prop: 'lineTextHide',
     rename:'line_text'
   }
  ]
@@ -200,13 +203,23 @@ Page({
       }
     })
     this.setData({optionList:this.data.optionList})
+    this.fetchData()
   },
 
   handleClickChange(e) {
-    let name = e.currentTarget.dataset.name
+    let name = e.currentTarget.dataset.name ,
+        arrIndex = e.currentTarget.dataset.index
+        console.log(arrIndex)
     this.data.optionList.map(item => {
-      item.list.map(list => {
+      item.list.map(list => {     // 设置基本信息和就业档案隐藏
         if (list.name === name) {
+          list.ischecked = !list.ischecked
+        }
+      })
+    })
+    this.data.optionList[2].list.map( (item,index) =>{ // 设置升学信息隐藏
+      item.map(list => {
+        if(list.name == name && index == arrIndex){
           list.ischecked = !list.ischecked
         }
       })
@@ -218,7 +231,8 @@ Page({
 
   handleClickSubmit() {
     let data = this.data.optionList
-    let arr = {}
+    console.log(data)
+    let arr = {data:[],} 
     data.map(item => {
       item.list.map(list => {
         if (list.prop) {
@@ -226,6 +240,17 @@ Page({
         }
       })
     })
+    data[2].list.map(item =>{
+      const obj = {}
+      item.map( list =>{
+        if(list.prop){
+          obj[list.prop] = list.ischecked
+          obj.advanceArchivesId = list.id
+        }
+      })
+      arr.data.push(obj)
+    })
+    arr.data = JSON.stringify(arr.data)
     app.apiPost('addStudent_Info_HideService', arr).then(res => {
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error, res.msg)
@@ -238,7 +263,35 @@ Page({
   fetchData(){
     app.apiPost('showStudent_Info',{id:wx.getStorageSync('number')}).then(res=>{
       var hideList = res.data[0].student_info_hide
-      console.log(hideList)
+      var advanceList = res.data[0].advanceArchivesHideList
+      this.data.optionList[0].list.map(item => {  // 基础信息隐藏
+        for(var k in hideList){
+          if(item.prop == k){
+            item.ischecked = hideList[k] == 'true' ?  true : false
+          }
+        }
+      })
+      this.data.optionList[1].list.map(item => {  // 就业信息隐藏
+        for(var k in hideList){
+          if(item.prop == k){
+            item.ischecked = hideList[k] == 'true' ? true : false
+          }
+        }
+      })
+      this.data.optionList[2].list.map((item,index) => { // 升学信息隐藏
+        item.map((list,lindex) =>{
+          var obj = advanceList[index]
+          for(var k in obj){
+            if(k == list.prop){
+              list.ischecked = obj[k] == 'true' ? true : false
+              list.id = obj.advanceArchivesId
+            } 
+          }
+        })  
+      })
+      this.setData({
+        optionList:this.data.optionList
+      })
     })
   }
 })

@@ -3,12 +3,20 @@
   width:40rpx;
   height:37rpx;
 }
-
+.container{
+  height:100%;
+}
 .top{
-  min-height:320rpx;
+  display: flex;
+  flex-flow: column wrap;
+
+  height:calc(100% - 320rpx);
   padding:10rpx 20rpx;
   background-color: #fff;
   font-size: 30rpx;
+}
+.top .empty{
+  flex:1;
 }
 .top .one{
   display: flex;
@@ -37,8 +45,8 @@
 .btn-list{
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top:50rpx;
+  justify-content: space-around;
+  margin-bottom:40rpx;
 }
 .btn-list > text{
   width:30%;
@@ -59,6 +67,9 @@
   background-color: rgba(0,0,0,.5);
 }
 .form-box{
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
   width:80%;
   height:80%;
   margin:0 auto;
@@ -70,4 +81,47 @@
   padding-top:20rpx;
   font-size: 30rpx;
   text-align: center;
+}
+.form-group{
+  height: 60rpx;
+  padding:0 15px;
+  font-size: 28rpx;
+  line-height:28px;
+  margin-bottom:15rpx;
+}
+.form-title{
+  text-align: center;
+  font-size: 30rpx;
+}
+.form-item{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  border-bottom:1px solid #eee;
+}
+.form-item .item-title{
+  margin-right:10rpx;
+  color: #999;
+}
+.form-btn-area{
+  display: flex;
+  align-items: center;
+  justify-content: space-around; 
+}
+.my-form-btn{
+  width:30%;
+  font-size: 28rpx;
+  outline: none;
+  border:none;
+  background-color: #fff;
+  border-radius: 4rpx;
+  -webkit-border-radius: 4rpx;
+  -moz-border-radius: 4rpx;
+  -ms-border-radius: 4rpx;
+  -o-border-radius: 4rpx;
+}
+.submit{
+  color: #fff;
+  background-color: #00998d;
 }
