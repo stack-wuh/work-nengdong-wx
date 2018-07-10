@@ -23,7 +23,7 @@ Page({
   },
   handleCollect(e){
     let id = e.currentTarget.dataset.id
-    app.apiPost('getMobileTidingsById',{id:id}).then(res=>{
+    app.apiPost('addTidings_Collect',{tidings_id:id}).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
       if(res.error == 0){
@@ -45,10 +45,12 @@ Page({
       res.data.imageName && res.data.imageName.length > 0 ? res.data.imageName : ['/images/logo.png']
       res.data.form_title = res.data.tidings_form && res.data.tidings_form.form_title
       res.data.form_content = res.data.tidings_form && res.data.tidings_form.form_content.split(',')
+      res.data.form_substance = (res.data.tidings_form && res.data.tidings_form.form_substance && res.data.tidings_form.form_substance.split(',')) || []
       this.setData({
         info:res.data,
         imgUrls:res.data.imageName
       })
+      console.log(this.data.info)
     })
   },
   handleClickShowForm(){
@@ -62,21 +64,47 @@ Page({
     })
   },
   handleSubmit(e){
-    console.log(e)
+    if(e.detail.value){
+      for(var k in e.detail.value){
+        if(e.detail.value[k] == ''){
+          app.toastMsg('error','请编辑必填项!')
+          return
+        }
+      }
+    }
+    var data = {
+      tidingsFromId:this.data.info.tidings_form.id,
+      formSubstance:Object.values(e.detail.value).toString(),
+    }
+    app.apiPost('subTidingsForm',data).then(res=>{
+      let error = res.error == 0 ? 'success' : 'error'
+      app.toastMsg(error,res.msg)
+      if(res.error == 0){
+        setTimeout(()=>{
+          this.setData({
+            isShowForm:false
+          })
+        },1000)
+      }
+    })
   },
-  openDocument(){
+  openDocument(){ 
     var self = this
     wx.downloadFile({
       url:self.data.info.accessoryName.toString(),
       success:function(res){
         var filePath = res.tempFilePath
+        app.toastMsg('success','正在下载文档')
         wx.openDocument({
           filePath:filePath,
           success:function(res){
-            console.log('打开文档成功')
+            app.toastMsg('success','正在打开文档')
           }
         })
-      }
+      },
+      fail:function(err){
+        app.toastMsg('error','文件下载失败')
+      },
     })
   },
 

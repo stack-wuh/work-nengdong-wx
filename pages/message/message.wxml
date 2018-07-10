@@ -18,7 +18,7 @@
           <view class="item-right">
             <view><text>标题：</text> {{item.title}}</view>
             <!-- <view><text>内容:</text> {{item.content}}</view> -->
-            <view><text>提醒时间:</text> {{item.time_or == 0 ? '开始前' : '截止前'}}</view>
+            <view><text>提醒时间:</text> {{item.time_or == 0 ? '开始前' : '截止前'}}{{item.remind || 0}}小时</view>
             <view><text>时间段:</text> {{item.starttime}} - {{item.endtime}}</view>
           </view>
       </navigator>
