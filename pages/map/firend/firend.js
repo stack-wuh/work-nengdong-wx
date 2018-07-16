@@ -117,28 +117,6 @@ Page({
     this.setData({
       menuList: this.data.menuList,
     })
-    // let vIndex = e.detail.value , name = e.currentTarget.dataset.name , index = e.currentTarget.dataset.index
-    // this.data.menuList.map((item,idx)=>{
-    //   if(item.name == name){
-    //     if(item.prop){
-    //       item.value = this.data.menuList[index].list[vIndex][item.prop]
-    //     }else if(item.name === '所在地'){
-    //       item.value = e.detail.value
-    //     }else if(item.name === '状态'){
-    //       item.value = this.data.menuList[index].list[vIndex]
-    //     }
-    //   }
-    //   for(var k in this.data.info){
-    //     if(item.search == k){
-    //       this.data.info[k] = item.value
-    //     }
-    //   }
-    // })
-    // this.setData({
-    //   menuList:this.data.menuList,
-    //   info:this.data.info
-    // })
-    // this.fetchData()
   },
   delRegion: function(){
     this.data.menuList[3].value = ''
@@ -367,7 +345,8 @@ Page({
     })
     this.setData({
       info: this.data.info,
-      isShowSlide: true
+      isShowSlide: true,
+      list:[]
     })
     this.fetchData()
   }
