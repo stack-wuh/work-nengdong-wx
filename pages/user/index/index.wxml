@@ -4,7 +4,8 @@
     <image src="/images/bg-user.png" class="bg-user" />
     <view class="info-content">
       <view class="img-box">
-        <image src="{{userInfo.avatarUrl}}" class="avatar"/>
+        <!-- <image src="{{userInfo.avatarUrl}}" class="avatar" /> -->
+        <open-data type="userAvatarUrl"></open-data>
       </view>
       <view class="right-content">
         <view>
