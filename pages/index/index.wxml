@@ -21,4 +21,5 @@
         </navigator>
     </view>
    </view>
+   <!-- <button open-type='getUserInfo' >获取授权信息</button> -->
 </view>

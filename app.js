@@ -3,27 +3,18 @@ App({
   onLaunch: function () {
     let self = this
     let number = wx.getStorageSync('number')
+    if(!number){
+      wx.reLaunch({
+         url: '/pages/account/login/login',
+      })
+    }
     wx.login({
       success:function(res){
-        // console.log(res)
         if(res.code){
-          // console.log(res)
           wx.getUserInfo({
             success:function(res){
-              // console.log(res)
-              console.log('is ok')
+              wx.setStorageSync('userInfo',res.userInfo)
             },
-            fail:function(res){
-              wx.getSetting({
-                success:function(res){
-                    wx.openSetting()
-                }
-              })
-            },
-            complete:function(res){
-              // console.log(res)
-              
-            }
           })
         }
       }

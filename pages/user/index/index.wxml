@@ -4,11 +4,11 @@
     <image src="/images/bg-user.png" class="bg-user" />
     <view class="info-content">
       <view class="img-box">
-        <image src="/images/avatar.png" class="avatar"/>
+        <image src="{{userInfo.avatarUrl}}" class="avatar"/>
       </view>
       <view class="right-content">
         <view>
-          <text>{{info.name}}</text>
+          <text>{{info.name || userInfo.nickName}}</text>
           <text class="txt-title">{{info.school_age}}</text>
         </view>
         <view>学号: {{info.number}}</view>

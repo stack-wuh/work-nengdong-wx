@@ -7,7 +7,8 @@ Page({
    */
   data: {
     recoedType:1,
-    info:[]
+    info:[],
+    userInfo:wx.getStorageSync('userInfo') || {}
   },
 
   /**
