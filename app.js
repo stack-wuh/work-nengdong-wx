@@ -2,7 +2,7 @@
 App({
   onLaunch: function () {
     let self = this
-    let number = wx.getStorageSync('number')
+    let number = wx.getStorageSync('number') , userInfo = wx.getStorageSync('userInfo') || {}
     if(!number){
       wx.reLaunch({
          url: '/pages/account/login/login',
@@ -10,13 +10,7 @@ App({
     }
     wx.login({
       success:function(res){
-        if(res.code){
-          wx.getUserInfo({
-            success:function(res){
-              wx.setStorageSync('userInfo',res.userInfo)
-            },
-          })
-        }
+        self.saveWxImg()
       }
     })
   },
@@ -125,20 +119,24 @@ App({
     let _this = this
     wx.getUserInfo({
       success: function (res) {
-        console.log(res,'is getinfo')
         wx.request({
-          url: _this.server + 'users/uploadwximg',
+          url: _this.server + 'addStuImage',
           method: 'POST',
           data: {
-            wxpic: res.userInfo.avatarUrl,
-            'number': wx.getStorageSync('number'),
+            avatarImg: res.userInfo.avatarUrl,
+            student_info_id: wx.getStorageSync('number'),
           },
           header: {
             'content-type': 'application/x-www-form-urlencoded'
           },
           success: function (res) {
-            console.log(res)
+
           }
+        })
+      },
+      fail(err){
+        wx.navigateTo({
+          url: '/pages/load/loading',
         })
       }
     })

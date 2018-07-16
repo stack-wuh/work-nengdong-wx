@@ -11,14 +11,14 @@ Page({
         name:'收藏',
         value:'collected'
       },
-      {
-        name:'我发出的',
-        value:'send'
-      },
-      {
-        name:'我收到的',
-        value:'received'
-      }
+      // {
+      //   name:'我发出的',
+      //   value:'send'
+      // },
+      // {
+      //   name:'我收到的',
+      //   value:'received'
+      // }
     ],
     search:{
       pageNo:1,

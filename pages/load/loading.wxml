@@ -1,0 +1,11 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <block>
+      <image bindtap="bindViewTap" class="avatar" src="{{userInfo.avatarUrl || '/images/avatar.png'}}" background-size="cover"></image>
+      <view class="nickname"><text wx:if="{{hasUserInfo}}">欢迎</text>{{userInfo.nickName || '用户昵称'}}</view>
+    </block>
+    <button class="btn"  open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 点击获取操作权限 </button>
+  </view>
+</view>
+ 

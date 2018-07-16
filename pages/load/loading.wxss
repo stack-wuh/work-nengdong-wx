@@ -1,0 +1,18 @@
+/* pages/load/loading.wxss */
+.container{
+  text-align: center;
+}
+.avatar{
+  width:180rpx;
+  height:180rpx;
+  margin-top:150rpx;
+  border-radius: 50%;
+}
+.btn{
+  width:300rpx;
+  margin-top:100rpx;
+  font-size: 30rpx;
+}
+.nickname{
+  font-size: 30rpx;
+}

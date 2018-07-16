@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/load/loading",
     "pages/index/index",
     "pages/account/login/login",
     "pages/account/register/register",
