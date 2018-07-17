@@ -131,7 +131,6 @@ Page({
       this.setData({
         list: this.data.list.concat(res.data),
       })
-      wx.setStorageSync('AlumniList',self.data.list)
       if(res.data.length == 10){
         this.setData({
           showMore: true,

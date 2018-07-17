@@ -59,7 +59,7 @@
 }
 .img-box{
   position: fixed;
-  right: -60rpx;
+  right: 0rpx;
   bottom:120rpx;
   width: 120rpx;
   height:120rpx;

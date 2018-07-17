@@ -11,7 +11,7 @@
     <view class="list-item">
       <view class="list-item-first">
        <text class="over-text">{{list.title}}</text>
-       <text class="act-top-title school">{{list.type}}</text>
+       <text class="act-top-title" style="background-color:{{list.activity_type && list.activity_type.color}};color:#fff;">{{list.activity_type && list.activity_type.type_name}}</text>
        <text class="text-list {{list.check_text === '进行中' ? 'act-ing' : list.check_text === '待审核' ? 'act-end' : 'act-danger'}}">{{list.check_text}}</text>
       </view>
       <view>

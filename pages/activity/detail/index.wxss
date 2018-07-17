@@ -175,10 +175,10 @@
 }
 
 .act-ing{
-  color: #0E90F5;
+  color: #0E90F5 !important;
 }
 .act-end{
-  color: #999999;
+  color: #999999 !important;
 }
 .text-list{
   width:100rpx;

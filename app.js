@@ -13,6 +13,7 @@ App({
         self.saveWxImg()
       }
     })
+    
   },
   globalData: {
     userInfo: null,
@@ -23,7 +24,6 @@ App({
    */
   apiPost: function (url, data={}, title ='加载中') {
     url = url.replace('/SchoolFellow','')
-    console.log(url)
     wx.showLoading({
       title: title,
     })

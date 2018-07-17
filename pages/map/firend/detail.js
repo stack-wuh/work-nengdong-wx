@@ -14,12 +14,16 @@ const temp = [
   {
     name: '院系',
     value: '',
-    prop:'faculty'
+    prop:'faculty',
+    hide:'facultyHide',
+    facultyHide:'true'
   },
   {
     name: '专业',
     value: '',
-    prop:'line_text'
+    prop:'line_text',
+    hide:'lineTextHide',
+    lineTextHide:'true'
   }]
 Page({
 
@@ -33,22 +37,30 @@ Page({
         list: [{
             name: '手机号',
             value: '',
-            prop:'phone_number'
+            prop:'phone_number',
+            hide:'phone_hide',
+            phone_hide:'false',
           },
           {
             name: '邮箱',
             value: '',
-            prop:'email'
+            prop:'email',
+            email_hide:'false',
+            hide:'email_hide',
           },
           {
             name: 'QQ',
             value: '',
-            prop:'qq'
+            prop:'qq',
+            qq_hide:'false',
+            hide:'qq_hide',
           },
           {
             name: "微信",
             value: '',
-            prop:'weixin'
+            prop:'weixin',
+            weixin_hide:'false',
+            hide:'weixin_hide',
           },
           {
             name: "工作/升学所在地",
@@ -57,7 +69,9 @@ Page({
           {
             name: '详细地址',
             value: '',
-            prop:'address'
+            prop:'address',
+            address_hide:'false',
+            hide:'address_hide',
           }
         ]
       },
@@ -67,7 +81,9 @@ Page({
         list: [{
             name: '用人单位名称',
             value: '',
-            prop:'unit_name'
+            prop:'unit_name',
+            unit_name_hide:'false',
+            hide:'unit_name_hide',
           },
           {
             name: '单位性质',
@@ -87,7 +103,16 @@ Page({
           {
             name: '岗位名称',
             value: '',
-            prop:'post_name'
+            prop:'post_name',
+            hide:'post_name_hide',
+            post_name_hide:'false',
+          },
+          {
+            name:'底薪',
+            value:'',
+            prop:'money',
+            hide:'money_hide',
+            money_hide:'false',
           }
         ]
       },
@@ -109,12 +134,16 @@ Page({
           {
             name: '院系',
             value: '',
-            prop:'faculty'
+            prop:'faculty',
+            facultyHide:'false',
+            hide:'facultyHide'
           },
           {
             name: '专业',
             value: '',
-            prop:'line_text'
+            prop:'line_text',
+            lineTextHide:'false',
+            hide:'lineTextHide'
           }]
         ]
       }
@@ -128,13 +157,14 @@ Page({
    */
   onLoad: function (options) {
     this.fetchData(options.id)
-    this.formatList()
+    console.log(options.id)
   },
   formatList(){
-    this.data.optionList[0].list.map(item=>{
+    this.data.optionList[0].list.map(item=>{  // 基础信息
       for(var k in this.data.list){
         if(item.prop == k){
           item.value = this.data.list[k]
+          item.value = item.value == null ? ' ' : item.value == 'null' ? ' ' : item.value
         }
         if(!item.prop){
           let provinces = this.data.list['site_provinces'] ? this.data.list['site_provinces'] : ''
@@ -143,22 +173,41 @@ Page({
           item.value = provinces + city + area
         }
       }
-    })
-    this.data.optionList[1].list.map(item=>{
-      for(var k in this.data.list.employment_archives){
-        if(item.prop == k){
-          item.value = this.data.list.employment_archives[k]
+      for(var k in this.data.list.student_info_hide){
+        if(item.hide && item.hide == k){
+          item[item.hide] = (this.data.list.student_info_hide[k] == null || this.data.list.student_info_hide[k] == 'true')? 'true' : 'false'
         }
       }
     })
-    let newData = this.data.list.advance_ArchivesList , 
-    newArr = []
+    this.data.optionList[1].list.map(item=>{  // 就业信息
+      for(var k in this.data.list.employment_archives){
+        if(item.prop == k){
+          item.value = this.data.list.employment_archives[k]
+          item.value = item.value == null ? ' ' : item.value == 'null' ? ' ' : item.value
+        }
+      }
+      for(var k in this.data.list.student_info_hide){
+        if(item.hide && item.hide == k){
+          item[item.hide] = (this.data.list.student_info_hide[k] == null || this.data.list.student_info_hide[k] == 'true')? 'true' : 'false'
+        }
+      }
+    })
+    let newData = this.data.list.advance_ArchivesList , newArr = [] , hideList = this.data.list.advanceArchivesHideList
     newData.map(item=>{
+      hideList.map(list=>{
+        item = Object.assign(item,list)
+      })
+    })
+    newData.map((item,index)=>{  // 升学信息
       var newList = JSON.parse(JSON.stringify(this.data.temp))
       for(var k in item){ 
         newList.map(list=>{
           if(list.prop == k){
             list.value = item[k]
+            list.value = list.value == null ? ' ' : list.value == 'null' ? ' ' : list.value 
+          }
+          if(list.hide == k){
+            list[list.hide] = (item[k] == 'true' || item[k] == null) ? 'true' : 'false'
           }
         })
       }
@@ -170,11 +219,16 @@ Page({
     })
   },
   fetchData(id) {
-    var pages =  getCurrentPages()
-    var page = pages[pages.length - 2]
-    let data = page.data.list
-    this.setData({
-      list:data[id]
+    app.apiPost('/showStudent_Info',{id:id}).then(res=>{
+      if(res.data[0].student_info_collect){
+        res.data[0].is_collect = true
+      }else{
+        res.data[0].is_collect = false
+      }
+      this.setData({
+        list:res.data[0]
+      })
+      this.formatList()
     })
   },
 })

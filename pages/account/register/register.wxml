@@ -14,14 +14,14 @@
         <image src="/images/icon-card.png"></image>
         <input name="no" type="idcard" placeholder='请输入您的身份证号'></input>
       </view>
-      <view class="icon-input-group">
+      <!-- <view class="icon-input-group">
         <image src="/images/icon-pwd.png"></image>
         <input name="password" type="password" placeholder='请输入密码'></input>
       </view>
       <view class="icon-input-group">
         <image src="/images/icon-pwd2.png"></image>
         <input name="checkpwd" type="password" placeholder='请确认密码'></input>
-      </view>            
+      </view>             -->
       <view class="icon-input-group">
         <image src="/images/icon-year.png"></image>
         <picker mode="selector" bindchange="changeYear" value="{{index}}" range="{{yearList}}" range-key="{{yearList[index].age_name}}">

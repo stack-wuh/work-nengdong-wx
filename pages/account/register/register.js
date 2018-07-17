@@ -52,16 +52,8 @@ Page({
         }
       } 
     }
-    if(data.password.length < 6){
-      app.toastMsg('error','密码至少6位')
-      return
-    }
-    if(data.password !== data.checkpwd){
-      app.toastMsg('error','密码不一致!!')
-      return
-    }
     let result = reg.test(data.no)
-    if(!result){
+    if(!result && !data.number){
       app.toastMsg('error','身份证号错误')
       return
     }

@@ -17,7 +17,7 @@ Page({
     typeList:['全部','校友活动','学校活动','学院活动','专业活动','班级活动','讲座活动'],
     isShowMore:false,
     page:1,
-    remind:'正在加载更多'
+    remind:'没有更多啦'
   },  
   
   bindchange(e){
@@ -61,7 +61,6 @@ Page({
           remind:'没有更多啦'
         })
       }
-      wx.setStorageSync('activeDetail',this.data.newList)
     })
   },
   showMore(){  // 加载更多

@@ -72,6 +72,7 @@ Page({
       app.toastMsg('error','请先上传图片')
       return
     }
+    data.year = data.year.replace(/[\u4e00-\u9fa5]/gm,'')
     data = Object.assign({file:this.data.imgList.toString(),student_info_id:wx.getStorageSync('number')},data)
     app.apiPost('addContact_College',data).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'

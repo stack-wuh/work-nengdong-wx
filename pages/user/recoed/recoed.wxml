@@ -39,15 +39,15 @@
           </view>
       </block>
     </view>    
-    <view wx:if="{{index == 0}}" class="form-msg">就业者填写就业档案, 生学者提供升学档案</view>
+    <view wx:if="{{index == 0}}" class="form-msg">就业者填写就业档案, 升学者提供升学档案</view>
     <view wx:if="{{index == 2 && recoedType != 3}}" class="form-msg txt-btn">
       <text bindtap="addNew">继续添加</text>
-      <image src="/images/icon-add.png" class="icon-add" />
+      <image bindtap="addNew" src="/images/icon-add.png" class="icon-add" />
     </view>
   </view>
  <button form-type="submit" class="btn-area">{{type == 1 ? '提交' : '保存'}}</button>
 </form>
-  <view data-back="{{isBack}}" bindtap="showImgBtn" animation="{{animation}}" hover-class="none" url="/pages/user/private/private" class="img-box">
+  <view data-back="{{isBack}}" bindtap="showImgBtn" hover-class="none" url="/pages/user/private/private" class="img-box">
     <image bindtap="jumpToOther" src="/images/bg-recoed.png" class="recoed" />
   </view>
 </view>

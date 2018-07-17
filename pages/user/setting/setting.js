@@ -45,6 +45,8 @@ Page({
   },
   signout(e){
     wx.removeStorageSync('number')
+    wx.removeStorageSync('recodeInfo')
+    wx.removeStorageSync('privateInfo')
     app.toastMsg('wraning','注销登录')
     setTimeout(() => {
       wx.redirectTo({

@@ -15,14 +15,14 @@
     </view>
     <view class="right-content">
       <view class="flex-box">
-        <text>类型：{{item.type}}</text>
+        <text>类型：{{item.type || ''}}</text>
         <image wx:if="{{item.isCollect}}" data-type="3" catchtap="handleClickCollage" data-id="{{item.id}}" src="/images/icon-collect-default.png" class="icon-collect" />
         <image wx:if="{{!item.isCollect}}" data-type="3" catchtap="handleClickCollage" data-id="{{item.id}}" src="/images/icon-collect-active.png" class="icon-collect" />
       </view>
-      <view class="over-text">{{item.title}}</view>
-      <view>创建时间：{{item.time}}</view>
+      <view class="over-text">{{item.title || ''}}</view>
+      <view>创建时间：{{item.time || ''}}</view>
       <view class="flex-box">
-        <text>{{item.praise}}人觉得赞</text>
+        <text>{{item.praise || 0}}人觉得赞</text>
         <image wx:if="{{!item.isPraise}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-default.png" class="icon-prise" />
         <image wx:if="{{item.isPraise}}" data-id="{{item.id}}" catchtap="handleClickPraise" src="/images/icon-prise-active.png" class="icon-prise" />
         <text class="empty"></text>
@@ -46,13 +46,13 @@
       </view>
       <view>
         <text>入学年份：</text>
-        <text>{{item.school_age}}级</text>
+        <text>{{item.school_age || ''}}级</text>
         <text>学院：</text>
         <text>{{item.school || ''}}</text>
       </view>
       <view >
         <text>专业班级：</text>
-        <text>{{item.line}}{{item.classes}}</text>
+        <text>{{item.line || ''}}{{item.classes || ''}}</text>
       </view>
       <view class="flex-box">
         <text>工作/升学所在地：</text>

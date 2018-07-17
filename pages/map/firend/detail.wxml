@@ -25,16 +25,28 @@
       <text class="empty"></text>
     </view>
     <view wx:if="{{item.title !== '升学档案'}}" class="act-card">
-      <view class="card-list-item" wx:for="{{item.list}}" wx:key="{{index}}">
-        <text class="item-title">{{item.name}}</text>
-        <text class="item-input">{{item.value||''}}</text>
+      <view class="card-list-item" wx:for="{{item.list}}" wx:for-item="alist" wx:key="{{index}}">
+        <block wx:if="{{alist.hide}}">
+          <text class="item-title">{{alist.name}}</text>
+          <text class="item-input">{{alist[alist.hide] == 'true' ? alist.value||'' : '用户设置不可见'}}</text>
+        </block>
+        <block wx:else>
+          <text class="item-title">{{alist.name}}</text>
+          <text class="item-input">{{alist.value||''}}</text>
+        </block>
       </view>
     </view>
     <view wx:if="{{item.title == '升学档案'}}" class="act-card">
       <block wx:for="{{item.list}}" wx:for-item="fItem" wx:key="{{index}}">
         <view class="card-list-item" wx:for="{{fItem}}" wx:for-item="sItem" wx:key="{{index}}">
-         <text class="item-title">{{sItem.name}}</text>
-          <text class="item-input">{{sItem.value||''}}</text>
+          <block wx:if="{{sItem.hide}}">
+            <text class="item-title">{{sItem.name}}</text>
+            <text class="item-input">{{sItem[sItem.hide] == 'true' ? sItem.value || ' ' : '用户设置不可见'}}</text>
+          </block>
+          <block wx:else>
+              <text class="item-title">{{sItem.name}}</text>
+              <text class="item-input">{{sItem.value || ''}}</text>
+          </block>
         </view>
       </block>
     </view>

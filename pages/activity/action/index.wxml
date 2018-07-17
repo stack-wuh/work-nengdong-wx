@@ -103,7 +103,7 @@
       <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title">负责人</text>
-            <input name="leading_name" placeholder="默认此账号，可以修改" class="item-input" />
+            <input name="leading_name" placeholder="默认此账号，可以修改" value="{{user.name || ''}}" class="item-input" />
           </view>
       </view>
     </view>
@@ -111,19 +111,19 @@
       <view class="act-card-list">
           <view class="card-list-item">
             <text class="item-title">手机号</text>
-            <input name="phone" placeholder="默认此账号绑定手机，可以修改" class="item-input" />
+            <input name="phone" placeholder="默认此账号绑定手机，可以修改" value="{{user.phone_number || ''}}" class="item-input" />
           </view>
           <view class="card-list-item">
             <text class="item-title">邮箱</text>
-            <input name="email" placeholder="默认此账号绑定邮箱，可以修改" class="item-input" />
+            <input name="email" placeholder="默认此账号绑定邮箱，可以修改" value="{{user.email || ''}}" class="item-input" />
           </view>
           <view class="card-list-item">
             <text class="item-title">QQ</text>
-            <input name="qq" placeholder="默认此账号，可以修改" class="item-input" />
+            <input name="qq" placeholder="默认此账号，可以修改" value="{{user.qq || ''}}" class="item-input" />
           </view> 
           <view class="card-list-item">
             <text class="item-title">微信</text>
-            <input name="weixin" placeholder="默认此账号，可以修改" class="item-input" />
+            <input name="weixin" placeholder="默认此账号，可以修改" value="{{user.weixin || ''}}" class="item-input" />
           </view> 
       </view>  
     </view>

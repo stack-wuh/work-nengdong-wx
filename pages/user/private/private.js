@@ -134,20 +134,17 @@ const temp = [
     value: '',
     default: true,
     rename:'levels',
-    // prop:'levelsHide'
   },
   {
     name: '学校',
     value: '',
     default: true,
     rename:'schools',
-    // prop:'schoolsHide'
   },
   {
     name: '院系',
     value: '',
     ischecked: false,
-    prop: 'faculty_hide',
     rename:'faculty',
     prop:'facultyHide'
   },
@@ -209,7 +206,6 @@ Page({
   handleClickChange(e) {
     let name = e.currentTarget.dataset.name ,
         arrIndex = e.currentTarget.dataset.index
-        console.log(arrIndex)
     this.data.optionList.map(item => {
       item.list.map(list => {     // 设置基本信息和就业档案隐藏
         if (list.name === name) {
@@ -231,7 +227,6 @@ Page({
 
   handleClickSubmit() {
     let data = this.data.optionList
-    console.log(data)
     let arr = {data:[],} 
     data.map(item => {
       item.list.map(list => {
@@ -244,12 +239,15 @@ Page({
       const obj = {}
       item.map( list =>{
         if(list.prop){
+          console.log(list)
           obj[list.prop] = list.ischecked
-          obj.advanceArchivesId = list.id
+          obj.advanceArchivesId = list.advanceArchivesId
         }
       })
       arr.data.push(obj)
     })
+    console.log(arr)
+    // return
     arr.data = JSON.stringify(arr.data)
     app.apiPost('addStudent_Info_HideService', arr).then(res => {
       let error = res.error == 0 ? 'success' : 'error'
@@ -263,7 +261,8 @@ Page({
   fetchData(){
     app.apiPost('showStudent_Info',{id:wx.getStorageSync('number')}).then(res=>{
       var hideList = res.data[0].student_info_hide
-      var advanceList = res.data[0].advanceArchivesHideList
+      // var advanceList = res.data[0].advanceArchivesHideList
+      var advanceList = res.data[0].advance_ArchivesList
       this.data.optionList[0].list.map(item => {  // 基础信息隐藏
         for(var k in hideList){
           if(item.prop == k){
@@ -281,12 +280,16 @@ Page({
       this.data.optionList[2].list.map((item,index) => { // 升学信息隐藏
         item.map((list,lindex) =>{
           var obj = advanceList[index]
-          for(var k in obj){
-            if(k == list.prop){
-              list.ischecked = obj[k] == 'true' ? true : false
-              list.id = obj.advanceArchivesId
-            } 
+          list.advanceArchivesId = obj.id
+          if(list.prop){
+            list.ischecked = true
           }
+          // for(var k in obj){
+          //   if(k == list.prop){
+          //     list.ischecked = obj[k] == 'true' ? true : false
+          //     list.id = obj.id
+          //   } 
+          // }
         })  
       })
       this.setData({

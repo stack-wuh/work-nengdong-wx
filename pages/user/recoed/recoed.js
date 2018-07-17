@@ -207,7 +207,7 @@ Page({
     type: 1,
     animation: '',
     isBack: false,
-    isbtn: false,
+    isbtn: true,
     data:[]
   },
 
@@ -241,25 +241,6 @@ Page({
     this.setData({
       optionList: this.data.optionList
     })
-  },
-  showImgBtn(e) {
-    let isBack = e.currentTarget.dataset.back
-    this.setData({
-      isBack: !this.data.isBack
-    })
-    if (!isBack) {
-      this.setData({
-        animation: app.animation(this.data.animation, -40, -180),
-        isbtn: true
-      })
-    } else {
-      setTimeout(() => {
-        this.setData({
-          animation: app.animation(this.data.animation, 0, 0),
-          isbtn: false
-        })
-      })
-    }
   },
   jumpToOther() {
     if (this.data.isbtn) {
@@ -422,14 +403,17 @@ Page({
         let obj = {}
         item.map(list=>{
           obj[list.prop] = list.value
+          obj.archivesId = list.id
+          obj.advanceArchivesId = list.id
         })
         levels.push(obj)
     })
     let number = wx.getStorageSync('number').toString()
     levels = JSON.stringify(levels)
-    info = Object.assign(base,work,{data:levels,student_info_id:number})
+    info = Object.assign(base,work,{data:levels,id:number})
     wx.request({
-      url:app.server + 'addEmployment_Archives',
+      // url:app.server + 'addEmployment_Archives',
+      url:app.server + 'addAlumnus_Info',
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -456,14 +440,22 @@ Page({
       this.data.optionList[0].list.map(item => {  // 基础信息
         for(var k in info){
           if(item.prop == k){
-            item.value = info[k]
+            if(info[k] == null || info[k]=='null'){
+              item.value = ''
+            }else{
+              item.value = info[k]
+            }
           }
         }
       })  
       this.data.optionList[1].list.map(item => {  // 就业档案
           for(var k in info.employment_archives){
             if(item.prop == k){
-              item.value = info.employment_archives[k]
+              if(info.employment_archives[k] == null || info.employment_archives[k] == 'null'){
+                item.value = ''
+              }else{
+                item.value = info.employment_archives[k]
+              }
             }
           }
       })  
@@ -472,7 +464,13 @@ Page({
         obj.map(oo => {
           for(var k in item){
             if(oo.prop == k){
-              oo.value = item[k]
+              // oo.value = item[k]
+              oo.id = item.id
+              if(item[k] == null || item[k] == 'null'){
+                oo.value = ''
+              }else{
+                oo.value = item[k]
+              }
             }
           }
         })

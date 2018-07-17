@@ -11,9 +11,9 @@
           <text>{{info.name || userInfo.nickName}}</text>
           <text class="txt-title">{{info.school_age}}</text>
         </view>
-        <view>学号: {{info.number}}</view>
-        <view>身份证: {{info.no}}</view>
-        <view>学院专业班级: {{info.school}}{{info.line}}{{info.classes}}</view>
+        <view>学号: {{info.number || ''}}</view>
+        <view>身份证: {{info.no || ''}}</view>
+        <view>学院专业班级: {{info.school || ''}}{{info.line || ''}}{{info.classes || ''}}</view>
       </view>
     </view>
  </view>

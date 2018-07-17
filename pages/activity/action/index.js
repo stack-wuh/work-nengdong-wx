@@ -23,7 +23,14 @@ Page({
     hours:[],
     munite:[],
     showPickerView:false,
-    nowTime: []
+    nowTime: [],
+    user:{
+      name:'',
+      phone_number:'',
+      email:'',
+      qq:'',
+      weixin:''
+    }
   },
 
   /**
@@ -31,6 +38,7 @@ Page({
    */
   onLoad: function (options) {
     this.newTimeStr()
+    this.getUserInfo()
   },
 
   setMonthDay: function(day){
@@ -197,6 +205,8 @@ Page({
       address:this.data.address.toString()
     }
     data = Object.assign(data,newList)
+    console.log(data)
+    return
     if(data.cover.length == 0){
       app.toastMsg('error','请上传封面照')
       return
@@ -229,6 +239,7 @@ Page({
     //   app.toastMsg('error','请填写联系方式')
     //   return
     // }
+
     app.apiPost('addActivity',data).then(res=>{
       let error = res.error == 0 ? 'success' : 'error'
       app.toastMsg(error,res.msg)
@@ -245,52 +256,20 @@ Page({
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成 
-   */
-  onReady: function () {
-  
+
+  getUserInfo(){
+    app.apiPost('showStudent_Info',{id:wx.getStorageSync('number')}).then(res=>{
+      for(var k in res.data[0]){
+        for(var j in this.data.user){
+          if(j == k){
+            this.data.user[j] = res.data[0][k]
+          }
+        }
+      }
+      this.setData({
+        user:this.data.user
+      })
+      console.log(this.data.user)
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

@@ -235,7 +235,6 @@ Page({
         this.setData({
           list: this.data.list
         })
-        wx.setStorageSync('firendsList', this.data.list)
       }
     })
   },
@@ -247,12 +246,6 @@ Page({
     if(isRow == 2){
       this.resetInfo()
     }
-    // isRow == 1 && this.setData({
-    //   animation:app.animation(this.data.animation,-375,0)
-    // })
-    // isRow == 2 && this.setData({
-    //   animation:app.animation(this.data.animation,0,0)
-    // })
   },
 
   fetchData(){
@@ -268,7 +261,6 @@ Page({
       this.setData({
         list: this.data.list,
         isShowDialog:false,
-        // animation:app.animation(this.data.animation,0,0)
       })
       if(res.data.length==10){
         this.setData({
@@ -281,7 +273,6 @@ Page({
           remind: '没有更多啦'
         })
       }
-      wx.setStorageSync('firendsList',this.data.list)
     })
   },
   

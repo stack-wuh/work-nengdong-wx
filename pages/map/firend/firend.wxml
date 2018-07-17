@@ -12,7 +12,7 @@
   </view>
   <view style="height:87rpx;"></view>
   <view class="father other-bg">
-    <navigator hover-class="none" url="/pages/map/firend/detail?id={{index}}" class="item-content" wx:for="{{list}}" wx:key="{{index}}">
+    <navigator hover-class="none" url="/pages/map/firend/detail?id={{item.id}}" class="item-content" wx:for="{{list}}" wx:key="{{index}}">
       <view class="img-box">
         <image wx:if="{{!item.image}}" src="/images/avatar.png" class="avatar" />
         <image  wx:else src="{{item.image}}" class="avatar" />
@@ -48,8 +48,7 @@
     <view class="btm-remind">{{remind}}</view>
   </view>
 
-  <view class='menu-slide'  wx:if="{{!isShowSlide}}">
-    
+  <view class='menu-slide'  wx:if="{{!isShowSlide}}">   
     <view class="menu-content">
       <view style="height:100rpx;"></view>
       <view class="menu-header">
