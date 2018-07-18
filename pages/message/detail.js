@@ -50,7 +50,6 @@ Page({
         info:res.data,
         imgUrls:res.data.imageName
       })
-      console.log(this.data.info)
     })
   },
   handleClickShowForm(){

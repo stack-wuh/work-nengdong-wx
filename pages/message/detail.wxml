@@ -25,7 +25,7 @@
     <view class="empty"></view>
     <view class="btn-list">
       <text wx:if="{{info.accessoryName}}" bindtap="openDocument">预览附件</text>
-      <text wx:if="{{info.form_substance}}" bindtap="handleClickShowForm">填写表单</text>
+      <text wx:if="{{info.tidings_form && !info.tidings_form.form_substance}}" bindtap="handleClickShowForm">填写表单</text>
     </view>
   </view>
   <view class="form-area" wx:if="{{isShowForm}}">

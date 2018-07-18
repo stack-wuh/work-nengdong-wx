@@ -2,10 +2,10 @@
 <view class="container other-bg">
    <view class="carousle">
       <swiper class="swiper" indicator-dots="{{false}}" autoplay="{{true}}" interval="{{5000}}" duration="{{1000}}">
-        <block wx:for="{{3}}" wx:key="{{index}}">
-          <swiper-item>
-             <image src="/images/avatar.jpg" class="index-bg" height="347"/>
-             <text class="carousle-title">此处为该图片的标题</text>
+        <block wx:for="{{carousle}}" wx:key="{{index}}">
+          <swiper-item bindtap="jump2other" data-index="{{index}}">
+             <image src="{{item.image}}" class="index-bg" height="347"/>
+             <text class="carousle-title">{{item.abstracts}}</text>
           </swiper-item>
         </block>
       </swiper>
